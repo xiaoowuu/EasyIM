@@ -1,5 +1,7 @@
 package win.smartown.easyim.nim;
 
+import android.view.View;
+
 import com.netease.nimlib.sdk.NIMSDK;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallback;
@@ -11,6 +13,7 @@ import com.netease.nimlib.sdk.team.model.Team;
 import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import win.smartown.easyim.standard.IMConversationService;
@@ -132,7 +135,7 @@ public class NIMConversationService extends IMConversationService implements Obs
         NIMSDK.getTeamService().queryTeamListById(teamIds).setCallback(fetchTeamInfoCallback);
     }
 
-    private static class NIMConversationAdapter extends ConversationAdapter {
+    private static class NIMConversationAdapter extends ConversationAdapter implements View.OnClickListener {
 
         private List<RecentContact> recentContacts;
 
@@ -142,6 +145,8 @@ public class NIMConversationService extends IMConversationService implements Obs
 
         @Override
         public void onBindViewHolder(Holder holder, int position) {
+            holder.itemView.setTag(position);
+            holder.itemView.setOnClickListener(this);
             RecentContact contact = recentContacts.get(position);
             switch (contact.getSessionType()) {
                 case Team:
@@ -168,6 +173,27 @@ public class NIMConversationService extends IMConversationService implements Obs
         @Override
         public int getItemCount() {
             return recentContacts.size();
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (jumpHandler != null) {
+                int position = (int) view.getTag();
+                SessionTypeEnum sessionType = recentContacts.get(position).getSessionType();
+                HashMap<String, String> params = new HashMap<>();
+                switch (sessionType) {
+                    case P2P:
+                        params.put("account", recentContacts.get(position).getContactId());
+                        jumpHandler.jumpToP2P(params);
+                        break;
+                    case Team:
+                        params.put("account", recentContacts.get(position).getContactId());
+                        jumpHandler.jumpToTeam(params);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

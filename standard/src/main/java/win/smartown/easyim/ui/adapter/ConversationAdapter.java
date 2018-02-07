@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 import win.smartown.easyim.standard.R;
 
 /**
@@ -17,9 +19,19 @@ import win.smartown.easyim.standard.R;
  */
 public abstract class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapter.Holder> {
 
+    protected JumpHandler jumpHandler;
+
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new Holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_conversation, parent, false));
+    }
+
+    public JumpHandler getJumpHandler() {
+        return jumpHandler;
+    }
+
+    public void setJumpHandler(JumpHandler jumpHandler) {
+        this.jumpHandler = jumpHandler;
     }
 
     public static class Holder extends RecyclerView.ViewHolder {
@@ -36,5 +48,11 @@ public abstract class ConversationAdapter extends RecyclerView.Adapter<Conversat
             msgTextView = itemView.findViewById(R.id.conversation_msg);
             timeTextView = itemView.findViewById(R.id.conversation_time);
         }
+    }
+
+    public interface JumpHandler {
+        void jumpToP2P(HashMap<String, String> params);
+
+        void jumpToTeam(HashMap<String, String> params);
     }
 }
