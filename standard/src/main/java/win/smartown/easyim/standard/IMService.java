@@ -6,15 +6,15 @@ package win.smartown.easyim.standard;
  * Desc:
  * <br>
  */
-public interface IMService<LoginResult> {
+public interface IMService {
 
-    void login(LoginCallback<LoginResult> loginCallback, String... params);
+    void login(LoginCallback loginCallback, String... params);
 
     void logout(String... params);
 
-    interface LoginCallback<LoginResult> {
+    interface LoginCallback {
 
-        void onLoginSuccess(LoginResult result);
+        void onLoginSuccess(Object result);
 
         void onLoginFailed(Throwable throwable);
 

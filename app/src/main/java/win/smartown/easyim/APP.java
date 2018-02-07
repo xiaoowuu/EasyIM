@@ -6,6 +6,7 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 
+import win.smartown.easyim.nim.NIMServiceFactory;
 import win.smartown.easyim.util.ToastUtil;
 
 /**
@@ -19,6 +20,7 @@ public class APP extends Application {
     public void onCreate() {
         super.onCreate();
         ToastUtil.init(this);
+        EasyIM.setImServiceFactory(new NIMServiceFactory());
         initIM();
     }
 

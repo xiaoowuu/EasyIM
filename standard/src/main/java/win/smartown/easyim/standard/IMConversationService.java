@@ -14,22 +14,20 @@ public abstract class IMConversationService {
     protected ConversationChangedListener conversationChangedListener;
 
     public IMConversationService() {
-        initAdapter();
+        conversationAdapter = createConversationAdapter();
     }
 
-    protected abstract void initAdapter();
+    protected abstract ConversationAdapter createConversationAdapter();
 
     public abstract void getConversations();
 
-    public abstract void registerConversationWatcher();
+    public void registerConversationWatcher(ConversationChangedListener listener) {
+        conversationChangedListener = listener;
+    }
 
     public abstract void unRegisterConversationWatcher();
 
     public abstract void sendMsgTo(String account, String msg);
-
-    public void setConversationChangedListener(ConversationChangedListener listener) {
-        conversationChangedListener = listener;
-    }
 
     public ConversationAdapter getConversationAdapter() {
         return conversationAdapter;

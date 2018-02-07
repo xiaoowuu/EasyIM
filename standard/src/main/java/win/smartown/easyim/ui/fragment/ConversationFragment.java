@@ -8,7 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
+import win.smartown.easyim.EasyIM;
 import win.smartown.easyim.standard.IMConversationService;
 import win.smartown.easyim.standard.R;
 
@@ -20,41 +22,15 @@ import win.smartown.easyim.standard.R;
  */
 public class ConversationFragment extends Fragment implements IMConversationService.ConversationChangedListener {
 
-    private static final String EXTRA_CLASS = "EXTRA_CLASS";
-
-    public static ConversationFragment newInstance(Class<? extends IMConversationService> aClass) {
-        Bundle args = new Bundle();
-        args.putString(EXTRA_CLASS, aClass.getName());
-        ConversationFragment fragment = new ConversationFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     private View noDataView;
     private RecyclerView mRecyclerView;
+    private EditText msgEditText;
     private IMConversationService imConversationService;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initConversationService();
-    }
-
-    private void initConversationService() {
-        Bundle bundle = getArguments();
-        if (bundle != null && bundle.containsKey(EXTRA_CLASS)) {
-            try {
-                String className = bundle.getString(EXTRA_CLASS);
-                Class aClass = Class.forName(className);
-                imConversationService = (IMConversationService) (aClass.newInstance());
-            } catch (java.lang.InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+        imConversationService = EasyIM.getImServiceFactory().getImConversationService();
     }
 
     @Nullable
@@ -67,19 +43,34 @@ public class ConversationFragment extends Fragment implements IMConversationServ
 
     @Override
     public void onDestroy() {
-        imConversationService.unRegisterConversationWatcher();
+        if (imConversationService != null) {
+            imConversationService.unRegisterConversationWatcher();
+            imConversationService = null;
+            EasyIM.getImServiceFactory().setImConversationService(null);
+
+        }
         super.onDestroy();
     }
 
     private void initView(View view) {
         noDataView = view.findViewById(R.id.no_data);
         mRecyclerView = view.findViewById(R.id.recycler_view);
+        msgEditText = view.findViewById(R.id.msg);
+        view.findViewById(R.id.send).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (msgEditText.length() > 0) {
+                    String[] data = msgEditText.getText().toString().split(",");
+                    imConversationService.sendMsgTo(data[0], data[1]);
+                }
+            }
+        });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(imConversationService.getConversationAdapter());
-        imConversationService.setConversationChangedListener(this);
-        imConversationService.registerConversationWatcher();
-        imConversationService.getConversations();
-        imConversationService.sendMsgTo("test2", System.currentTimeMillis() + "");
+        if (imConversationService != null) {
+            mRecyclerView.setAdapter(imConversationService.getConversationAdapter());
+            imConversationService.registerConversationWatcher(this);
+            imConversationService.getConversations();
+        }
     }
 
     @Override

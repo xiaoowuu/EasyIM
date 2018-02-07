@@ -10,11 +10,10 @@ import android.widget.RadioGroup;
 
 import com.netease.nimlib.sdk.auth.LoginInfo;
 
+import win.smartown.easyim.EasyIM;
 import win.smartown.easyim.R;
-import win.smartown.easyim.util.ToastUtil;
-import win.smartown.easyim.standard.IMServiceFactory;
-import win.smartown.easyim.nim.NIMService;
 import win.smartown.easyim.standard.IMService;
+import win.smartown.easyim.util.ToastUtil;
 
 /**
  * Created by smartown on 2018/2/6 14:57.
@@ -66,13 +65,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void loginNIM() {
-        IMService<LoginInfo> service = IMServiceFactory.createIMService(NIMService.class);
-        service.login(new IMService.LoginCallback<LoginInfo>() {
+        EasyIM.getImServiceFactory().getImService().login(new IMService.LoginCallback() {
+
             @Override
-            public void onLoginSuccess(LoginInfo loginInfo) {
-                ToastUtil.showShort("onLoginSuccess");
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
+            public void onLoginSuccess(Object result) {
+                if (result instanceof LoginInfo) {
+                    ToastUtil.showShort("onLoginSuccess");
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                } else {
+                    onLoginFailed(new Exception("Unknown result"));
+                }
             }
 
             @Override

@@ -7,6 +7,8 @@ import com.netease.nimlib.sdk.msg.MessageBuilder;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
+import com.netease.nimlib.sdk.team.model.Team;
+import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,23 +25,43 @@ import win.smartown.easyim.ui.adapter.ConversationAdapter;
 public class NIMConversationService extends IMConversationService implements Observer<List<RecentContact>> {
 
     private List<RecentContact> recentContacts;
+    private transient RequestCallback<List<NimUserInfo>> fetchUserInfoCallback = new RequestCallback<List<NimUserInfo>>() {
+        @Override
+        public void onSuccess(List<NimUserInfo> param) {
+            conversationAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onFailed(int code) {
+
+        }
+
+        @Override
+        public void onException(Throwable exception) {
+
+        }
+    };
+    private transient RequestCallback<List<Team>> fetchTeamInfoCallback = new RequestCallback<List<Team>>() {
+        @Override
+        public void onSuccess(List<Team> param) {
+            conversationAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onFailed(int code) {
+
+        }
+
+        @Override
+        public void onException(Throwable exception) {
+
+        }
+    };
 
     @Override
-    protected void initAdapter() {
+    protected ConversationAdapter createConversationAdapter() {
         recentContacts = new ArrayList<>();
-        conversationAdapter = new ConversationAdapter() {
-            @Override
-            public void onBindViewHolder(Holder holder, int position) {
-                RecentContact contact = recentContacts.get(position);
-                holder.nameTextView.setText(contact.getFromNick());
-                holder.msgTextView.setText(contact.getContent());
-            }
-
-            @Override
-            public int getItemCount() {
-                return recentContacts.size();
-            }
-        };
+        return new NIMConversationAdapter(recentContacts);
     }
 
     @Override
@@ -47,7 +69,13 @@ public class NIMConversationService extends IMConversationService implements Obs
         NIMSDK.getMsgService().queryRecentContacts().setCallback(new RequestCallback<List<RecentContact>>() {
             @Override
             public void onSuccess(List<RecentContact> param) {
-                refresh(param);
+                recentContacts.clear();
+                recentContacts.addAll(param);
+                conversationAdapter.notifyDataSetChanged();
+                fetchUserInfo();
+                if (conversationChangedListener != null) {
+                    conversationChangedListener.onConversationChanged(recentContacts.size());
+                }
             }
 
             @Override
@@ -63,7 +91,8 @@ public class NIMConversationService extends IMConversationService implements Obs
     }
 
     @Override
-    public void registerConversationWatcher() {
+    public void registerConversationWatcher(ConversationChangedListener listener) {
+        super.registerConversationWatcher(listener);
         NIMSDK.getMsgServiceObserve().observeRecentContact(this, true);
     }
 
@@ -80,14 +109,65 @@ public class NIMConversationService extends IMConversationService implements Obs
 
     @Override
     public void onEvent(List<RecentContact> recentContacts) {
-        refresh(recentContacts);
+        getConversations();
     }
 
-    private void refresh(List<RecentContact> recentContacts) {
-        if (conversationChangedListener != null) {
-            conversationChangedListener.onConversationChanged(recentContacts.size());
+    private void fetchUserInfo() {
+        List<String> userIds = new ArrayList<>();
+        List<String> teamIds = new ArrayList<>();
+        for (RecentContact contact : recentContacts) {
+            String account = contact.getContactId();
+            switch (contact.getSessionType()) {
+                case P2P:
+                    userIds.add(account);
+                    break;
+                case Team:
+                    teamIds.add(account);
+                    break;
+                default:
+                    break;
+            }
         }
-        this.recentContacts = recentContacts;
-        conversationAdapter.notifyDataSetChanged();
+        NIMSDK.getUserService().fetchUserInfo(userIds).setCallback(fetchUserInfoCallback);
+        NIMSDK.getTeamService().queryTeamListById(teamIds).setCallback(fetchTeamInfoCallback);
+    }
+
+    private static class NIMConversationAdapter extends ConversationAdapter {
+
+        private List<RecentContact> recentContacts;
+
+        public NIMConversationAdapter(List<RecentContact> recentContacts) {
+            this.recentContacts = recentContacts;
+        }
+
+        @Override
+        public void onBindViewHolder(Holder holder, int position) {
+            RecentContact contact = recentContacts.get(position);
+            switch (contact.getSessionType()) {
+                case Team:
+                    Team team = NIMSDK.getTeamService().queryTeamBlock(contact.getContactId());
+                    if (team != null) {
+                        ImageUtil.loadImage(team.getIcon(), holder.headImageView);
+                        holder.nameTextView.setText(team.getName());
+                        holder.msgTextView.setText(contact.getContent());
+                    }
+                    break;
+                case P2P:
+                    NimUserInfo info = NIMSDK.getUserService().getUserInfo(contact.getContactId());
+                    if (info != null) {
+                        ImageUtil.loadImage(info.getAvatar(), holder.headImageView);
+                        holder.nameTextView.setText(info.getName());
+                        holder.msgTextView.setText(contact.getContent());
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return recentContacts.size();
+        }
     }
 }
