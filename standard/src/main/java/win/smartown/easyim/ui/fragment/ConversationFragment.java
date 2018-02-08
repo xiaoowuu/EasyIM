@@ -51,7 +51,7 @@ public class ConversationFragment extends Fragment implements IMConversationServ
         if (bundle != null && bundle.containsKey(EXTRA_JUMP_TARGET)) {
             jumpTarget = getArguments().getParcelable(EXTRA_JUMP_TARGET);
         }
-        imConversationService = EasyIM.getImServiceFactory().getImConversationService();
+        imConversationService = EasyIM.getImServiceFactory().createImConversationService();
     }
 
     @Nullable
@@ -67,8 +67,6 @@ public class ConversationFragment extends Fragment implements IMConversationServ
         if (imConversationService != null) {
             imConversationService.unRegisterConversationWatcher();
             imConversationService = null;
-            EasyIM.getImServiceFactory().setImConversationService(null);
-
         }
         super.onDestroy();
     }
@@ -102,11 +100,11 @@ public class ConversationFragment extends Fragment implements IMConversationServ
     }
 
     @Override
-    public void jumpToP2P(HashMap<String, String> params) {
+    public void jumpToP2P(String jsonString) {
         if (jumpTarget != null) {
             try {
                 Intent intent = new Intent(getActivity(), Class.forName(jumpTarget.getP2pActivityClass()));
-                intent.putExtra(Constants.CONVERSATION_CHAT_ROOM_PARAMS, params);
+                intent.putExtra(Constants.CONVERSATION_CHAT_ROOM_PARAMS, jsonString);
                 startActivity(intent);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -115,11 +113,11 @@ public class ConversationFragment extends Fragment implements IMConversationServ
     }
 
     @Override
-    public void jumpToTeam(HashMap<String, String> params) {
+    public void jumpToTeam(String jsonString) {
         if (jumpTarget != null) {
             try {
                 Intent intent = new Intent(getActivity(), Class.forName(jumpTarget.getTeamActivityClass()));
-                intent.putExtra(Constants.CONVERSATION_CHAT_ROOM_PARAMS, params);
+                intent.putExtra(Constants.CONVERSATION_CHAT_ROOM_PARAMS, jsonString);
                 startActivity(intent);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();

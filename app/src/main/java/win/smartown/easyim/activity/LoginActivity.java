@@ -27,9 +27,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText accountEditText;
     private EditText passwordEditText;
 
+    private IMService imService;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        imService = EasyIM.getImServiceFactory().createImService();
         setContentView(R.layout.activity_login);
         imProviderGroup = findViewById(R.id.im_service_group);
         accountEditText = findViewById(R.id.account);
@@ -65,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void loginNIM() {
-        EasyIM.getImServiceFactory().getImService().login(new IMService.LoginCallback() {
+        imService.login(new IMService.LoginCallback() {
 
             @Override
             public void onLoginSuccess(Object result) {

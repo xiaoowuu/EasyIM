@@ -1,6 +1,5 @@
 package win.smartown.easyim.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -22,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ConversationJumpTarget getJumpTarget() {
         ConversationJumpTarget target = new ConversationJumpTarget();
-        target.setP2pActivityClass(Activity.class);
-        target.setTeamActivityClass(Activity.class);
+        target.setP2pActivityClass(P2PChatActivity.class);
+        target.setTeamActivityClass(P2PChatActivity.class);
         return target;
     }
 

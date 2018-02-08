@@ -12,8 +12,10 @@ import com.netease.nimlib.sdk.msg.model.RecentContact;
 import com.netease.nimlib.sdk.team.model.Team;
 import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import win.smartown.easyim.standard.IMConversationService;
@@ -179,16 +181,19 @@ public class NIMConversationService extends IMConversationService implements Obs
         public void onClick(View view) {
             if (jumpHandler != null) {
                 int position = (int) view.getTag();
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("chatTarget", recentContacts.get(position).getContactId());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 SessionTypeEnum sessionType = recentContacts.get(position).getSessionType();
-                HashMap<String, String> params = new HashMap<>();
                 switch (sessionType) {
                     case P2P:
-                        params.put("account", recentContacts.get(position).getContactId());
-                        jumpHandler.jumpToP2P(params);
+                        jumpHandler.jumpToP2P(jsonObject.toString());
                         break;
                     case Team:
-                        params.put("account", recentContacts.get(position).getContactId());
-                        jumpHandler.jumpToTeam(params);
+                        jumpHandler.jumpToTeam(jsonObject.toString());
                         break;
                     default:
                         break;

@@ -51,8 +51,8 @@ public abstract class ConversationAdapter extends RecyclerView.Adapter<Conversat
     }
 
     public interface JumpHandler {
-        void jumpToP2P(HashMap<String, String> params);
+        void jumpToP2P(String jsonString);
 
-        void jumpToTeam(HashMap<String, String> params);
+        void jumpToTeam(String jsonString);
     }
 }
