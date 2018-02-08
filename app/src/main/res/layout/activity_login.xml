@@ -35,29 +35,4 @@
 
     </LinearLayout>
 
-    <RadioGroup
-        android:id="@+id/im_service_group"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/im_service_nim"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="云信" />
-
-        <RadioButton
-            android:id="@+id/im_service_rongcloud"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="融云" />
-
-    </RadioGroup>
-
 </FrameLayout>

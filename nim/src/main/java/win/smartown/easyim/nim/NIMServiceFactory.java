@@ -1,5 +1,10 @@
 package win.smartown.easyim.nim;
 
+import android.content.Context;
+
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.SDKOptions;
+
 import win.smartown.easyim.standard.IMConversationService;
 import win.smartown.easyim.standard.IMP2PChatService;
 import win.smartown.easyim.standard.IMService;
@@ -12,6 +17,13 @@ import win.smartown.easyim.standard.IMServiceFactory;
  * <br>
  */
 public class NIMServiceFactory extends IMServiceFactory {
+
+    public NIMServiceFactory(Context applicationContext) {
+        super(applicationContext);
+        SDKOptions options = new SDKOptions();
+        options.checkManifestConfig = true;
+        NIMClient.init(applicationContext, null, options);
+    }
 
     @Override
     public IMService createImService() {

@@ -1,5 +1,7 @@
 package win.smartown.easyim.standard;
 
+import android.content.Context;
+
 /**
  * Created by smartown on 2018/2/6 15:46.
  * <br>
@@ -7,6 +9,10 @@ package win.smartown.easyim.standard;
  * <br>
  */
 public abstract class IMServiceFactory {
+
+    public IMServiceFactory(Context applicationContext) {
+
+    }
 
     public abstract IMService createImService();
 

@@ -6,9 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RadioGroup;
-
-import com.netease.nimlib.sdk.auth.LoginInfo;
 
 import win.smartown.easyim.EasyIM;
 import win.smartown.easyim.R;
@@ -23,7 +20,6 @@ import win.smartown.easyim.util.ToastUtil;
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private RadioGroup imProviderGroup;
     private EditText accountEditText;
     private EditText passwordEditText;
 
@@ -34,7 +30,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         imService = EasyIM.getImServiceFactory().createImService();
         setContentView(R.layout.activity_login);
-        imProviderGroup = findViewById(R.id.im_service_group);
         accountEditText = findViewById(R.id.account);
         passwordEditText = findViewById(R.id.password);
         findViewById(R.id.login).setOnClickListener(this);
@@ -54,31 +49,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void checkInput() {
         if (accountEditText.length() > 0 && passwordEditText.length() > 0) {
-            int id = imProviderGroup.getCheckedRadioButtonId();
-            switch (id) {
-                case R.id.im_service_nim:
-                    loginNIM();
-                    break;
-                case R.id.im_service_rongcloud:
-                    break;
-                default:
-                    break;
-            }
+            login();
         }
     }
 
-    private void loginNIM() {
+    private void login() {
         imService.login(new IMService.LoginCallback() {
 
             @Override
             public void onLoginSuccess(Object result) {
-                if (result instanceof LoginInfo) {
-                    ToastUtil.showShort("onLoginSuccess");
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    finish();
-                } else {
-                    onLoginFailed(new Exception("Unknown result"));
-                }
+                ToastUtil.showShort("onLoginSuccess");
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
             }
 
             @Override

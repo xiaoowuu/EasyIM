@@ -10,14 +10,8 @@ import win.smartown.easyim.ui.adapter.ConversationAdapter;
  */
 public abstract class IMConversationService {
 
-    protected ConversationAdapter conversationAdapter;
+    private ConversationAdapter conversationAdapter;
     protected ConversationChangedListener conversationChangedListener;
-
-    public IMConversationService() {
-        conversationAdapter = createConversationAdapter();
-    }
-
-    protected abstract ConversationAdapter createConversationAdapter();
 
     public abstract void getConversations();
 
@@ -30,8 +24,13 @@ public abstract class IMConversationService {
     public abstract void sendMsgTo(String account, String msg);
 
     public ConversationAdapter getConversationAdapter() {
+        if (conversationAdapter == null) {
+            conversationAdapter = createConversationAdapter();
+        }
         return conversationAdapter;
     }
+
+    protected abstract ConversationAdapter createConversationAdapter();
 
     public interface ConversationChangedListener {
         void onConversationChanged(int count);

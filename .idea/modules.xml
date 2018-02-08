@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EasyIM.iml" filepath="$PROJECT_DIR$/EasyIM.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easemob/easemob.iml" filepath="$PROJECT_DIR$/easemob/easemob.iml" />
       <module fileurl="file://$PROJECT_DIR$/nim/nim.iml" filepath="$PROJECT_DIR$/nim/nim.iml" />
       <module fileurl="file://$PROJECT_DIR$/standard/standard.iml" filepath="$PROJECT_DIR$/standard/standard.iml" />
     </modules>

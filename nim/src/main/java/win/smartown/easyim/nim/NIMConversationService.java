@@ -33,7 +33,7 @@ public class NIMConversationService extends IMConversationService implements Obs
     private transient RequestCallback<List<NimUserInfo>> fetchUserInfoCallback = new RequestCallback<List<NimUserInfo>>() {
         @Override
         public void onSuccess(List<NimUserInfo> param) {
-            conversationAdapter.notifyDataSetChanged();
+            getConversationAdapter().notifyDataSetChanged();
         }
 
         @Override
@@ -49,7 +49,7 @@ public class NIMConversationService extends IMConversationService implements Obs
     private transient RequestCallback<List<Team>> fetchTeamInfoCallback = new RequestCallback<List<Team>>() {
         @Override
         public void onSuccess(List<Team> param) {
-            conversationAdapter.notifyDataSetChanged();
+            getConversationAdapter().notifyDataSetChanged();
         }
 
         @Override
@@ -76,7 +76,7 @@ public class NIMConversationService extends IMConversationService implements Obs
             public void onSuccess(List<RecentContact> param) {
                 recentContacts.clear();
                 recentContacts.addAll(param);
-                conversationAdapter.notifyDataSetChanged();
+                getConversationAdapter().notifyDataSetChanged();
                 fetchUserInfo();
                 if (conversationChangedListener != null) {
                     conversationChangedListener.onConversationChanged(recentContacts.size());

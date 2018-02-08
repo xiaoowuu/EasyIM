@@ -63,9 +63,21 @@ public class ConversationFragment extends Fragment implements IMConversationServ
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        imConversationService.registerConversationWatcher(this);
+        imConversationService.getConversations();
+    }
+
+    @Override
+    public void onPause() {
+        imConversationService.unRegisterConversationWatcher();
+        super.onPause();
+    }
+
+    @Override
     public void onDestroy() {
         if (imConversationService != null) {
-            imConversationService.unRegisterConversationWatcher();
             imConversationService = null;
         }
         super.onDestroy();
@@ -85,13 +97,9 @@ public class ConversationFragment extends Fragment implements IMConversationServ
             }
         });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        if (imConversationService != null) {
-            ConversationAdapter conversationAdapter = imConversationService.getConversationAdapter();
-            conversationAdapter.setJumpHandler(this);
-            mRecyclerView.setAdapter(conversationAdapter);
-            imConversationService.registerConversationWatcher(this);
-            imConversationService.getConversations();
-        }
+        ConversationAdapter conversationAdapter = imConversationService.getConversationAdapter();
+        conversationAdapter.setJumpHandler(this);
+        mRecyclerView.setAdapter(conversationAdapter);
     }
 
     @Override

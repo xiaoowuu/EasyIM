@@ -1,1 +1,1 @@
-include ':app', ':standard', ':nim'
+include ':app', ':standard', ':nim', ':easemob'
