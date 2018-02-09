@@ -13,7 +13,7 @@
             <option value="$PROJECT_DIR$/im-hyphenate" />
             <option value="$PROJECT_DIR$/im-netease" />
             <option value="$PROJECT_DIR$/ui-base" />
-            <option value="$PROJECT_DIR$/ui-demo" />
+            <option value="$PROJECT_DIR$/ui-wechat" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

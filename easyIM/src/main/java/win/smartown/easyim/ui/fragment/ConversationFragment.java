@@ -11,12 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import java.util.HashMap;
-
 import win.smartown.easyim.Constants;
 import win.smartown.easyim.EasyIM;
 import win.smartown.easyim.standard.IMConversationService;
 import win.smartown.easyim.standard.R;
+import win.smartown.easyim.ui.SimpleDivider;
 import win.smartown.easyim.ui.adapter.ConversationAdapter;
 import win.smartown.easyim.ui.target.ConversationJumpTarget;
 
@@ -85,7 +84,6 @@ public class ConversationFragment extends Fragment implements IMConversationServ
 
     private void initView(View view) {
         noDataView = view.findViewById(R.id.no_data);
-        mRecyclerView = view.findViewById(R.id.recycler_view);
         msgEditText = view.findViewById(R.id.msg);
         view.findViewById(R.id.send).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +94,9 @@ public class ConversationFragment extends Fragment implements IMConversationServ
                 }
             }
         });
+        mRecyclerView = view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.addItemDecoration(new SimpleDivider(getActivity(), R.dimen.divider_height, R.color.divider_color));
         ConversationAdapter conversationAdapter = imConversationService.getConversationAdapter();
         conversationAdapter.setJumpHandler(this);
         mRecyclerView.setAdapter(conversationAdapter);

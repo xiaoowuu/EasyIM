@@ -1,1 +1,4 @@
-include ':app', ':easyIM', ':im-netease', ':im-hyphenate', ':ui-demo', ':ui-base'
+include ':app',
+        ':easyIM',
+        ':im-netease', ':im-hyphenate',
+        ':ui-base', ':ui-wechat'

@@ -41,10 +41,10 @@ public abstract class ConversationAdapter extends RecyclerView.Adapter<Conversat
 
         public Holder(View itemView) {
             super(itemView);
-            headImageView = itemView.findViewById(R.id.conversation_head);
-            nameTextView = itemView.findViewById(R.id.conversation_name);
-            msgTextView = itemView.findViewById(R.id.conversation_msg);
-            timeTextView = itemView.findViewById(R.id.conversation_time);
+            headImageView = itemView.findViewById(R.id.head);
+            nameTextView = itemView.findViewById(R.id.name);
+            msgTextView = itemView.findViewById(R.id.content);
+            timeTextView = itemView.findViewById(R.id.time);
         }
     }
 
