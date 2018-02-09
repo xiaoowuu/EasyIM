@@ -1,9 +1,8 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "win.smartown.easyim"
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1
@@ -16,12 +15,4 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
-
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation project(':easyIM')
-    implementation project(':im-netease')
-    implementation project(':ui-demo')
 }

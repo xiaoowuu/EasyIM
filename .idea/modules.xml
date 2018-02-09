@@ -4,11 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EasyIM.iml" filepath="$PROJECT_DIR$/EasyIM.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\Develop\Project\Android\Personal\EasyIM\im-hyphenate\easemob.iml" filepath="D:\Develop\Project\Android\Personal\EasyIM\im-hyphenate\easemob.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easyIM/standard.iml" filepath="$PROJECT_DIR$/easyIM/standard.iml" />
       <module fileurl="file://$PROJECT_DIR$/im-hyphenate/im-hyphenate.iml" filepath="$PROJECT_DIR$/im-hyphenate/im-hyphenate.iml" />
       <module fileurl="file://$PROJECT_DIR$/im-netease/im-netease.iml" filepath="$PROJECT_DIR$/im-netease/im-netease.iml" />
-      <module fileurl="file://D:\Develop\Project\Android\Personal\EasyIM\im-netease\nim.iml" filepath="D:\Develop\Project\Android\Personal\EasyIM\im-netease\nim.iml" />
-      <module fileurl="file://$PROJECT_DIR$/standard/standard.iml" filepath="$PROJECT_DIR$/standard/standard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ui-base/ui-base.iml" filepath="$PROJECT_DIR$/ui-base/ui-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ui-demo/ui-demo.iml" filepath="$PROJECT_DIR$/ui-demo/ui-demo.iml" />
     </modules>
   </component>
 </project>

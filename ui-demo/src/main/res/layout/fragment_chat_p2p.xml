@@ -18,13 +18,13 @@
         android:padding="16dp">
 
         <EditText
-            android:id="@+id/msg"
+            android:id="@id/msg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/send"
+            android:id="@id/send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="send" />

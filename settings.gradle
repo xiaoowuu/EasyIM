@@ -1,1 +1,1 @@
-include ':app', ':standard', ':im-netease', ':im-hyphenate'
+include ':app', ':easyIM', ':im-netease', ':im-hyphenate', ':ui-demo', ':ui-base'
