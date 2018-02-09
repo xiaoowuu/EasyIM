@@ -1,1 +1,1 @@
-include ':app', ':standard', ':nim', ':easemob'
+include ':app', ':standard', ':im-netease', ':im-hyphenate'

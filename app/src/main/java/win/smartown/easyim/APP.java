@@ -2,9 +2,9 @@ package win.smartown.easyim;
 
 import android.app.Application;
 
-import win.smartown.easyim.easemob.Easemob;
-import win.smartown.easyim.easemob.EasemobServiceFactory;
-import win.smartown.easyim.easemob.UserInfoProvider;
+import win.smartown.easyim.im.hyphenate.Easemob;
+import win.smartown.easyim.im.hyphenate.EasemobServiceFactory;
+import win.smartown.easyim.im.hyphenate.UserInfoProvider;
 import win.smartown.easyim.util.ToastUtil;
 
 /**
