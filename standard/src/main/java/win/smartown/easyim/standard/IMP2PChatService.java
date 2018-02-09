@@ -14,7 +14,7 @@ import win.smartown.easyim.ui.adapter.ChatMessageAdapter;
 public abstract class IMP2PChatService {
 
     protected JSONObject jsonObject;
-    protected ChatMessageAdapter chatMessageAdapter;
+    private ChatMessageAdapter chatMessageAdapter;
 
     public IMP2PChatService(String jsonString) {
         try {

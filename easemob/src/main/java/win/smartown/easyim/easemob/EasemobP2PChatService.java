@@ -1,11 +1,15 @@
 package win.smartown.easyim.easemob;
 
+import android.os.Handler;
+import android.os.Message;
+
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessageBody;
 import com.hyphenate.chat.EMTextMessageBody;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import win.smartown.easyim.standard.IMP2PChatService;
@@ -20,15 +24,17 @@ import win.smartown.easyim.ui.adapter.ChatMessageAdapter;
 public class EasemobP2PChatService extends IMP2PChatService implements EMMessageListener {
 
     private List<EMMessage> messages;
+    private MessageHandler messageHandler;
 
     public EasemobP2PChatService(String jsonString) {
         super(jsonString);
+        messageHandler = new MessageHandler(this);
         messages = EMClient.getInstance().chatManager().getConversation(getAccount()).getAllMessages();
     }
 
     @Override
     public ChatMessageAdapter createChatMessageAdapter() {
-        return new Adapter();
+        return new Adapter(messages);
     }
 
     @Override
@@ -42,21 +48,24 @@ public class EasemobP2PChatService extends IMP2PChatService implements EMMessage
         message.setAttribute(Constants.MESSAGE_FIELD_NICK, Easemob.getUserInfoProvider().getNick());
         message.setAttribute(Constants.MESSAGE_FIELD_HEAD, Easemob.getUserInfoProvider().getHead());
         EMClient.getInstance().chatManager().sendMessage(message);
+        messages.add(message);
+        getChatMessageAdapter().notifyDataSetChanged();
     }
 
     @Override
     public void observeReceiveMessage(boolean observe) {
-        if (observe){
+        if (observe) {
             EMClient.getInstance().chatManager().addMessageListener(this);
-        }else {
+        } else {
             EMClient.getInstance().chatManager().removeMessageListener(this);
+            messageHandler.removeCallbacksAndMessages(null);
         }
     }
 
     @Override
     public void onMessageReceived(List<EMMessage> messages) {
         this.messages.addAll(messages);
-        getChatMessageAdapter().notifyDataSetChanged();
+        messageHandler.sendEmptyMessage(MessageHandler.CODE_MSG_RECEIVED);
     }
 
     @Override
@@ -79,11 +88,17 @@ public class EasemobP2PChatService extends IMP2PChatService implements EMMessage
 
     }
 
-    private class Adapter extends ChatMessageAdapter {
+    private static class Adapter extends ChatMessageAdapter {
+
+        private WeakReference<List<EMMessage>> messages;
+
+        public Adapter(List<EMMessage> messages) {
+            this.messages = new WeakReference<List<EMMessage>>(messages);
+        }
 
         @Override
         public void onBindViewHolder(ChatMessageViewHolder holder, int position) {
-            EMMessage message = messages.get(position);
+            EMMessage message = messages.get().get(position);
             EMMessage.ChatType chatType = message.getChatType();
             String nick = "";
             switch (chatType) {
@@ -103,8 +118,30 @@ public class EasemobP2PChatService extends IMP2PChatService implements EMMessage
 
         @Override
         public int getItemCount() {
-            return messages.size();
+            return messages.get().size();
         }
     }
 
+    private static class MessageHandler extends Handler {
+
+        private static final int CODE_MSG_RECEIVED = 0X1000;
+
+        private WeakReference<EasemobP2PChatService> reference;
+
+        public MessageHandler(EasemobP2PChatService service) {
+            this.reference = new WeakReference<EasemobP2PChatService>(service);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            int code = msg.what;
+            switch (code) {
+                case CODE_MSG_RECEIVED:
+                    reference.get().getChatMessageAdapter().notifyDataSetChanged();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }
