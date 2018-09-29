@@ -9,11 +9,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/easyIM" />
-            <option value="$PROJECT_DIR$/im-hyphenate" />
-            <option value="$PROJECT_DIR$/im-netease" />
-            <option value="$PROJECT_DIR$/ui-base" />
-            <option value="$PROJECT_DIR$/ui-wechat" />
+            <option value="$PROJECT_DIR$/library" />
+            <option value="$PROJECT_DIR$/library/easy-im" />
+            <option value="$PROJECT_DIR$/library/im-base" />
+            <option value="$PROJECT_DIR$/library/im-netease" />
+            <option value="$PROJECT_DIR$/library/ui-base" />
+            <option value="$PROJECT_DIR$/library/ui-wechat" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

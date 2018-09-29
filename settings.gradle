@@ -1,4 +1,6 @@
 include ':app',
-        ':easyIM',
-        ':im-netease', ':im-hyphenate',
-        ':ui-base', ':ui-wechat'
+        ':library:easy-im',
+        ':library:im-base',
+        ':library:im-netease',
+        ':library:ui-base',
+        ':library:ui-wechat'

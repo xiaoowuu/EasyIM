@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import win.smartown.easyim.EasyIM;
 import win.smartown.easyim.R;
-import win.smartown.easyim.standard.IMService;
+import win.smartown.easyim.im.base.LoginListener;
 import win.smartown.easyim.util.ToastUtil;
 
 /**
@@ -23,12 +23,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText accountEditText;
     private EditText passwordEditText;
 
-    private IMService imService;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        imService = EasyIM.getImServiceFactory().createImService();
         setContentView(R.layout.activity_login);
         accountEditText = findViewById(R.id.account);
         passwordEditText = findViewById(R.id.password);
@@ -54,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void login() {
-        imService.login(new IMService.LoginCallback() {
+        EasyIM.getIMService().login(new LoginListener() {
 
             @Override
             public void onLoginSuccess(Object result) {

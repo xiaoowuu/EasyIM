@@ -2,7 +2,8 @@ package win.smartown.easyim;
 
 import android.app.Application;
 
-import win.smartown.easyim.im.netease.NIMServiceFactory;
+import win.smartown.easyim.im.netease.NIMService;
+import win.smartown.easyim.ui.base.UI;
 import win.smartown.easyim.util.ToastUtil;
 
 /**
@@ -16,7 +17,7 @@ public class APP extends Application {
     public void onCreate() {
         super.onCreate();
         ToastUtil.init(this);
-        EasyIM.setImServiceFactory(new NIMServiceFactory(this));
+        EasyIM.init(new NIMService(this), new UI());
     }
 
 }
