@@ -19,5 +19,6 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:support-v4:28.0.0'
+    implementation rootProject.ext.support_v4
+    implementation project(":library:im-base")
 }

@@ -1,5 +1,4 @@
 include ':app',
-        ':library:easy-im',
         ':library:im-base',
         ':library:im-netease',
         ':library:ui-base',

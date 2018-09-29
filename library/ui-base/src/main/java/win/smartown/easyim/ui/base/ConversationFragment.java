@@ -1,6 +1,12 @@
 package win.smartown.easyim.ui.base;
 
-import android.support.v4.app.Fragment;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.View;
+
+import win.smartown.easyim.im.base.IMService;
+import win.smartown.easyim.im.base.OnConversationChangedListener;
 
 /**
  * @author 雷小武
@@ -8,5 +14,18 @@ import android.support.v4.app.Fragment;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class ConversationFragment extends Fragment {
+public abstract class ConversationFragment extends BaseFragment implements OnConversationChangedListener {
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        IMService.getInstance().addOnConversationChangedListener(this);
+        IMService.getInstance().refreshConversations();
+    }
+
+    @Override
+    public void onDestroy() {
+        IMService.getInstance().removeOnConversationChangedListener(this);
+        super.onDestroy();
+    }
 }

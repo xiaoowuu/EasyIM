@@ -22,7 +22,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.appcompat_v7
-    implementation project(':library:easy-im')
     implementation project(':library:im-netease')
     implementation project(':library:ui-wechat')
 }

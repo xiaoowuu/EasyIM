@@ -33,19 +33,13 @@
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.SingleChatActivity" />
 
         <!--网易云信start-->
         <!-- APP key, 可以在这里设置，也可以在 SDKOptions 中提供。如果 SDKOptions 中提供了，取 SDKOptions 中的值。 -->
         <meta-data
             android:name="com.netease.nim.appKey"
             android:value="7e189c54b1d789ba7bf174d4e074e585" />
-        <!-- 云信进程间通信provider -->
-        <!-- android:authorities="{包名}.ipc.provider", 请将com.netease.nim.demo替换为自己的包名 -->
-        <provider
-            android:name="com.netease.nimlib.ipc.NIMContentProvider"
-            android:authorities="win.smartown.easyim.ipc.provider"
-            android:exported="false"
-            android:process=":core" />
         <!--网易云信end-->
 
         <!-- 设置环信应用的AppKey -->

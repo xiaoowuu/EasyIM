@@ -19,7 +19,9 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation rootProject.ext.appcompat_v7
-    implementation project(':library:ui-base')
+    implementation rootProject.ext.recyclerview_v7
+    implementation project(':library:im-base')
+    api project(':library:ui-base')
 }

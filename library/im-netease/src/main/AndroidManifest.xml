@@ -58,6 +58,13 @@
         <receiver android:name="com.netease.nimlib.service.ResponseReceiver" />
         <!-- 云信进程间通信service -->
         <service android:name="com.netease.nimlib.service.ResponseService" />
+        <!-- 云信进程间通信provider -->
+        <!-- android:authorities="{包名}.ipc.provider", 请将com.netease.nim.demo替换为自己的包名 -->
+        <provider
+            android:name="com.netease.nimlib.ipc.NIMContentProvider"
+            android:authorities="${applicationId}.ipc.provider"
+            android:exported="false"
+            android:process=":core" />
         <!--网易云信end-->
     </application>
 

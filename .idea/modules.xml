@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/EasyIM.iml" filepath="$PROJECT_DIR$/EasyIM.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/EasyIM.iml" filepath="$PROJECT_DIR$/.idea/EasyIM.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/library/easy-im/easy-im.iml" filepath="$PROJECT_DIR$/library/easy-im/easy-im.iml" />
       <module fileurl="file://$PROJECT_DIR$/easyIM/easyIM.iml" filepath="$PROJECT_DIR$/easyIM/easyIM.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/im-base/im-base.iml" filepath="$PROJECT_DIR$/library/im-base/im-base.iml" />
       <module fileurl="file://$PROJECT_DIR$/im-hyphenate/im-hyphenate.iml" filepath="$PROJECT_DIR$/im-hyphenate/im-hyphenate.iml" />
