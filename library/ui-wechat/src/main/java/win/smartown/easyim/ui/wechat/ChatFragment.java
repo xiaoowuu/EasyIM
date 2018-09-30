@@ -14,7 +14,7 @@ import java.util.List;
 
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.Message;
-import win.smartown.easyim.ui.base.ChatFragment;
+import win.smartown.easyim.ui.base.BaseChatFragment;
 
 /**
  * @author 雷小武
@@ -22,7 +22,7 @@ import win.smartown.easyim.ui.base.ChatFragment;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class WxChatFragment extends ChatFragment implements View.OnClickListener {
+public class ChatFragment extends BaseChatFragment implements View.OnClickListener {
 
     private RecyclerView rvMessage;
     private LinearLayoutManager linearLayoutManager;
@@ -30,20 +30,20 @@ public class WxChatFragment extends ChatFragment implements View.OnClickListener
     private Button btEmotion;
     private Button btMore;
     private Button btSend;
-    private WxMessageAdapter messageAdapter;
+    private MessageAdapter messageAdapter;
 
-    public static WxChatFragment newInstance(String account, int type) {
+    public static ChatFragment newInstance(String account, int type) {
         Bundle args = new Bundle();
-        args.putString(ChatFragment.ACCOUNT, account);
-        args.putInt(ChatFragment.TYPE, type);
-        WxChatFragment fragment = new WxChatFragment();
+        args.putString(BaseChatFragment.ACCOUNT, account);
+        args.putInt(BaseChatFragment.TYPE, type);
+        ChatFragment fragment = new ChatFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_wx_single_chat;
+        return R.layout.fragment_single_chat;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class WxChatFragment extends ChatFragment implements View.OnClickListener
         });
         linearLayoutManager = new LinearLayoutManager(getActivity());
         rvMessage.setLayoutManager(linearLayoutManager);
-        messageAdapter = new WxMessageAdapter();
+        messageAdapter = new MessageAdapter();
         rvMessage.setAdapter(messageAdapter);
         btSend.setOnClickListener(this);
     }

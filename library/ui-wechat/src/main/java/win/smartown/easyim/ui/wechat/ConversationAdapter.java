@@ -13,7 +13,7 @@ import java.util.List;
 
 import win.smartown.easyim.im.base.Conversation;
 import win.smartown.easyim.ui.base.ActionHandler;
-import win.smartown.easyim.ui.base.UI;
+import win.smartown.easyim.ui.base.BaseUI;
 
 /**
  * @author 雷小武
@@ -21,18 +21,18 @@ import win.smartown.easyim.ui.base.UI;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class WxConversationAdapter extends RecyclerView.Adapter<WxConversationAdapter.ViewHolder> implements View.OnClickListener {
+public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapter.ViewHolder> implements View.OnClickListener {
 
     private List<Conversation> conversations;
 
-    public WxConversationAdapter(List<Conversation> conversations) {
+    public ConversationAdapter(List<Conversation> conversations) {
         this.conversations = conversations;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_wx_conversation, viewGroup, false));
+        return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_conversation, viewGroup, false));
     }
 
     @Override
@@ -53,7 +53,7 @@ public class WxConversationAdapter extends RecyclerView.Adapter<WxConversationAd
 
     @Override
     public void onClick(View v) {
-        ActionHandler actionHandler = UI.getInstance().getActionHandler();
+        ActionHandler actionHandler = BaseUI.getInstance().getActionHandler();
         Object tag = v.getTag();
         if (actionHandler != null && tag instanceof Conversation) {
             Conversation conversation = (Conversation) tag;

@@ -8,8 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import win.smartown.easyim.R;
 import win.smartown.easyim.im.base.Conversation;
-import win.smartown.easyim.ui.base.ChatFragment;
-import win.smartown.easyim.ui.base.UI;
+import win.smartown.easyim.ui.base.BaseChatFragment;
+import win.smartown.easyim.ui.base.BaseUI;
 
 /**
  * @author 雷小武
@@ -21,26 +21,27 @@ public class ChatActivity extends AppCompatActivity {
 
     /**
      * 进入聊天
+     *
      * @param context Context
      * @param account 聊天对象账号
-     * @param type 会话类型<br>{@link Conversation#TYPE_SINGLE}<br>{@link Conversation#TYPE_GROUP}<br>{@link Conversation#TYPE_OTHER}
+     * @param type    会话类型<br>{@link Conversation#TYPE_SINGLE}<br>{@link Conversation#TYPE_GROUP}<br>{@link Conversation#TYPE_OTHER}
      */
     public static void startChat(Context context, String account, int type) {
         Intent intent = new Intent(context, ChatActivity.class);
-        intent.putExtra(ChatFragment.ACCOUNT, account);
-        intent.putExtra(ChatFragment.TYPE, type);
+        intent.putExtra(BaseChatFragment.ACCOUNT, account);
+        intent.putExtra(BaseChatFragment.TYPE, type);
         context.startActivity(intent);
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String account = getIntent().getStringExtra(ChatFragment.ACCOUNT);
-        int type = getIntent().getIntExtra(ChatFragment.TYPE, Conversation.TYPE_OTHER);
+        String account = getIntent().getStringExtra(BaseChatFragment.ACCOUNT);
+        int type = getIntent().getIntExtra(BaseChatFragment.TYPE, Conversation.TYPE_OTHER);
         setContentView(R.layout.activity_main);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, UI.getInstance().getSingleChatFragment(account, String.valueOf(type)))
+                .replace(R.id.fragment_container, BaseUI.getInstance().getChatFragment(account, String.valueOf(type)))
                 .commit();
     }
 }

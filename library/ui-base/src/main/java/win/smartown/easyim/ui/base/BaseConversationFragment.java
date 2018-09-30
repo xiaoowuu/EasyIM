@@ -14,7 +14,7 @@ import win.smartown.easyim.im.base.OnConversationChangedListener;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public abstract class ConversationFragment extends BaseFragment implements OnConversationChangedListener {
+public abstract class BaseConversationFragment extends BaseFragment implements OnConversationChangedListener {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

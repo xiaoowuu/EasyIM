@@ -12,7 +12,7 @@ import java.util.List;
 
 import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.ui.base.ActionHandler;
-import win.smartown.easyim.ui.base.UI;
+import win.smartown.easyim.ui.base.BaseUI;
 
 /**
  * @author 雷小武
@@ -20,20 +20,20 @@ import win.smartown.easyim.ui.base.UI;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class WxMessageAdapter extends RecyclerView.Adapter<WxMessageAdapter.ViewHolder> implements View.OnClickListener {
+public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> implements View.OnClickListener {
 
     private List<Message> messages;
 
-    public WxMessageAdapter() {
+    public MessageAdapter() {
         this.messages = new ArrayList<>();
     }
 
     @Override
     public int getItemViewType(int position) {
         if (messages.get(position).isSend()) {
-            return R.layout.item_wx_message_send;
+            return R.layout.item_message_send;
         }
-        return R.layout.item_wx_message_received;
+        return R.layout.item_message_received;
     }
 
     @NonNull
@@ -79,7 +79,7 @@ public class WxMessageAdapter extends RecyclerView.Adapter<WxMessageAdapter.View
      */
     @Override
     public void onClick(View v) {
-        ActionHandler actionHandler = UI.getInstance().getActionHandler();
+        ActionHandler actionHandler = BaseUI.getInstance().getActionHandler();
         Object tag = v.getTag();
         if (actionHandler!=null&&tag != null) {
             int position = (int) tag;

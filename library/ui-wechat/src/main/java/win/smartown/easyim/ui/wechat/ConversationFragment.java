@@ -8,7 +8,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import win.smartown.easyim.im.base.Conversation;
-import win.smartown.easyim.ui.base.ConversationFragment;
+import win.smartown.easyim.ui.base.BaseConversationFragment;
 
 /**
  * @author 雷小武
@@ -16,14 +16,14 @@ import win.smartown.easyim.ui.base.ConversationFragment;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class WxConversationFragment extends ConversationFragment {
+public class ConversationFragment extends BaseConversationFragment {
 
     private RecyclerView rvConversation;
     private TextView tvNone;
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_wx_conversation;
+        return R.layout.fragment_conversation;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class WxConversationFragment extends ConversationFragment {
         } else {
             tvNone.setVisibility(View.GONE);
             rvConversation.setVisibility(View.VISIBLE);
-            rvConversation.setAdapter(new WxConversationAdapter(conversations));
+            rvConversation.setAdapter(new ConversationAdapter(conversations));
         }
     }
 }
