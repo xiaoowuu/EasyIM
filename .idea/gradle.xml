@@ -13,7 +13,7 @@
             <option value="$PROJECT_DIR$/library/im-base" />
             <option value="$PROJECT_DIR$/library/im-netease" />
             <option value="$PROJECT_DIR$/library/ui-base" />
-            <option value="$PROJECT_DIR$/library/ui-wechat" />
+            <option value="$PROJECT_DIR$/library/ui-ysy" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -15,8 +15,8 @@
       <module fileurl="file://$PROJECT_DIR$/library/ui-wechat/library-ui-wechat.iml" filepath="$PROJECT_DIR$/library/ui-wechat/library-ui-wechat.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/ui-base/ui-base.iml" filepath="$PROJECT_DIR$/library/ui-base/ui-base.iml" />
       <module fileurl="file://$PROJECT_DIR$/ui-base/ui-base.iml" filepath="$PROJECT_DIR$/ui-base/ui-base.iml" />
-      <module fileurl="file://$PROJECT_DIR$/library/ui-wechat/ui-wechat.iml" filepath="$PROJECT_DIR$/library/ui-wechat/ui-wechat.iml" />
       <module fileurl="file://$PROJECT_DIR$/ui-wechat/ui-wechat.iml" filepath="$PROJECT_DIR$/ui-wechat/ui-wechat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/ui-ysy/ui-ysy.iml" filepath="$PROJECT_DIR$/library/ui-ysy/ui-ysy.iml" />
     </modules>
   </component>
 </project>

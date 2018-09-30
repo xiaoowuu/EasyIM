@@ -5,7 +5,7 @@ import android.app.Application;
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.netease.NIM;
 import win.smartown.easyim.ui.base.BaseUI;
-import win.smartown.easyim.ui.wechat.UI;
+import win.smartown.easyim.ui.ysy.UI;
 import win.smartown.easyim.util.ActionHandler;
 import win.smartown.easyim.util.ToastUtil;
 

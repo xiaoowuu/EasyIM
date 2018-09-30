@@ -2,5 +2,4 @@ include ':app',
         ':library:im-base',
         ':library:im-netease',
         ':library:ui-base',
-//        ':library:ui-yishengyue',
-        ':library:ui-wechat'
+        ':library:ui-ysy'
