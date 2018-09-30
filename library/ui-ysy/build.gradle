@@ -22,6 +22,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation rootProject.ext.appcompat_v7
     implementation rootProject.ext.recyclerview_v7
+    implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.2'
     implementation project(':library:im-base')
     api project(':library:ui-base')
 }

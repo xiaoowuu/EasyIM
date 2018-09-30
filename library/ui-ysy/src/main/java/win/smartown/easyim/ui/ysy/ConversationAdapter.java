@@ -42,8 +42,10 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         viewHolder.tvNick.setText(conversation.getId());
         viewHolder.tvContent.setText(conversation.getLastMessageContent());
         viewHolder.tvTime.setText(String.valueOf(conversation.getLastMessageTime()));
-        viewHolder.itemView.setTag(conversation);
-        viewHolder.itemView.setOnClickListener(this);
+        viewHolder.contentView.setTag(conversation);
+        viewHolder.contentView.setOnClickListener(this);
+        viewHolder.tvDelete.setTag(conversation);
+        viewHolder.tvDelete.setOnClickListener(this);
     }
 
     @Override
@@ -57,23 +59,32 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         Object tag = v.getTag();
         if (actionHandler != null && tag instanceof Conversation) {
             Conversation conversation = (Conversation) tag;
-            actionHandler.startChat(v.getContext(), conversation);
+            int id = v.getId();
+            if (id == R.id.rl_content) {
+                actionHandler.startChat(v.getContext(), conversation);
+            } else if (id == R.id.tv_delete) {
+
+            }
         }
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
+        private View contentView;
         private ImageView ivPortrait;
         private TextView tvNick;
         private TextView tvContent;
         private TextView tvTime;
+        private TextView tvDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            contentView = itemView.findViewById(R.id.rl_content);
             ivPortrait = itemView.findViewById(R.id.iv_portrait);
             tvNick = itemView.findViewById(R.id.tv_nick);
             tvContent = itemView.findViewById(R.id.tv_content);
             tvTime = itemView.findViewById(R.id.tv_time);
+            tvDelete = itemView.findViewById(R.id.tv_delete);
         }
     }
 }
