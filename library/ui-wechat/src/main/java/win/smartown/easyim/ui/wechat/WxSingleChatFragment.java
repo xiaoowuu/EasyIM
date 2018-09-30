@@ -3,6 +3,7 @@ package win.smartown.easyim.ui.wechat;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,7 +15,6 @@ import java.util.List;
 
 import win.smartown.easyim.im.base.IMService;
 import win.smartown.easyim.im.base.Message;
-import win.smartown.easyim.im.base.OnMessageChangedListener;
 import win.smartown.easyim.ui.base.SingleChatFragment;
 
 /**
@@ -23,33 +23,22 @@ import win.smartown.easyim.ui.base.SingleChatFragment;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class WxSingleChatFragment extends SingleChatFragment implements OnMessageChangedListener, View.OnClickListener {
+public class WxSingleChatFragment extends SingleChatFragment implements View.OnClickListener {
 
-    private final static String ACCOUNT = "account";
     private RecyclerView rvMessage;
+    private LinearLayoutManager linearLayoutManager;
     private EditText etMessage;
     private Button btEmotion;
     private Button btMore;
     private Button btSend;
-    private String account;
     private WxMessageAdapter messageAdapter;
 
     public static WxSingleChatFragment newInstance(String account) {
         Bundle args = new Bundle();
-        args.putString(ACCOUNT, account);
+        args.putString(SingleChatFragment.ACCOUNT, account);
         WxSingleChatFragment fragment = new WxSingleChatFragment();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Bundle bundle = getArguments();
-        if (bundle != null && bundle.containsKey(ACCOUNT)) {
-            account = bundle.getString(ACCOUNT);
-        }
-        messageAdapter = new WxMessageAdapter();
     }
 
     @Override
@@ -87,12 +76,11 @@ public class WxSingleChatFragment extends SingleChatFragment implements OnMessag
                 }
             }
         });
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        rvMessage.setLayoutManager(linearLayoutManager);
+        messageAdapter = new WxMessageAdapter();
         rvMessage.setAdapter(messageAdapter);
-        btSend.setOnClickListener(this);
-        IMService.getInstance().addOnMessageChangedListener(account, this);
-        IMService.getInstance().refreshMessages(account);
-    }
-
+        btSend.setOnClickListener(this);}
     @Override
     public void onReceivedMessage(List<Message> messages) {
         messageAdapter.addMessages(messages);
@@ -101,18 +89,12 @@ public class WxSingleChatFragment extends SingleChatFragment implements OnMessag
     @Override
     public void onSendMessage(Message message) {
         messageAdapter.addMessage(message);
-        rvMessage.scrollToPosition(messageAdapter.getItemCount());
+        linearLayoutManager.scrollToPosition(messageAdapter.getItemCount());
     }
 
     @Override
     public void onMessageStatusChanged(Message message) {
         messageAdapter.onMessageStatusChanged(message);
-    }
-
-    @Override
-    public void onDestroy() {
-        IMService.getInstance().removeOnMessageChangedListener(account);
-        super.onDestroy();
     }
 
     /**

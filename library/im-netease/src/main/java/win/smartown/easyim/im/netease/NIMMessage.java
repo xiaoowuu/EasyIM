@@ -13,12 +13,10 @@ import win.smartown.easyim.im.base.Message;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class NIMMessage implements Message {
+public class NIMMessage extends Message<IMMessage> {
 
-    private IMMessage message;
-
-    public NIMMessage(IMMessage message) {
-        this.message = message;
+    public NIMMessage(IMMessage imMessage) {
+        super(imMessage);
     }
 
     /**
@@ -26,7 +24,7 @@ public class NIMMessage implements Message {
      */
     @Override
     public boolean isSend() {
-        return message.getDirect() == MsgDirectionEnum.Out;
+        return data.getDirect() == MsgDirectionEnum.Out;
     }
 
     /**
@@ -34,13 +32,13 @@ public class NIMMessage implements Message {
      */
     @Override
     public String getContent() {
-        return message.getContent();
+        return data.getContent();
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof NIMMessage) {
-            return TextUtils.equals(((NIMMessage) obj).message.getUuid(), message.getUuid());
+            return TextUtils.equals(((NIMMessage) obj).data.getUuid(), data.getUuid());
         }
         return false;
     }

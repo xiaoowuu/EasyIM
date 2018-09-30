@@ -6,36 +6,42 @@ package win.smartown.easyim.im.base;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public interface Conversation {
+public abstract class Conversation<Data> {
+
+    protected Data data;
+
+    public Conversation(Data data) {
+        this.data = data;
+    }
 
     /**
      * @return 会话投降
      */
-    String getPortrait();
+    public abstract String getPortrait();
 
     /**
      * @return 昵称
      */
-    String getNick();
+    public abstract String getNick();
 
     /**
      * @return 最后一条消息内容
      */
-    String getLastMessageContent();
+    public abstract String getLastMessageContent();
 
     /**
      * @return 最后一条消息的类型
      */
-    int getLastMessageType();
+    public abstract int getLastMessageType();
 
     /**
      * @return 最后一条消息的时间
      */
-    long getLastMessageTime();
+    public abstract long getLastMessageTime();
 
     /**
      * @return 未读数
      */
-    int getUnreadCount();
+    public abstract int getUnreadCount();
 
 }

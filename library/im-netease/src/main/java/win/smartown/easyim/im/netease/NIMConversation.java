@@ -10,12 +10,10 @@ import win.smartown.easyim.im.base.Conversation;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class NIMConversation implements Conversation {
+public class NIMConversation extends Conversation<RecentContact> {
 
-    private RecentContact recentContact;
-
-    public NIMConversation(RecentContact recentContact) {
-        this.recentContact = recentContact;
+    public NIMConversation(RecentContact data) {
+        super(data);
     }
 
     /**
@@ -31,7 +29,7 @@ public class NIMConversation implements Conversation {
      */
     @Override
     public String getNick() {
-        return recentContact.getFromNick();
+        return data.getFromNick();
     }
 
     /**
@@ -39,7 +37,7 @@ public class NIMConversation implements Conversation {
      */
     @Override
     public String getLastMessageContent() {
-        return recentContact.getContent();
+        return data.getContent();
     }
 
     /**
@@ -55,7 +53,7 @@ public class NIMConversation implements Conversation {
      */
     @Override
     public long getLastMessageTime() {
-        return recentContact.getTime();
+        return data.getTime();
     }
 
     /**
@@ -63,6 +61,6 @@ public class NIMConversation implements Conversation {
      */
     @Override
     public int getUnreadCount() {
-        return recentContact.getUnreadCount();
+        return data.getUnreadCount();
     }
 }
