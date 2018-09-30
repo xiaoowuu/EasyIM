@@ -33,7 +33,7 @@
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.SingleChatActivity" />
+        <activity android:name=".activity.ChatActivity" />
 
         <!--网易云信start-->
         <!-- APP key, 可以在这里设置，也可以在 SDKOptions 中提供。如果 SDKOptions 中提供了，取 SDKOptions 中的值。 -->

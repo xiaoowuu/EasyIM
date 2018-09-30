@@ -2,10 +2,11 @@ package win.smartown.easyim;
 
 import android.app.Application;
 
-import win.smartown.easyim.im.base.IMService;
-import win.smartown.easyim.im.netease.NIMService;
+import win.smartown.easyim.im.base.IM;
+import win.smartown.easyim.im.netease.NIM;
 import win.smartown.easyim.ui.base.UI;
 import win.smartown.easyim.ui.wechat.WxUI;
+import win.smartown.easyim.util.ActionHandler;
 import win.smartown.easyim.util.ToastUtil;
 
 /**
@@ -19,8 +20,9 @@ public class APP extends Application {
     public void onCreate() {
         super.onCreate();
         ToastUtil.init(this);
-        IMService.init(new NIMService(this));
+        IM.init(new NIM(this));
         UI.init(new WxUI());
+        UI.getInstance().setActionHandler(new ActionHandler());
     }
 
 }

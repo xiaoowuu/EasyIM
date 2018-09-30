@@ -18,7 +18,17 @@ public abstract class UI {
         return sUI;
     }
 
+    private ActionHandler actionHandler;
+
     public abstract ConversationFragment getConversationFragment(String... params);
 
-    public abstract SingleChatFragment getSingleChatFragment(String... params);
+    public abstract ChatFragment getSingleChatFragment(String... params);
+
+    public void setActionHandler(ActionHandler actionHandler) {
+        this.actionHandler = actionHandler;
+    }
+
+    public ActionHandler getActionHandler() {
+        return actionHandler;
+    }
 }

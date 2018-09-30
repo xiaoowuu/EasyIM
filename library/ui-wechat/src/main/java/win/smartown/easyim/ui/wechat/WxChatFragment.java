@@ -2,7 +2,6 @@ package win.smartown.easyim.ui.wechat;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -13,9 +12,9 @@ import android.widget.EditText;
 
 import java.util.List;
 
-import win.smartown.easyim.im.base.IMService;
+import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.Message;
-import win.smartown.easyim.ui.base.SingleChatFragment;
+import win.smartown.easyim.ui.base.ChatFragment;
 
 /**
  * @author 雷小武
@@ -23,7 +22,7 @@ import win.smartown.easyim.ui.base.SingleChatFragment;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class WxSingleChatFragment extends SingleChatFragment implements View.OnClickListener {
+public class WxChatFragment extends ChatFragment implements View.OnClickListener {
 
     private RecyclerView rvMessage;
     private LinearLayoutManager linearLayoutManager;
@@ -33,10 +32,11 @@ public class WxSingleChatFragment extends SingleChatFragment implements View.OnC
     private Button btSend;
     private WxMessageAdapter messageAdapter;
 
-    public static WxSingleChatFragment newInstance(String account) {
+    public static WxChatFragment newInstance(String account, int type) {
         Bundle args = new Bundle();
-        args.putString(SingleChatFragment.ACCOUNT, account);
-        WxSingleChatFragment fragment = new WxSingleChatFragment();
+        args.putString(ChatFragment.ACCOUNT, account);
+        args.putInt(ChatFragment.TYPE, type);
+        WxChatFragment fragment = new WxChatFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -80,7 +80,9 @@ public class WxSingleChatFragment extends SingleChatFragment implements View.OnC
         rvMessage.setLayoutManager(linearLayoutManager);
         messageAdapter = new WxMessageAdapter();
         rvMessage.setAdapter(messageAdapter);
-        btSend.setOnClickListener(this);}
+        btSend.setOnClickListener(this);
+    }
+
     @Override
     public void onReceivedMessage(List<Message> messages) {
         messageAdapter.addMessages(messages);
@@ -112,7 +114,7 @@ public class WxSingleChatFragment extends SingleChatFragment implements View.OnC
 
     private void checkInput() {
         if (etMessage.length() > 0) {
-            IMService.getInstance().sendMessage(account, etMessage.getText().toString());
+            IM.getInstance().sendMessage(account, type, etMessage.getText().toString());
             etMessage.setText("");
         }
     }

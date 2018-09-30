@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import win.smartown.easyim.R;
-import win.smartown.easyim.im.base.IMService;
+import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.LoginListener;
 import win.smartown.easyim.util.ToastUtil;
 
@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void login() {
-        IMService.getInstance().login(new LoginListener() {
+        IM.getInstance().login(new LoginListener() {
 
             @Override
             public void onLoginSuccess(Object result) {

@@ -1,7 +1,7 @@
 package win.smartown.easyim.ui.wechat;
 
+import win.smartown.easyim.ui.base.ChatFragment;
 import win.smartown.easyim.ui.base.ConversationFragment;
-import win.smartown.easyim.ui.base.SingleChatFragment;
 import win.smartown.easyim.ui.base.UI;
 
 /**
@@ -18,7 +18,7 @@ public class WxUI extends UI {
     }
 
     @Override
-    public SingleChatFragment getSingleChatFragment(String... params) {
-        return WxSingleChatFragment.newInstance(params[0]);
+    public ChatFragment getSingleChatFragment(String... params) {
+        return WxChatFragment.newInstance(params[0], Integer.parseInt(params[1]));
     }
 }

@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import win.smartown.easyim.im.base.Message;
+import win.smartown.easyim.ui.base.ActionHandler;
+import win.smartown.easyim.ui.base.UI;
 
 /**
  * @author 雷小武
@@ -18,7 +20,7 @@ import win.smartown.easyim.im.base.Message;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class WxMessageAdapter extends RecyclerView.Adapter<WxMessageAdapter.ViewHolder> {
+public class WxMessageAdapter extends RecyclerView.Adapter<WxMessageAdapter.ViewHolder> implements View.OnClickListener {
 
     private List<Message> messages;
 
@@ -43,6 +45,8 @@ public class WxMessageAdapter extends RecyclerView.Adapter<WxMessageAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.tvContent.setText(messages.get(i).getContent());
+        viewHolder.itemView.setTag(i);
+        viewHolder.itemView.setOnClickListener(this);
     }
 
     @Override
@@ -68,6 +72,20 @@ public class WxMessageAdapter extends RecyclerView.Adapter<WxMessageAdapter.View
         }
     }
 
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+        ActionHandler actionHandler = UI.getInstance().getActionHandler();
+        Object tag = v.getTag();
+        if (actionHandler!=null&&tag != null) {
+            int position = (int) tag;
+        }
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvContent;
@@ -77,5 +95,4 @@ public class WxMessageAdapter extends RecyclerView.Adapter<WxMessageAdapter.View
             tvContent = itemView.findViewById(R.id.tv_content);
         }
     }
-
 }

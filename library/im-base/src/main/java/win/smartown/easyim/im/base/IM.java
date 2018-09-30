@@ -13,15 +13,15 @@ import java.util.Set;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public abstract class IMService {
+public abstract class IM {
 
-    private static IMService sImService;
+    private static IM sImService;
 
-    public static void init(IMService sImService) {
-        IMService.sImService = sImService;
+    public static void init(IM sImService) {
+        IM.sImService = sImService;
     }
 
-    public static IMService getInstance() {
+    public static IM getInstance() {
         return sImService;
     }
 
@@ -29,7 +29,7 @@ public abstract class IMService {
     protected Set<OnConversationChangedListener> onConversationChangedListeners;
     protected Map<String, OnMessageChangedListener> onMessageChangedListeners;
 
-    public IMService(Context context) {
+    public IM(Context context) {
         this.context = context.getApplicationContext();
         onConversationChangedListeners = new HashSet<>();
         onMessageChangedListeners = new HashMap<>();
@@ -49,7 +49,7 @@ public abstract class IMService {
         onConversationChangedListeners.add(listener);
     }
 
-    public abstract void refreshMessages(String account);
+    public abstract void refreshMessages(String account, int type);
 
     public void addOnMessageChangedListener(String account, OnMessageChangedListener listener) {
         onMessageChangedListeners.put(account, listener);
@@ -59,6 +59,6 @@ public abstract class IMService {
         onMessageChangedListeners.remove(account);
     }
 
-    public abstract void sendMessage(String account, String text);
+    public abstract void sendMessage(String account, int type, String text);
 
 }

@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import win.smartown.easyim.im.base.IMService;
+import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.OnMessageChangedListener;
 
 /**
@@ -14,30 +14,37 @@ import win.smartown.easyim.im.base.OnMessageChangedListener;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public abstract class SingleChatFragment extends BaseFragment implements OnMessageChangedListener {
+public abstract class ChatFragment extends BaseFragment implements OnMessageChangedListener {
 
     public final static String ACCOUNT = "account";
+    public final static String TYPE = "type";
     protected String account;
+    protected int type;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         if (bundle != null && bundle.containsKey(ACCOUNT)) {
-            account = bundle.getString(ACCOUNT);
+            if (bundle.containsKey(ACCOUNT)) {
+                account = bundle.getString(ACCOUNT);
+            }
+            if (bundle.containsKey(TYPE)) {
+                type = bundle.getInt(TYPE);
+            }
         }
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        IMService.getInstance().addOnMessageChangedListener(account, this);
-        IMService.getInstance().refreshMessages(account);
+        IM.getInstance().addOnMessageChangedListener(account, this);
+        IM.getInstance().refreshMessages(account, type);
     }
 
     @Override
     public void onDestroy() {
-        IMService.getInstance().removeOnMessageChangedListener(account);
+        IM.getInstance().removeOnMessageChangedListener(account);
         super.onDestroy();
     }
 

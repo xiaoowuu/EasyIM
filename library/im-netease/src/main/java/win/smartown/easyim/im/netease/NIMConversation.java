@@ -17,6 +17,29 @@ public class NIMConversation extends Conversation<RecentContact> {
     }
 
     /**
+     * @return 会话id
+     */
+    @Override
+    public String getId() {
+        return data.getContactId();
+    }
+
+    /**
+     * @return 会话类型
+     */
+    @Override
+    public int getType() {
+        switch (data.getSessionType()) {
+            case P2P:
+                return Conversation.TYPE_SINGLE;
+            case Team:
+                return Conversation.TYPE_GROUP;
+            default:
+                return Conversation.TYPE_OTHER;
+        }
+    }
+
+    /**
      * @return 会话投降
      */
     @Override
@@ -25,10 +48,18 @@ public class NIMConversation extends Conversation<RecentContact> {
     }
 
     /**
-     * @return 昵称
+     * @return 最后一条发送人昵称
      */
     @Override
-    public String getNick() {
+    public String getLastMessageFromAccount() {
+        return data.getFromAccount();
+    }
+
+    /**
+     * @return 最后一条发送人昵称
+     */
+    @Override
+    public String getLastMessageFromNick() {
         return data.getFromNick();
     }
 

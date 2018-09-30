@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import win.smartown.easyim.R;
+import win.smartown.easyim.im.base.Conversation;
 import win.smartown.easyim.ui.base.UI;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.test2:
-                SingleChatActivity.startSingleChat(this, "test2");
+                ChatActivity.startChat(this, "test2", Conversation.TYPE_SINGLE);
                 break;
             case R.id.test3:
-                SingleChatActivity.startSingleChat(this, "test3");
+                ChatActivity.startChat(this, "test3", Conversation.TYPE_SINGLE);
                 break;
             default:
                 break;

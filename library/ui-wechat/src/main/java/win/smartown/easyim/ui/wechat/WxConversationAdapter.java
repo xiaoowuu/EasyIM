@@ -12,6 +12,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import win.smartown.easyim.im.base.Conversation;
+import win.smartown.easyim.ui.base.ActionHandler;
+import win.smartown.easyim.ui.base.UI;
 
 /**
  * @author 雷小武
@@ -19,7 +21,7 @@ import win.smartown.easyim.im.base.Conversation;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class WxConversationAdapter extends RecyclerView.Adapter<WxConversationAdapter.ViewHolder> {
+public class WxConversationAdapter extends RecyclerView.Adapter<WxConversationAdapter.ViewHolder> implements View.OnClickListener {
 
     private List<Conversation> conversations;
 
@@ -35,15 +37,28 @@ public class WxConversationAdapter extends RecyclerView.Adapter<WxConversationAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        Conversation conversation = conversations.get(i);
         viewHolder.ivPortrait.setBackgroundColor(Color.BLUE);
-        viewHolder.tvNick.setText(conversations.get(i).getNick());
-        viewHolder.tvContent.setText(conversations.get(i).getLastMessageContent());
-        viewHolder.tvTime.setText(String.valueOf(conversations.get(i).getLastMessageTime()));
+        viewHolder.tvNick.setText(conversation.getId());
+        viewHolder.tvContent.setText(conversation.getLastMessageContent());
+        viewHolder.tvTime.setText(String.valueOf(conversation.getLastMessageTime()));
+        viewHolder.itemView.setTag(conversation);
+        viewHolder.itemView.setOnClickListener(this);
     }
 
     @Override
     public int getItemCount() {
         return conversations.size();
+    }
+
+    @Override
+    public void onClick(View v) {
+        ActionHandler actionHandler = UI.getInstance().getActionHandler();
+        Object tag = v.getTag();
+        if (actionHandler != null && tag instanceof Conversation) {
+            Conversation conversation = (Conversation) tag;
+            actionHandler.startChat(v.getContext(), conversation);
+        }
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

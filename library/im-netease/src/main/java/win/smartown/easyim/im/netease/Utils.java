@@ -1,5 +1,6 @@
 package win.smartown.easyim.im.netease;
 
+import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
 
@@ -31,6 +32,17 @@ public class Utils {
             messages.add(new NIMMessage(message));
         }
         return messages;
+    }
+
+    public static SessionTypeEnum getSesstionType(int type) {
+        switch (type) {
+            case Conversation.TYPE_SINGLE:
+                return SessionTypeEnum.P2P;
+            case Conversation.TYPE_GROUP:
+                return SessionTypeEnum.Team;
+            default:
+                return SessionTypeEnum.None;
+        }
     }
 
 }
