@@ -5,9 +5,12 @@ package win.smartown.easyim.im.base;
  * @author 雷小武
  * 创建时间：2018/9/29 11:42
  * 版权：成都智慧一生约科技有限公司
- * 类描述：封装统一message对象，需用重写equals方法
+ * 类描述：封装统一message对象，需重写equals方法
  */
 public abstract class Message<Data> {
+
+    public static final int TYPE_TEXT = 1;
+    public static final int TYPE_IMAGE = 2;
 
     protected Data data;
 
@@ -16,13 +19,26 @@ public abstract class Message<Data> {
     }
 
     /**
+     * 此消息是否是我发送的
+     *
      * @return 是否是我发送的
      */
     public abstract boolean isSend();
 
     /**
+     * 获取消息内容
+     *
      * @return 消息内容
      */
     public abstract String getContent();
+
+    /**
+     * 获取消息类型
+     *
+     * @return 消息类型
+     * 文本:{@link Message#TYPE_TEXT}
+     * 图片:{@link Message#TYPE_IMAGE}
+     */
+    public abstract int getType();
 
 }

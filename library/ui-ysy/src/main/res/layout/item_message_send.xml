@@ -8,14 +8,24 @@
     android:paddingRight="16dp"
     android:paddingTop="8dp">
 
-    <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/iv_portrait"
+        android:layout_width="@dimen/dp40"
+        android:layout_height="@dimen/dp40"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:textColor="@android:color/holo_blue_dark"
-        android:textSize="16sp"
-        tools:text="我发送的" />
+        android:background="@color/_00a6ff"
+        tools:background="@tools:sample/backgrounds/scenic" />
+
+    <RelativeLayout
+        android:id="@+id/rl_content"
+        android:layout_width="@dimen/dp200"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp8"
+        android:layout_marginRight="@dimen/dp8"
+        android:layout_toLeftOf="@+id/iv_portrait"
+        android:layout_toStartOf="@+id/iv_portrait"
+        android:gravity="right|end"
+        android:orientation="horizontal" />
 
 </RelativeLayout>

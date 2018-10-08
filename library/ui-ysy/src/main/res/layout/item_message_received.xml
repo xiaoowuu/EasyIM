@@ -3,17 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="8dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="8dp">
+    android:paddingBottom="@dimen/dp8"
+    android:paddingLeft="@dimen/dp16"
+    android:paddingRight="@dimen/dp16"
+    android:paddingTop="@dimen/dp8">
 
-    <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/iv_portrait"
+        android:layout_width="@dimen/dp40"
+        android:layout_height="@dimen/dp40"
+        android:background="@color/_ffffff"
+        tools:background="@tools:sample/backgrounds/scenic" />
+
+    <RelativeLayout
+        android:id="@+id/rl_content"
+        android:layout_width="@dimen/dp200"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/holo_blue_bright"
-        android:textSize="16sp"
-        tools:text="我收到的" />
+        android:layout_marginLeft="@dimen/dp8"
+        android:layout_marginStart="@dimen/dp8"
+        android:layout_toEndOf="@+id/iv_portrait"
+        android:layout_toRightOf="@+id/iv_portrait"
+        android:orientation="horizontal" />
 
 </RelativeLayout>

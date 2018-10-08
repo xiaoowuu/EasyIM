@@ -36,6 +36,18 @@ public class NIMMessage extends Message<IMMessage> {
     }
 
     @Override
+    public int getType() {
+        switch (data.getMsgType()) {
+            case text:
+                return Message.TYPE_TEXT;
+            case image:
+                return Message.TYPE_IMAGE;
+            default:
+                return 0;
+        }
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj instanceof NIMMessage) {
             return TextUtils.equals(((NIMMessage) obj).data.getUuid(), data.getUuid());

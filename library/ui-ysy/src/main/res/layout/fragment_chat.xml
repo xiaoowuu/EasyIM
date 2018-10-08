@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_message"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px1"
+        android:background="@color/_e1e1e1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp8">
+
+        <EditText
+            android:id="@+id/et_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp8"
+            android:layout_marginRight="@dimen/dp8"
+            android:layout_weight="1"
+            android:background="@drawable/shape_message_edit_background"
+            android:minHeight="@dimen/dp32"
+            android:paddingBottom="@dimen/dp4"
+            android:paddingLeft="@dimen/dp16"
+            android:paddingRight="@dimen/dp16"
+            android:paddingTop="@dimen/dp4"
+            android:textSize="@dimen/sp14" />
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="@dimen/dp32"
+            android:layout_height="@dimen/dp32"
+            android:background="@drawable/shape_message_edit_background"
+            android:padding="@dimen/dp8"
+            android:src="@drawable/ic_more" />
+
+        <TextView
+            android:id="@+id/tv_send"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp32"
+            android:background="@drawable/selector_message_send"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp16"
+            android:paddingRight="@dimen/dp16"
+            android:text="@string/send"
+            android:textColor="@color/_ffffff"
+            android:textSize="@dimen/sp14"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px1"
+        android:background="@color/_e1e1e1" />
+
+    <LinearLayout
+        android:id="@+id/ll_action"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp120"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/ll_camera"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/dp40"
+                android:layout_height="@dimen/dp40"
+                android:src="@drawable/ic_camera" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
+                android:text="@string/camera"
+                android:textColor="@color/_333333"
+                android:textSize="@dimen/sp14" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_photo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/dp40"
+                android:layout_height="@dimen/dp40"
+                android:src="@drawable/ic_photo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
+                android:text="@string/photo"
+                android:textColor="@color/_333333"
+                android:textSize="@dimen/sp14" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="delete">删除</string>
+    <string name="send">发送</string>
+    <string name="unknown_message">未知消息类型</string>
+    <string name="camera">拍\t照</string>
+    <string name="photo">照\t片</string>
 </resources>

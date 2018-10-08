@@ -7,8 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -27,9 +29,9 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
     private RecyclerView rvMessage;
     private LinearLayoutManager linearLayoutManager;
     private EditText etMessage;
-    private Button btEmotion;
-    private Button btMore;
-    private Button btSend;
+    private ImageView ivMore;
+    private TextView tvSend;
+    private LinearLayout llAction;
     private MessageAdapter messageAdapter;
 
     public static ChatFragment newInstance(String account, int type) {
@@ -43,16 +45,16 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_single_chat;
+        return R.layout.fragment_chat;
     }
 
     @Override
     protected void initView(@NonNull View view) {
         rvMessage = view.findViewById(R.id.rv_message);
         etMessage = view.findViewById(R.id.et_message);
-        btEmotion = view.findViewById(R.id.bt_emotion);
-        btMore = view.findViewById(R.id.bt_more);
-        btSend = view.findViewById(R.id.bt_send);
+        ivMore = view.findViewById(R.id.iv_more);
+        tvSend = view.findViewById(R.id.tv_send);
+        llAction = view.findViewById(R.id.ll_action);
 
         etMessage.addTextChangedListener(new TextWatcher() {
             @Override
@@ -68,11 +70,11 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
             @Override
             public void afterTextChanged(Editable s) {
                 if (etMessage.length() > 0) {
-                    btMore.setVisibility(View.GONE);
-                    btSend.setVisibility(View.VISIBLE);
+                    ivMore.setVisibility(View.GONE);
+                    tvSend.setVisibility(View.VISIBLE);
                 } else {
-                    btMore.setVisibility(View.VISIBLE);
-                    btSend.setVisibility(View.GONE);
+                    ivMore.setVisibility(View.VISIBLE);
+                    tvSend.setVisibility(View.GONE);
                 }
             }
         });
@@ -80,7 +82,11 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
         rvMessage.setLayoutManager(linearLayoutManager);
         messageAdapter = new MessageAdapter();
         rvMessage.setAdapter(messageAdapter);
-        btSend.setOnClickListener(this);
+        etMessage.setOnClickListener(this);
+        tvSend.setOnClickListener(this);
+        ivMore.setOnClickListener(this);
+        view.findViewById(R.id.ll_camera).setOnClickListener(this);
+        view.findViewById(R.id.ll_photo).setOnClickListener(this);
     }
 
     @Override
@@ -107,8 +113,18 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.bt_send) {
+        if (id == R.id.et_message) {
+            llAction.setVisibility(View.GONE);
+        } else if (id == R.id.tv_send) {
             checkInput();
+        } else if (id == R.id.iv_more) {
+            if (llAction.getVisibility() != View.VISIBLE) {
+                llAction.setVisibility(View.VISIBLE);
+            } else {
+                llAction.setVisibility(View.GONE);
+            }
+        } else if (id == R.id.ll_camera) {
+        } else if (id == R.id.ll_photo) {
         }
     }
 

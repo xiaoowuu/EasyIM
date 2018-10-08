@@ -2,7 +2,11 @@
 <resources>
     <color name="_333333">#333333</color>
     <color name="_aaaaaa">#aaaaaa</color>
+    <color name="_e1e1e1">#e1e1e1</color>
     <color name="_d9d9d9">#d9d9d9</color>
     <color name="_ed1c1c">#ed1c1c</color>
     <color name="_ce1616">#CE1616</color>
+    <color name="_00a6ff">#00a6ff</color>
+    <color name="_007fc2">#007fc2</color>
+    <color name="_ffffff">#ffffff</color>
 </resources>

@@ -3,16 +3,15 @@ package win.smartown.easyim.ui.ysy;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import win.smartown.easyim.im.base.Message;
-import win.smartown.easyim.ui.base.ActionHandler;
-import win.smartown.easyim.ui.base.BaseUI;
+import win.smartown.easyim.ui.ysy.viewholder.BaseViewHolder;
+import win.smartown.easyim.ui.ysy.viewholder.TextViewHolder;
+import win.smartown.easyim.ui.ysy.viewholder.UnknownViewHolder;
 
 /**
  * @author 雷小武
@@ -20,7 +19,12 @@ import win.smartown.easyim.ui.base.BaseUI;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> implements View.OnClickListener {
+public class MessageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+
+    private static final int TYPE_TEXT_RECEIVED = 1;
+    private static final int TYPE_TEXT_SEND = 2;
+    private static final int TYPE_UNKNOWN_RECEIVED = 3;
+    private static final int TYPE_UNKNOWN_SEND = 4;
 
     private List<Message> messages;
 
@@ -30,23 +34,44 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     @Override
     public int getItemViewType(int position) {
-        if (messages.get(position).isSend()) {
-            return R.layout.item_message_send;
+        Message message = messages.get(position);
+        if (message.isSend()) {
+            switch (message.getType()) {
+                case Message.TYPE_TEXT:
+                    return TYPE_TEXT_SEND;
+                default:
+                    return TYPE_UNKNOWN_SEND;
+            }
+        } else {
+            switch (message.getType()) {
+                case Message.TYPE_TEXT:
+                    return TYPE_TEXT_RECEIVED;
+                default:
+                    return TYPE_UNKNOWN_RECEIVED;
+            }
         }
-        return R.layout.item_message_received;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(i, viewGroup, false));
+    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        switch (i) {
+            case TYPE_TEXT_SEND:
+                return new TextViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_send, viewGroup, false), true);
+            case TYPE_UNKNOWN_SEND:
+                return new UnknownViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_send, viewGroup, false), true);
+            case TYPE_TEXT_RECEIVED:
+                return new TextViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_received, viewGroup, false), false);
+            case TYPE_UNKNOWN_RECEIVED:
+                return new UnknownViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_received, viewGroup, false), false);
+            default:
+                return null;
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.tvContent.setText(messages.get(i).getContent());
-        viewHolder.itemView.setTag(i);
-        viewHolder.itemView.setOnClickListener(this);
+    public void onBindViewHolder(@NonNull BaseViewHolder viewHolder, int i) {
+        viewHolder.showMessage(messages.get(i));
     }
 
     @Override
@@ -72,27 +97,4 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         }
     }
 
-    /**
-     * Called when a view has been clicked.
-     *
-     * @param v The view that was clicked.
-     */
-    @Override
-    public void onClick(View v) {
-        ActionHandler actionHandler = BaseUI.getInstance().getActionHandler();
-        Object tag = v.getTag();
-        if (actionHandler!=null&&tag != null) {
-            int position = (int) tag;
-        }
-    }
-
-    static class ViewHolder extends RecyclerView.ViewHolder {
-
-        private TextView tvContent;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            tvContent = itemView.findViewById(R.id.tv_content);
-        }
-    }
 }

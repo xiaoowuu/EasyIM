@@ -51,6 +51,8 @@
             android:layout_alignLeft="@+id/tv_nick"
             android:layout_alignStart="@+id/tv_nick"
             android:layout_below="@id/center"
+            android:layout_marginEnd="@dimen/dp8"
+            android:layout_marginRight="@dimen/dp8"
             android:ellipsize="end"
             android:lines="1"
             android:textColor="@color/_aaaaaa"
