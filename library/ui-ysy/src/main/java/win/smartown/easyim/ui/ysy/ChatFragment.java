@@ -26,6 +26,7 @@ import java.util.List;
 
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
+import top.zibin.luban.OnRenameListener;
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.ui.base.BaseChatFragment;
@@ -178,14 +179,16 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
             case REQUEST_CAMERA:
                 if (resultCode == RESULT_OK) {
                     if (tempImageFile != null && tempImageFile.exists()) {
-                        compressImage(tempImageFile);
+                        compressImage(getFileUri(tempImageFile));
                     }
                 }
                 break;
             case REQUEST_PICK:
                 if (resultCode == RESULT_OK) {
-                    if (tempImageFile != null && tempImageFile.exists()) {
-                        compressImage(tempImageFile);
+                    try {
+                        compressImage(data.getData());
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
                 break;
@@ -220,13 +223,7 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
     private void takePhoto() {
         tempImageFile = new File(getActivity().getExternalCacheDir(), String.valueOf(System.currentTimeMillis()));
         Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        Uri uri;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            uri = FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".file.path.share", tempImageFile);
-        } else {
-            uri = Uri.fromFile(tempImageFile);
-        }
-        openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, getFileUri(tempImageFile));
         startActivityForResult(openCameraIntent, REQUEST_CAMERA);
     }
 
@@ -255,26 +252,38 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
 
     private void pickImage() {
         tempImageFile = new File(getActivity().getExternalCacheDir(), String.valueOf(System.currentTimeMillis()));
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+        startActivityForResult(intent, REQUEST_PICK);
+    }
+
+    private Uri getFileUri(File file) {
         Uri uri;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             uri = FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".file.path.share", tempImageFile);
         } else {
-            uri = Uri.fromFile(tempImageFile);
+            uri = Uri.fromFile(file);
         }
-        Intent intent = new Intent(Intent.ACTION_PICK, uri);
-        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/jpeg");
-        startActivityForResult(intent, REQUEST_PICK);
+        return uri;
     }
 
     /**
      * 压缩图片
      *
-     * @param file 原文件
+     * @param uri 原文件
      */
-    private void compressImage(File file) {
+    private void compressImage(Uri uri) {
+        final File compressFile = new File(getActivity().getExternalCacheDir(), String.valueOf(System.currentTimeMillis()));
         Luban.with(getActivity())
-                .load(file)
+                .load(uri)
                 .ignoreBy(100)
+                .setTargetDir(compressFile.getParent())
+                .setRenameListener(new OnRenameListener() {
+                    @Override
+                    public String rename(String filePath) {
+                        return compressFile.getName();
+                    }
+                })
                 .setCompressListener(new OnCompressListener() {
                     @Override
                     public void onStart() {
