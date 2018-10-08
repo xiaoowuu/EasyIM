@@ -1,6 +1,5 @@
 package win.smartown.easyim.ui.ysy;
 
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,7 +37,6 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Conversation conversation = conversations.get(i);
-        viewHolder.ivPortrait.setBackgroundColor(Color.BLUE);
         viewHolder.tvNick.setText(conversation.getId());
         viewHolder.tvContent.setText(conversation.getLastMessageContent());
         viewHolder.tvTime.setText(String.valueOf(conversation.getLastMessageTime()));

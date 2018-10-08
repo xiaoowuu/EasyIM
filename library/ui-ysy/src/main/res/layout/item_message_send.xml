@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="8dp"
@@ -8,14 +7,13 @@
     android:paddingRight="16dp"
     android:paddingTop="8dp">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_portrait"
         android:layout_width="@dimen/dp40"
         android:layout_height="@dimen/dp40"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:background="@color/_00a6ff"
-        tools:background="@tools:sample/backgrounds/scenic" />
+        android:src="@color/_00a6ff" />
 
     <RelativeLayout
         android:id="@+id/rl_content"

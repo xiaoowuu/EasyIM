@@ -39,7 +39,7 @@ public class UnknownViewHolder extends BaseViewHolder {
 
     @Override
     public void showMessage(Message message) {
-
+        super.showMessage(message);
     }
 
 }

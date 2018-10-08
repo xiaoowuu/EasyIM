@@ -14,14 +14,14 @@
         android:layout_height="match_parent"
         android:background="?selectableItemBackground">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_portrait"
             android:layout_width="@dimen/dp50"
             android:layout_height="@dimen/dp50"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp8"
             android:layout_marginStart="@dimen/dp8"
-            tools:src="@android:drawable/ic_media_ff" />
+            android:src="@color/_00a6ff" />
 
         <View
             android:id="@+id/center"

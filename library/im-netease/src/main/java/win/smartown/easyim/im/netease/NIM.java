@@ -15,6 +15,7 @@ import com.netease.nimlib.sdk.msg.model.QueryDirectionEnum;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
 import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
@@ -159,8 +160,18 @@ public class NIM extends IM {
     }
 
     @Override
-    public void sendMessage(String account, int type, String text) {
+    public void sendTextMessage(String account, int type, String text) {
         final IMMessage message = MessageBuilder.createTextMessage(account, Utils.getSesstionType(type), text);
+        sendMessage(message);
+    }
+
+    @Override
+    public void sendImageMessage(String account, int type, File file) {
+        final IMMessage message = MessageBuilder.createImageMessage(account, Utils.getSesstionType(type), file);
+        sendMessage(message);
+    }
+
+    public void sendMessage(final IMMessage message) {
         onSendMessage(message);
         NIMSDK.getMsgService().sendMessage(message, false).setCallback(new RequestCallback<Void>() {
             @Override

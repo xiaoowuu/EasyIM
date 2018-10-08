@@ -2,6 +2,7 @@ package win.smartown.easyim.im.base;
 
 import android.content.Context;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -59,6 +60,8 @@ public abstract class IM {
         onMessageChangedListeners.remove(account);
     }
 
-    public abstract void sendMessage(String account, int type, String text);
+    public abstract void sendTextMessage(String account, int type, String text);
+
+    public abstract void sendImageMessage(String account, int type, File file);
 
 }

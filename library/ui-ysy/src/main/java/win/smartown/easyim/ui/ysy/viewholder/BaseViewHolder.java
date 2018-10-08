@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
 import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.ui.ysy.R;
 
@@ -33,16 +35,29 @@ public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
     }
 
     /**
+     * 获取消息内容布局
+     *
      * @return 消息内容布局
      */
     @LayoutRes
     protected abstract int getContentLayout();
 
     /**
+     * 初始化内容
+     *
      * @param view 内容View
      */
     protected abstract void initContentView(View view);
 
-    public abstract void showMessage(Message message);
+    /**
+     * 显示消息内容
+     *
+     * @param message 消息
+     */
+    public void showMessage(Message message) {
+        Glide.with(itemView)
+                .load("https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=459442427,2730359660&fm=173&app=25&f=JPEG?w=600&h=311&s=B307D0047B1B15C678F351850300E0C8")
+                .into(ivPortrait);
+    }
 
 }

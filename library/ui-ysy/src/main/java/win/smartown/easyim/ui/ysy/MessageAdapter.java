@@ -10,6 +10,7 @@ import java.util.List;
 
 import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.ui.ysy.viewholder.BaseViewHolder;
+import win.smartown.easyim.ui.ysy.viewholder.ImageViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.TextViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.UnknownViewHolder;
 
@@ -25,6 +26,8 @@ public class MessageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private static final int TYPE_TEXT_SEND = 2;
     private static final int TYPE_UNKNOWN_RECEIVED = 3;
     private static final int TYPE_UNKNOWN_SEND = 4;
+    private static final int TYPE_IMAGE_RECEIVED = 5;
+    private static final int TYPE_IMAGE_SEND = 6;
 
     private List<Message> messages;
 
@@ -39,6 +42,8 @@ public class MessageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             switch (message.getType()) {
                 case Message.TYPE_TEXT:
                     return TYPE_TEXT_SEND;
+                case Message.TYPE_IMAGE:
+                    return TYPE_IMAGE_SEND;
                 default:
                     return TYPE_UNKNOWN_SEND;
             }
@@ -46,6 +51,8 @@ public class MessageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             switch (message.getType()) {
                 case Message.TYPE_TEXT:
                     return TYPE_TEXT_RECEIVED;
+                case Message.TYPE_IMAGE:
+                    return TYPE_IMAGE_RECEIVED;
                 default:
                     return TYPE_UNKNOWN_RECEIVED;
             }
@@ -58,10 +65,14 @@ public class MessageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         switch (i) {
             case TYPE_TEXT_SEND:
                 return new TextViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_send, viewGroup, false), true);
+            case TYPE_IMAGE_SEND:
+                return new ImageViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_send, viewGroup, false), true);
             case TYPE_UNKNOWN_SEND:
                 return new UnknownViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_send, viewGroup, false), true);
             case TYPE_TEXT_RECEIVED:
                 return new TextViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_received, viewGroup, false), false);
+            case TYPE_IMAGE_RECEIVED:
+                return new ImageViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_received, viewGroup, false), false);
             case TYPE_UNKNOWN_RECEIVED:
                 return new UnknownViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_received, viewGroup, false), false);
             default:

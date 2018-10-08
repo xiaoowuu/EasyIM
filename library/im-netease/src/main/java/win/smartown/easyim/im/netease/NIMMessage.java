@@ -2,6 +2,8 @@ package win.smartown.easyim.im.netease;
 
 import android.text.TextUtils;
 
+import com.netease.nimlib.sdk.msg.attachment.ImageAttachment;
+import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
 import com.netease.nimlib.sdk.msg.constant.MsgDirectionEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 
@@ -45,6 +47,21 @@ public class NIMMessage extends Message<IMMessage> {
             default:
                 return 0;
         }
+    }
+
+    /**
+     * 获取图片链接
+     *
+     * @return 图片链接
+     */
+    @Override
+    public String getImageUrl() {
+        MsgAttachment attachment = data.getAttachment();
+        if (attachment instanceof ImageAttachment) {
+            ImageAttachment imageAttachment = (ImageAttachment) attachment;
+            return TextUtils.isEmpty(imageAttachment.getUrl()) ? imageAttachment.getPath() : imageAttachment.getUrl();
+        }
+        return "";
     }
 
     @Override

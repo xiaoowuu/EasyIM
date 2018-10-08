@@ -7,6 +7,7 @@
     <dimen name="sp16">16sp</dimen>
     <dimen name="sp14">14sp</dimen>
     <dimen name="dp1">1dp</dimen>
+    <dimen name="dp2">2dp</dimen>
     <dimen name="dp4">4dp</dimen>
     <dimen name="px1">1px</dimen>
     <dimen name="dp32">32dp</dimen>

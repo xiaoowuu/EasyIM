@@ -41,4 +41,11 @@ public abstract class Message<Data> {
      */
     public abstract int getType();
 
+    /**
+     * 获取图片链接
+     *
+     * @return 图片链接
+     */
+    public abstract String getImageUrl();
+
 }
