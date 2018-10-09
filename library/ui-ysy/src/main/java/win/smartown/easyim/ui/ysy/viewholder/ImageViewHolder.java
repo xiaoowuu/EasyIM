@@ -50,18 +50,17 @@ public class ImageViewHolder extends BaseViewHolder {
         super.showMessage(message);
 
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ivImage.getLayoutParams();
-        int imageWidth = ivImage.getResources().getDimensionPixelSize(R.dimen.dp196);
+        int imageWidth = ivImage.getResources().getDimensionPixelSize(R.dimen.dp198);
         float scale = (float) imageWidth / message.getImageWidth();
         int imageHeight = (int) (scale * message.getImageHeight());
         params.width = imageWidth + ivImage.getPaddingLeft() + ivImage.getPaddingRight();
         params.height = imageHeight + ivImage.getPaddingTop() + ivImage.getPaddingBottom();
         ivImage.setLayoutParams(params);
 
-        int dp2 = ivImage.getResources().getDimensionPixelSize(R.dimen.dp2);
-        int roundingRadius = (int) (dp2 / scale);
+        int dp7 = ivImage.getResources().getDimensionPixelSize(R.dimen.dp7);
         Glide.with(itemView)
                 .load(message.getImageUrl())
-                .apply(new RequestOptions().transform(new RoundedCorners(roundingRadius < dp2 ? dp2 : roundingRadius)))
+                .apply(new RequestOptions().transform(new RoundedCorners(dp7)))
                 .into(ivImage);
     }
 

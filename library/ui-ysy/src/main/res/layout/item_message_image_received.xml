@@ -4,6 +4,4 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/shape_receive_message_body"
-    android:padding="@dimen/dp2"
-    android:textColor="@color/_ffffff"
-    android:textSize="@dimen/sp16" />
+    android:padding="@dimen/dp1" />

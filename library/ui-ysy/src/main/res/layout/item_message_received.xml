@@ -14,13 +14,14 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/dp4"
-        android:height="@dimen/dp16"
+        android:height="@dimen/dp20"
         android:background="@drawable/shape_message_time_background"
         android:gravity="center"
         android:paddingLeft="@dimen/dp8"
         android:paddingRight="@dimen/dp8"
         android:textColor="@color/_ffffff"
-        android:textSize="@dimen/sp10"
+        android:textSize="@dimen/sp12"
+        android:textStyle="bold"
         tools:text="100" />
 
     <de.hdodenhof.circleimageview.CircleImageView
