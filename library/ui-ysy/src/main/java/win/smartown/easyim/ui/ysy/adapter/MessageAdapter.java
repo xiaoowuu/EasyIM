@@ -1,4 +1,4 @@
-package win.smartown.easyim.ui.ysy;
+package win.smartown.easyim.ui.ysy.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import win.smartown.easyim.im.base.Message;
+import win.smartown.easyim.ui.ysy.R;
 import win.smartown.easyim.ui.ysy.viewholder.BaseViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.ImageViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.TextViewHolder;

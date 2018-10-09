@@ -3,6 +3,8 @@ package win.smartown.easyim.ui.ysy;
 import win.smartown.easyim.ui.base.BaseChatFragment;
 import win.smartown.easyim.ui.base.BaseConversationFragment;
 import win.smartown.easyim.ui.base.BaseUI;
+import win.smartown.easyim.ui.ysy.fragment.ChatFragment;
+import win.smartown.easyim.ui.ysy.fragment.ConversationFragment;
 
 /**
  * @author 雷小武

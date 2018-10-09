@@ -1,4 +1,4 @@
-package win.smartown.easyim.ui.ysy;
+package win.smartown.easyim.ui.ysy.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +18,7 @@ import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.User;
 import win.smartown.easyim.ui.base.ActionHandler;
 import win.smartown.easyim.ui.base.BaseUI;
+import win.smartown.easyim.ui.ysy.R;
 
 /**
  * @author 雷小武

@@ -1,4 +1,4 @@
-package win.smartown.easyim.ui.ysy;
+package win.smartown.easyim.ui.ysy.fragment;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,8 @@ import java.util.List;
 
 import win.smartown.easyim.im.base.Conversation;
 import win.smartown.easyim.ui.base.BaseConversationFragment;
+import win.smartown.easyim.ui.ysy.adapter.ConversationAdapter;
+import win.smartown.easyim.ui.ysy.R;
 
 /**
  * @author 雷小武

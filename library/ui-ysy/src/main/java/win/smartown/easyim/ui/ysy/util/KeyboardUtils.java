@@ -1,4 +1,4 @@
-package win.smartown.easyim.ui.ysy;
+package win.smartown.easyim.ui.ysy.util;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

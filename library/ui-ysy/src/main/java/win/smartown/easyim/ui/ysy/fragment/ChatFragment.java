@@ -1,4 +1,4 @@
-package win.smartown.easyim.ui.ysy;
+package win.smartown.easyim.ui.ysy.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -34,6 +34,10 @@ import win.smartown.easyim.im.base.Conversation;
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.ui.base.BaseChatFragment;
+import win.smartown.easyim.ui.ysy.util.Glide4Engine;
+import win.smartown.easyim.ui.ysy.util.KeyboardUtils;
+import win.smartown.easyim.ui.ysy.adapter.MessageAdapter;
+import win.smartown.easyim.ui.ysy.R;
 
 import static android.app.Activity.RESULT_OK;
 
