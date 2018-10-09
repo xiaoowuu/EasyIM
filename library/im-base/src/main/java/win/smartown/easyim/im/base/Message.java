@@ -62,4 +62,9 @@ public abstract class Message<Data> {
      */
     public abstract int getImageHeight();
 
+    /**
+     * @return 消息发送人账号
+     */
+    public abstract String getFromAccount();
+
 }

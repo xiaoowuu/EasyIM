@@ -26,6 +26,7 @@ import win.smartown.easyim.im.base.LogoutListener;
 import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.im.base.OnConversationChangedListener;
 import win.smartown.easyim.im.base.OnMessageChangedListener;
+import win.smartown.easyim.im.base.User;
 
 
 /**
@@ -151,6 +152,12 @@ public class NIM extends IM {
     @Override
     public void refreshConversations() {
         NIMSDK.getMsgService().queryRecentContacts().setCallback(recentContactCallback);
+    }
+
+    @Override
+    public User getUser(String account) {
+        NimUserInfo info = NIMSDK.getUserService().getUserInfo(account);
+        return new NIMUser(info);
     }
 
     @Override

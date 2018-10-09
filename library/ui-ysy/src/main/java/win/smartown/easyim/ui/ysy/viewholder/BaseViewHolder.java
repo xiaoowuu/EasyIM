@@ -10,7 +10,9 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.Message;
+import win.smartown.easyim.im.base.User;
 import win.smartown.easyim.ui.ysy.R;
 
 /**
@@ -55,8 +57,9 @@ public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
      * @param message 消息
      */
     public void showMessage(Message message) {
+        User user = IM.getInstance().getUser(message.getFromAccount());
         Glide.with(itemView)
-                .load("https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=459442427,2730359660&fm=173&app=25&f=JPEG?w=600&h=311&s=B307D0047B1B15C678F351850300E0C8")
+                .load(user.getAvatar())
                 .into(ivPortrait);
     }
 

@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -95,6 +96,14 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
         tvSend = view.findViewById(R.id.tv_send);
         llAction = view.findViewById(R.id.ll_action);
 
+        rvMessage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                llAction.setVisibility(View.GONE);
+                KeyboardUtils.hideSoftInput(getActivity());
+                return false;
+            }
+        });
         etMessage.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -159,6 +168,7 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
         } else if (id == R.id.tv_send) {
             checkInput();
         } else if (id == R.id.iv_more) {
+            KeyboardUtils.hideSoftInput(getActivity());
             if (llAction.getVisibility() != View.VISIBLE) {
                 llAction.setVisibility(View.VISIBLE);
                 scrollToBottomDelay(200);

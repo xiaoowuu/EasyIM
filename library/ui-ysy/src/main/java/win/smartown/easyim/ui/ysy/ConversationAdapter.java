@@ -2,15 +2,20 @@ package win.smartown.easyim.ui.ysy;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import win.smartown.easyim.im.base.Conversation;
+import win.smartown.easyim.im.base.IM;
+import win.smartown.easyim.im.base.User;
 import win.smartown.easyim.ui.base.ActionHandler;
 import win.smartown.easyim.ui.base.BaseUI;
 
@@ -37,7 +42,9 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Conversation conversation = conversations.get(i);
-        viewHolder.tvNick.setText(conversation.getId());
+        User user = IM.getInstance().getUser(conversation.getId());
+        Glide.with(viewHolder.ivPortrait).load(user.getAvatar()).into(viewHolder.ivPortrait);
+        viewHolder.tvNick.setText(TextUtils.isEmpty(user.getNick()) ? conversation.getId() : user.getNick());
         viewHolder.tvContent.setText(conversation.getLastMessageContent());
         viewHolder.tvTime.setText(String.valueOf(conversation.getLastMessageTime()));
         viewHolder.contentView.setTag(conversation);

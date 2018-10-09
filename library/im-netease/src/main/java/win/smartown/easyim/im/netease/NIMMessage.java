@@ -103,6 +103,14 @@ public class NIMMessage extends Message<IMMessage> {
         return 1;
     }
 
+    /**
+     * @return 消息发送人账号
+     */
+    @Override
+    public String getFromAccount() {
+        return data.getFromAccount();
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof NIMMessage) {

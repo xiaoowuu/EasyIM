@@ -50,6 +50,8 @@ public abstract class IM {
         onConversationChangedListeners.add(listener);
     }
 
+    public abstract User getUser(String account);
+
     public abstract void refreshMessages(String account, int type);
 
     public void addOnMessageChangedListener(String account, OnMessageChangedListener listener) {
