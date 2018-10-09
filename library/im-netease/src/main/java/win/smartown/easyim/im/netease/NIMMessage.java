@@ -111,6 +111,14 @@ public class NIMMessage extends Message<IMMessage> {
         return data.getFromAccount();
     }
 
+    /**
+     * @return 消息时间
+     */
+    @Override
+    public long getTime() {
+        return data.getTime();
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof NIMMessage) {

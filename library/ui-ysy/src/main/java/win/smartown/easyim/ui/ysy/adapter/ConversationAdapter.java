@@ -19,6 +19,7 @@ import win.smartown.easyim.im.base.User;
 import win.smartown.easyim.ui.base.ActionHandler;
 import win.smartown.easyim.ui.base.BaseUI;
 import win.smartown.easyim.ui.ysy.R;
+import win.smartown.easyim.ui.ysy.util.TimeUtil;
 
 /**
  * @author 雷小武
@@ -47,7 +48,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         Glide.with(viewHolder.ivPortrait).load(user.getAvatar()).into(viewHolder.ivPortrait);
         viewHolder.tvNick.setText(TextUtils.isEmpty(user.getNick()) ? conversation.getId() : user.getNick());
         viewHolder.tvContent.setText(conversation.getLastMessageContent());
-        viewHolder.tvTime.setText(String.valueOf(conversation.getLastMessageTime()));
+        viewHolder.tvTime.setText(TimeUtil.getTimeShowString(conversation.getLastMessageTime()));
         viewHolder.contentView.setTag(conversation);
         viewHolder.contentView.setOnClickListener(this);
         viewHolder.tvDelete.setTag(conversation);

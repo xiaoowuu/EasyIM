@@ -67,4 +67,9 @@ public abstract class Message<Data> {
      */
     public abstract String getFromAccount();
 
+    /**
+     * @return 消息时间
+     */
+    public abstract long getTime();
+
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -14,6 +15,7 @@ import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.im.base.User;
 import win.smartown.easyim.ui.ysy.R;
+import win.smartown.easyim.ui.ysy.util.TimeUtil;
 
 /**
  * @author 雷小武
@@ -24,14 +26,15 @@ import win.smartown.easyim.ui.ysy.R;
 public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
 
     protected boolean send;
-    public ImageView ivPortrait;
-    public ViewGroup contentContainer;
+    private TextView tvTime;
+    private ImageView ivPortrait;
 
     public BaseViewHolder(@NonNull View itemView, boolean send) {
         super(itemView);
         this.send = send;
+        tvTime = itemView.findViewById(R.id.tv_time);
         ivPortrait = itemView.findViewById(R.id.iv_portrait);
-        contentContainer = itemView.findViewById(R.id.rl_content);
+        ViewGroup contentContainer = itemView.findViewById(R.id.rl_content);
         View contentView = LayoutInflater.from(itemView.getContext()).inflate(getContentLayout(), contentContainer, true);
         initContentView(contentView);
     }
@@ -57,6 +60,7 @@ public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
      * @param message 消息
      */
     public void showMessage(Message message) {
+        tvTime.setText(TimeUtil.getTimeShowString(message.getTime(), true));
         User user = IM.getInstance().getUser(message.getFromAccount());
         Glide.with(itemView)
                 .load(user.getAvatar())

@@ -20,7 +20,7 @@ import win.smartown.easyim.ui.ysy.R;
  */
 public class ImageViewHolder extends BaseViewHolder {
 
-    public ImageView ivImage;
+    private ImageView ivImage;
 
     public ImageViewHolder(@NonNull View itemView, boolean send) {
         super(itemView, send);

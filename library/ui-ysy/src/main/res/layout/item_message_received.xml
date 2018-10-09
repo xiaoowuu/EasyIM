@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="@dimen/dp8"
@@ -7,16 +8,33 @@
     android:paddingRight="@dimen/dp16"
     android:paddingTop="@dimen/dp8">
 
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dp4"
+        android:height="@dimen/dp16"
+        android:background="@drawable/shape_message_time_background"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp8"
+        android:paddingRight="@dimen/dp8"
+        android:textColor="@color/_ffffff"
+        android:textSize="@dimen/sp10"
+        tools:text="100" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_portrait"
         android:layout_width="@dimen/dp40"
         android:layout_height="@dimen/dp40"
+        android:layout_below="@+id/tv_time"
         android:src="@color/_ffffff" />
 
     <RelativeLayout
         android:id="@+id/rl_content"
         android:layout_width="@dimen/dp200"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/iv_portrait"
         android:layout_marginLeft="@dimen/dp8"
         android:layout_marginStart="@dimen/dp8"
         android:layout_toEndOf="@+id/iv_portrait"

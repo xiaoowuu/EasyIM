@@ -15,7 +15,7 @@ import win.smartown.easyim.ui.ysy.R;
  */
 public class TextViewHolder extends BaseViewHolder {
 
-    public TextView tvText;
+    private TextView tvText;
 
     public TextViewHolder(@NonNull View itemView, boolean send) {
         super(itemView, send);
