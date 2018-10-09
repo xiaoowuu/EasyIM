@@ -48,4 +48,18 @@ public abstract class Message<Data> {
      */
     public abstract String getImageUrl();
 
+    /**
+     * 获取图片宽度
+     *
+     * @return 图片宽度
+     */
+    public abstract int getImageWidth();
+
+    /**
+     * 获取图片高度
+     *
+     * @return 图片高度
+     */
+    public abstract int getImageHeight();
+
 }

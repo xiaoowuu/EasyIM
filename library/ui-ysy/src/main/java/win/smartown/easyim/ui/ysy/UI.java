@@ -12,11 +12,19 @@ import win.smartown.easyim.ui.base.BaseUI;
  */
 public class UI extends BaseUI {
 
+    /**
+     * @param params 参数
+     * @return {@link ConversationFragment}
+     */
     @Override
     public BaseConversationFragment getConversationFragment(String... params) {
         return new ConversationFragment();
     }
 
+    /**
+     * @param params {@link ChatFragment#newInstance(String, int)}
+     * @return {@link ChatFragment}
+     */
     @Override
     public BaseChatFragment getChatFragment(String... params) {
         return ChatFragment.newInstance(params[0], Integer.parseInt(params[1]));

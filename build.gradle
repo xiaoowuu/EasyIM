@@ -46,4 +46,5 @@ ext {
     and_permission =  'com.yanzhenjie:permission:2.0.0-rc12'
     glide = 'com.github.bumptech.glide:glide:4.5.0'
     luban = 'top.zibin:Luban:1.1.8'
+    matisse = 'com.zhihu.android:matisse:0.5.1'
 }

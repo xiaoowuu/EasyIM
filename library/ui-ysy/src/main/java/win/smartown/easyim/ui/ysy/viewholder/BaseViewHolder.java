@@ -17,7 +17,7 @@ import win.smartown.easyim.ui.ysy.R;
  * @author 雷小武
  * 创建时间：2018/10/8 9:11
  * 版权：成都智慧一生约科技有限公司
- * 类描述：
+ * 类描述：ViewHolder
  */
 public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
 

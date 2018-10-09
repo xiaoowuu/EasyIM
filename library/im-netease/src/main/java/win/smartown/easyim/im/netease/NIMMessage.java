@@ -17,6 +17,8 @@ import win.smartown.easyim.im.base.Message;
  */
 public class NIMMessage extends Message<IMMessage> {
 
+    private ImageAttachment imageAttachment;
+
     public NIMMessage(IMMessage imMessage) {
         super(imMessage);
     }
@@ -49,6 +51,16 @@ public class NIMMessage extends Message<IMMessage> {
         }
     }
 
+    public ImageAttachment getImageAttachment() {
+        if (imageAttachment == null) {
+            MsgAttachment attachment = data.getAttachment();
+            if (attachment instanceof ImageAttachment) {
+                imageAttachment = (ImageAttachment) attachment;
+            }
+        }
+        return imageAttachment;
+    }
+
     /**
      * 获取图片链接
      *
@@ -56,12 +68,39 @@ public class NIMMessage extends Message<IMMessage> {
      */
     @Override
     public String getImageUrl() {
-        MsgAttachment attachment = data.getAttachment();
-        if (attachment instanceof ImageAttachment) {
-            ImageAttachment imageAttachment = (ImageAttachment) attachment;
+        ImageAttachment imageAttachment = getImageAttachment();
+        if (imageAttachment != null) {
             return TextUtils.isEmpty(imageAttachment.getUrl()) ? imageAttachment.getPath() : imageAttachment.getUrl();
         }
         return "";
+    }
+
+    /**
+     * 获取图片宽度
+     *
+     * @return 图片宽度
+     */
+    @Override
+    public int getImageWidth() {
+        ImageAttachment imageAttachment = getImageAttachment();
+        if (imageAttachment != null) {
+            return imageAttachment.getWidth();
+        }
+        return 1;
+    }
+
+    /**
+     * 获取图片高度
+     *
+     * @return 图片高度
+     */
+    @Override
+    public int getImageHeight() {
+        ImageAttachment imageAttachment = getImageAttachment();
+        if (imageAttachment != null) {
+            return imageAttachment.getHeight();
+        }
+        return 1;
     }
 
     @Override

@@ -20,6 +20,8 @@ import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.FileProvider;
 import com.yanzhenjie.permission.Permission;
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
 
 import java.io.File;
 import java.util.List;
@@ -27,6 +29,7 @@ import java.util.List;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 import top.zibin.luban.OnRenameListener;
+import win.smartown.easyim.im.base.Conversation;
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.ui.base.BaseChatFragment;
@@ -37,11 +40,17 @@ import static android.app.Activity.RESULT_OK;
  * @author 雷小武
  * 创建时间：2018/9/29 16:21
  * 版权：成都智慧一生约科技有限公司
- * 类描述：
+ * 类描述：聊天界面
  */
 public class ChatFragment extends BaseChatFragment implements View.OnClickListener {
 
+    /**
+     * 拍照
+     */
     private static final int REQUEST_CAMERA = 11;
+    /**
+     * 选择图片
+     */
     private static final int REQUEST_PICK = 12;
     private RecyclerView rvMessage;
     private LinearLayoutManager linearLayoutManager;
@@ -53,6 +62,17 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
 
     private File tempImageFile;
 
+    /**
+     * 创建一个聊天
+     *
+     * @param account 聊天对象账号
+     * @param type    聊天类型:
+     *                <br>
+     *                单聊{@link Conversation#TYPE_SINGLE}
+     *                <br>
+     *                群聊{@link Conversation#TYPE_GROUP}
+     * @return 聊天界面
+     */
     public static ChatFragment newInstance(String account, int type) {
         Bundle args = new Bundle();
         args.putString(BaseChatFragment.ACCOUNT, account);
@@ -152,6 +172,9 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
         }
     }
 
+    /**
+     * 校验输入内容
+     */
     private void checkInput() {
         if (etMessage.length() > 0) {
             IM.getInstance().sendTextMessage(account, type, etMessage.getText().toString());
@@ -159,6 +182,11 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
         }
     }
 
+    /**
+     * 延时滚动到消息列表底部
+     *
+     * @param millis 延时毫秒
+     */
     private void scrollToBottomDelay(long millis) {
         rvMessage.postDelayed(new Runnable() {
             @Override
@@ -168,6 +196,9 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
         }, millis);
     }
 
+    /**
+     * 滚动到消息列表底部
+     */
     private void scrollToBottom() {
         linearLayoutManager.scrollToPosition(messageAdapter.getItemCount() - 1);
     }
@@ -176,19 +207,20 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
+            //拍照回调
             case REQUEST_CAMERA:
                 if (resultCode == RESULT_OK) {
                     if (tempImageFile != null && tempImageFile.exists()) {
-                        compressImage(getFileUri(tempImageFile));
+                        compressImage(tempImageFile);
                     }
                 }
                 break;
+            //选择图片回调
             case REQUEST_PICK:
                 if (resultCode == RESULT_OK) {
-                    try {
-                        compressImage(data.getData());
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    List<String> list = Matisse.obtainPathResult(data);
+                    if (list != null && !list.isEmpty()) {
+                        compressImage(new File(list.get(0)));
                     }
                 }
                 break;
@@ -197,6 +229,9 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
         }
     }
 
+    /**
+     * 检查相机权限
+     */
     private void checkCameraPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             AndPermission.with(this)
@@ -220,6 +255,9 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
         }
     }
 
+    /**
+     * 调用系统相机拍照
+     */
     private void takePhoto() {
         tempImageFile = new File(getActivity().getExternalCacheDir(), String.valueOf(System.currentTimeMillis()));
         Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -227,6 +265,9 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
         startActivityForResult(openCameraIntent, REQUEST_CAMERA);
     }
 
+    /**
+     * 检查文件系统权限
+     */
     private void checkStoragePermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             AndPermission.with(this)
@@ -250,17 +291,29 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
         }
     }
 
+    /**
+     * 选择图片
+     */
     private void pickImage() {
-        tempImageFile = new File(getActivity().getExternalCacheDir(), String.valueOf(System.currentTimeMillis()));
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-        startActivityForResult(intent, REQUEST_PICK);
+        Matisse.from(this)
+                .choose(MimeType.ofImage())
+                .countable(true)
+                .maxSelectable(1)
+                .theme(R.style.Matisse_Zhihu)
+                .imageEngine(new Glide4Engine())
+                .forResult(REQUEST_PICK);
     }
 
+    /**
+     * File转Uri
+     *
+     * @param file 文件
+     * @return Uri
+     */
     private Uri getFileUri(File file) {
         Uri uri;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            uri = FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".file.path.share", tempImageFile);
+            uri = FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".file.path.share", file);
         } else {
             uri = Uri.fromFile(file);
         }
@@ -270,18 +323,17 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
     /**
      * 压缩图片
      *
-     * @param uri 原文件
+     * @param file 原文件
      */
-    private void compressImage(Uri uri) {
-        final File compressFile = new File(getActivity().getExternalCacheDir(), String.valueOf(System.currentTimeMillis()));
+    private void compressImage(final File file) {
         Luban.with(getActivity())
-                .load(uri)
+                .load(file)
                 .ignoreBy(100)
-                .setTargetDir(compressFile.getParent())
+                .setTargetDir(getActivity().getExternalCacheDir().getPath())
                 .setRenameListener(new OnRenameListener() {
                     @Override
                     public String rename(String filePath) {
-                        return compressFile.getName();
+                        return file.getName() + "_compress";
                     }
                 })
                 .setCompressListener(new OnCompressListener() {

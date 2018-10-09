@@ -26,6 +26,7 @@ dependencies {
     implementation rootProject.ext.easy_swipe_menu_layout
     implementation rootProject.ext.and_permission
     implementation rootProject.ext.luban
+    implementation rootProject.ext.matisse
     implementation(rootProject.ext.glide) {
         exclude group: "com.android.support"
     }

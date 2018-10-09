@@ -20,3 +20,4 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 -dontwarn com.yanzhenjie.permission.**
+-dontwarn com.bumptech.glide.**

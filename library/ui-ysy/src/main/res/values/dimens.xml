@@ -8,11 +8,13 @@
     <dimen name="sp14">14sp</dimen>
     <dimen name="dp1">1dp</dimen>
     <dimen name="dp2">2dp</dimen>
+    <dimen name="dp3">3dp</dimen>
     <dimen name="dp4">4dp</dimen>
     <dimen name="px1">1px</dimen>
     <dimen name="dp32">32dp</dimen>
     <dimen name="dp20">20dp</dimen>
     <dimen name="dp40">40dp</dimen>
     <dimen name="dp120">120dp</dimen>
+    <dimen name="dp196">196dp</dimen>
     <dimen name="dp200">200dp</dimen>
 </resources>
