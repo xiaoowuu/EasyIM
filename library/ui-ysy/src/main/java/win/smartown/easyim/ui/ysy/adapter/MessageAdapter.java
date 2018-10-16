@@ -3,6 +3,7 @@ package win.smartown.easyim.ui.ysy.adapter;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.ui.ysy.R;
+import win.smartown.easyim.ui.ysy.strategy.BaseShowTimeStrategy;
 import win.smartown.easyim.ui.ysy.viewholder.BaseViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.ImageViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.TextViewHolder;
@@ -31,9 +33,11 @@ public class MessageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private static final int TYPE_IMAGE_SEND = 6;
 
     private List<Message> messages;
+    private BaseShowTimeStrategy showTimeStrategy;
 
-    public MessageAdapter() {
+    public MessageAdapter(BaseShowTimeStrategy showTimeStrategy) {
         this.messages = new ArrayList<>();
+        this.showTimeStrategy = showTimeStrategy;
     }
 
     @Override
@@ -83,7 +87,10 @@ public class MessageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder viewHolder, int i) {
-        viewHolder.showMessage(messages.get(i));
+        Message message = messages.get(i);
+        boolean needShowTime = showTimeStrategy.needShowTime(message);
+        viewHolder.tvTime.setVisibility(needShowTime ? View.VISIBLE : View.GONE);
+        viewHolder.showMessage(message);
     }
 
     @Override
@@ -92,11 +99,13 @@ public class MessageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     public void addMessages(List<Message> messages) {
+        showTimeStrategy.addMessages(messages);
         this.messages.addAll(messages);
         notifyDataSetChanged();
     }
 
     public void addMessage(Message message) {
+        showTimeStrategy.addMessage(message);
         this.messages.add(message);
         notifyItemInserted(this.messages.size() - 1);
     }

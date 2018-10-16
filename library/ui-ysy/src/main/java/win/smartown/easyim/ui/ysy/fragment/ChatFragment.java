@@ -35,6 +35,7 @@ import win.smartown.easyim.im.base.Conversation;
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.ui.base.BaseChatFragment;
+import win.smartown.easyim.ui.ysy.strategy.ShowTimeStrategy;
 import win.smartown.easyim.ui.ysy.util.Glide4Engine;
 import win.smartown.easyim.ui.ysy.util.KeyboardUtils;
 import win.smartown.easyim.ui.ysy.adapter.MessageAdapter;
@@ -107,6 +108,7 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
             public boolean onTouch(View v, MotionEvent event) {
                 llAction.setVisibility(View.GONE);
                 KeyboardUtils.hideSoftInput(getActivity());
+                etMessage.clearFocus();
                 return false;
             }
         });
@@ -134,12 +136,13 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
         });
         linearLayoutManager = new LinearLayoutManager(getActivity());
         rvMessage.setLayoutManager(linearLayoutManager);
-        messageAdapter = new MessageAdapter();
+        messageAdapter = new MessageAdapter(new ShowTimeStrategy());
         rvMessage.setAdapter(messageAdapter);
         etMessage.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 llAction.setVisibility(View.GONE);
+                scrollToBottomDelay(200);
                 return false;
             }
         });

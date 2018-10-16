@@ -25,7 +25,7 @@ import win.smartown.easyim.ui.ysy.util.TimeUtil;
 public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
 
     protected boolean send;
-    private TextView tvTime;
+    public TextView tvTime;
     private ImageView ivPortrait;
 
     public BaseViewHolder(@NonNull View itemView, boolean send) {
