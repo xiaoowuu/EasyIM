@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import win.smartown.easyim.im.base.Conversation;
@@ -19,6 +18,7 @@ import win.smartown.easyim.im.base.User;
 import win.smartown.easyim.ui.base.ActionHandler;
 import win.smartown.easyim.ui.base.BaseUI;
 import win.smartown.easyim.ui.ysy.R;
+import win.smartown.easyim.ui.ysy.util.ImageLoader;
 import win.smartown.easyim.ui.ysy.util.TimeUtil;
 
 /**
@@ -31,8 +31,13 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
     private List<Conversation> conversations;
 
-    public ConversationAdapter(List<Conversation> conversations) {
+    public ConversationAdapter() {
+        conversations = new ArrayList<>();
+    }
+
+    public void setData(List<Conversation> conversations) {
         this.conversations = conversations;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -45,7 +50,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Conversation conversation = conversations.get(i);
         User user = IM.getInstance().getUser(conversation.getId());
-        Glide.with(viewHolder.ivPortrait).load(user.getAvatar()).into(viewHolder.ivPortrait);
+        ImageLoader.loadHeadImage(user.getAvatar(), viewHolder.ivPortrait);
         viewHolder.tvNick.setText(TextUtils.isEmpty(user.getNick()) ? conversation.getId() : user.getNick());
         viewHolder.tvContent.setText(conversation.getLastMessageContent());
         viewHolder.tvTime.setText(TimeUtil.getTimeShowString(conversation.getLastMessageTime()));

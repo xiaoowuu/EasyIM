@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/_f5f5f5"
     android:layout_height="match_parent"
+    android:background="@color/_f5f5f5"
     android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
@@ -46,9 +46,7 @@
             android:id="@+id/iv_more"
             android:layout_width="@dimen/dp32"
             android:layout_height="@dimen/dp32"
-            android:background="@drawable/shape_message_edit_background"
-            android:padding="@dimen/dp8"
-            android:src="@drawable/ic_more" />
+            android:src="@drawable/selector_more" />
 
         <TextView
             android:id="@+id/tv_send"
@@ -74,6 +72,7 @@
         android:id="@+id/ll_action"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp120"
+        android:background="@color/_ffffff"
         android:orientation="horizontal"
         android:visibility="gone"
         tools:visibility="visible">
@@ -88,17 +87,17 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="@dimen/dp40"
-                android:layout_height="@dimen/dp40"
-                android:src="@drawable/ic_camera" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp3"
+                android:src="@drawable/ico_camera" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp8"
                 android:text="@string/camera"
-                android:textColor="@color/_333333"
-                android:textSize="@dimen/sp14" />
+                android:textColor="@color/_757572"
+                android:textSize="@dimen/sp13" />
 
         </LinearLayout>
 
@@ -112,17 +111,17 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="@dimen/dp40"
-                android:layout_height="@dimen/dp40"
-                android:src="@drawable/ic_photo" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp3"
+                android:src="@drawable/ico_picture" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp8"
                 android:text="@string/photo"
-                android:textColor="@color/_333333"
-                android:textSize="@dimen/sp14" />
+                android:textColor="@color/_757572"
+                android:textSize="@dimen/sp13" />
 
         </LinearLayout>
 

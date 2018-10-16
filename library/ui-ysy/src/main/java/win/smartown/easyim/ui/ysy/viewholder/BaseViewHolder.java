@@ -9,12 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.im.base.User;
 import win.smartown.easyim.ui.ysy.R;
+import win.smartown.easyim.ui.ysy.util.ImageLoader;
 import win.smartown.easyim.ui.ysy.util.TimeUtil;
 
 /**
@@ -62,9 +61,7 @@ public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
     public void showMessage(Message message) {
         tvTime.setText(TimeUtil.getTimeShowString(message.getTime(), true));
         User user = IM.getInstance().getUser(message.getFromAccount());
-        Glide.with(itemView)
-                .load(user.getAvatar())
-                .into(ivPortrait);
+        ImageLoader.loadHeadImage(user.getAvatar(), ivPortrait);
     }
 
 }

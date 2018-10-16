@@ -20,6 +20,11 @@ public abstract class BaseConversationFragment extends BaseFragment implements O
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         IM.getInstance().addOnConversationChangedListener(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         IM.getInstance().refreshConversations();
     }
 

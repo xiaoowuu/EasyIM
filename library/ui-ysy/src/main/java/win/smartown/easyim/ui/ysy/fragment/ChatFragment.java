@@ -1,5 +1,6 @@
 package win.smartown.easyim.ui.ysy.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -92,6 +93,7 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
         return R.layout.fragment_chat;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void initView(@NonNull View view) {
         rvMessage = view.findViewById(R.id.rv_message);
@@ -134,7 +136,13 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
         rvMessage.setLayoutManager(linearLayoutManager);
         messageAdapter = new MessageAdapter();
         rvMessage.setAdapter(messageAdapter);
-        etMessage.setOnClickListener(this);
+        etMessage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                llAction.setVisibility(View.GONE);
+                return false;
+            }
+        });
         tvSend.setOnClickListener(this);
         ivMore.setOnClickListener(this);
         view.findViewById(R.id.ll_camera).setOnClickListener(this);
@@ -173,6 +181,7 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
             checkInput();
         } else if (id == R.id.iv_more) {
             KeyboardUtils.hideSoftInput(getActivity());
+            etMessage.clearFocus();
             if (llAction.getVisibility() != View.VISIBLE) {
                 llAction.setVisibility(View.VISIBLE);
                 scrollToBottomDelay(200);

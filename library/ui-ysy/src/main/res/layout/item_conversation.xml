@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp72"
+    android:layout_height="@dimen/dp70"
     android:background="@android:color/white"
     app:contentView="@id/rl_content"
     app:rightMenuView="@id/tv_delete">
@@ -19,9 +19,9 @@
             android:layout_width="@dimen/dp50"
             android:layout_height="@dimen/dp50"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp8"
-            android:layout_marginStart="@dimen/dp8"
-            android:src="@color/_00a6ff" />
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_marginStart="@dimen/dp10"
+            tools:src="@drawable/ico_default_head" />
 
         <View
             android:id="@+id/center"
@@ -34,8 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/center"
-            android:layout_marginLeft="@dimen/dp8"
-            android:layout_marginRight="@dimen/dp8"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_marginRight="@dimen/dp10"
             android:layout_toEndOf="@+id/iv_portrait"
             android:layout_toLeftOf="@+id/tv_time"
             android:layout_toRightOf="@+id/iv_portrait"
@@ -76,16 +76,16 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/px1"
+            android:layout_height="@dimen/px2"
+            android:layout_alignLeft="@+id/tv_nick"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="@dimen/dp72"
-            android:layout_marginStart="@dimen/dp72"
+            android:layout_alignStart="@+id/tv_nick"
             android:background="@color/_d9d9d9" />
     </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_delete"
-        android:layout_width="@dimen/dp72"
+        android:layout_width="@dimen/dp70"
         android:layout_height="match_parent"
         android:background="@drawable/selector_delete"
         android:gravity="center"

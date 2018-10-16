@@ -70,7 +70,7 @@ public class NIMMessage extends Message<IMMessage> {
     public String getImageUrl() {
         ImageAttachment imageAttachment = getImageAttachment();
         if (imageAttachment != null) {
-            return TextUtils.isEmpty(imageAttachment.getUrl()) ? imageAttachment.getPath() : imageAttachment.getUrl();
+            return !TextUtils.isEmpty(imageAttachment.getPath()) ? imageAttachment.getPath() : imageAttachment.getUrl();
         }
         return "";
     }
