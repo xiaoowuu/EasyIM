@@ -57,10 +57,10 @@ public class ImageViewHolder extends BaseViewHolder {
         params.height = imageHeight + ivImage.getPaddingTop() + ivImage.getPaddingBottom();
         ivImage.setLayoutParams(params);
 
-        int dp7 = ivImage.getResources().getDimensionPixelSize(R.dimen.dp7);
+        int dp3 = ivImage.getResources().getDimensionPixelSize(R.dimen.dp3);
         Glide.with(itemView)
                 .load(message.getImageUrl())
-                .apply(new RequestOptions().transform(new RoundedCorners(dp7)))
+                .apply(new RequestOptions().transform(new RoundedCorners(dp3)))
                 .into(ivImage);
     }
 

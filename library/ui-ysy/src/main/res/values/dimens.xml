@@ -24,4 +24,7 @@
     <dimen name="dp200">200dp</dimen>
     <dimen name="sp13">13sp</dimen>
     <dimen name="px2">2px</dimen>
+    <dimen name="dp12">12dp</dimen>
+    <dimen name="dp14">14dp</dimen>
+    <dimen name="dp6">6dp</dimen>
 </resources>

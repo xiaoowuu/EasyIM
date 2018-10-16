@@ -286,6 +286,7 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
         Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, getFileUri(tempImageFile));
         startActivityForResult(openCameraIntent, REQUEST_CAMERA);
+        llAction.setVisibility(View.GONE);
     }
 
     /**
@@ -325,6 +326,7 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
                 .theme(R.style.Matisse_Zhihu)
                 .imageEngine(new Glide4Engine())
                 .forResult(REQUEST_PICK);
+        llAction.setVisibility(View.GONE);
     }
 
     /**

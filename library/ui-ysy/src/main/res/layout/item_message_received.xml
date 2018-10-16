@@ -29,17 +29,28 @@
         android:layout_width="@dimen/dp40"
         android:layout_height="@dimen/dp40"
         android:layout_below="@+id/tv_time"
-        android:src="@color/_ffffff" />
+        tools:src="@drawable/ico_default_head" />
+
+    <View
+        android:id="@+id/triangle"
+        android:layout_width="@dimen/dp6"
+        android:layout_height="@dimen/dp12"
+        android:layout_alignTop="@+id/iv_portrait"
+        android:layout_marginLeft="@dimen/dp8"
+        android:layout_marginStart="@dimen/dp8"
+        android:layout_marginTop="@dimen/dp14"
+        android:layout_toEndOf="@+id/iv_portrait"
+        android:layout_toRightOf="@+id/iv_portrait"
+        android:background="@drawable/triangle_left" />
 
     <RelativeLayout
         android:id="@+id/rl_content"
         android:layout_width="@dimen/dp200"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/iv_portrait"
-        android:layout_marginLeft="@dimen/dp8"
-        android:layout_marginStart="@dimen/dp8"
-        android:layout_toEndOf="@+id/iv_portrait"
-        android:layout_toRightOf="@+id/iv_portrait"
-        android:orientation="horizontal" />
+        android:layout_toEndOf="@+id/triangle"
+        android:layout_toRightOf="@+id/triangle"
+        tools:background="@drawable/shape_receive_message_body"
+        tools:minHeight="@dimen/dp40" />
 
 </RelativeLayout>
