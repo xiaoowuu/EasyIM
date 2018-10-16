@@ -1,10 +1,9 @@
 package win.smartown.easyim.ui.ysy.viewholder;
 
-import android.support.annotation.NonNull;
 import android.view.View;
 
-import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.ui.ysy.R;
+import win.smartown.easyim.ui.ysy.adapter.BaseAdapter;
 
 /**
  * @author 雷小武
@@ -12,10 +11,10 @@ import win.smartown.easyim.ui.ysy.R;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class UnknownViewHolder extends BaseViewHolder {
+public class UnknownViewHolder extends MessageViewHolder {
 
-    public UnknownViewHolder(@NonNull View itemView, boolean send) {
-        super(itemView, send);
+    public UnknownViewHolder(View itemView, boolean send, BaseAdapter adapter) {
+        super(itemView, send, adapter);
     }
 
     /**
@@ -27,19 +26,6 @@ public class UnknownViewHolder extends BaseViewHolder {
             return R.layout.item_message_unknown_send;
         }
         return R.layout.item_message_unknown_received;
-    }
-
-    /**
-     * @param view 内容View
-     */
-    @Override
-    protected void initContentView(View view) {
-
-    }
-
-    @Override
-    public void showMessage(Message message) {
-        super.showMessage(message);
     }
 
 }

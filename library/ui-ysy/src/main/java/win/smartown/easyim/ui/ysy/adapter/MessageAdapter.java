@@ -1,7 +1,6 @@
 package win.smartown.easyim.ui.ysy.adapter;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,8 @@ import java.util.List;
 import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.ui.ysy.R;
 import win.smartown.easyim.ui.ysy.strategy.BaseShowTimeStrategy;
-import win.smartown.easyim.ui.ysy.viewholder.BaseViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.ImageViewHolder;
+import win.smartown.easyim.ui.ysy.viewholder.MessageViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.TextViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.UnknownViewHolder;
 
@@ -23,7 +22,7 @@ import win.smartown.easyim.ui.ysy.viewholder.UnknownViewHolder;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class MessageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
 
     private static final int TYPE_TEXT_RECEIVED = 1;
     private static final int TYPE_TEXT_SEND = 2;
@@ -66,30 +65,30 @@ public class MessageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     @NonNull
     @Override
-    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         switch (i) {
             case TYPE_TEXT_SEND:
-                return new TextViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_send, viewGroup, false), true);
+                return new TextViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_send, viewGroup, false), true, this);
             case TYPE_IMAGE_SEND:
-                return new ImageViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_send, viewGroup, false), true);
+                return new ImageViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_send, viewGroup, false), true, this);
             case TYPE_UNKNOWN_SEND:
-                return new UnknownViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_send, viewGroup, false), true);
+                return new UnknownViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_send, viewGroup, false), true, this);
             case TYPE_TEXT_RECEIVED:
-                return new TextViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_received, viewGroup, false), false);
+                return new TextViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_received, viewGroup, false), false, this);
             case TYPE_IMAGE_RECEIVED:
-                return new ImageViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_received, viewGroup, false), false);
+                return new ImageViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_received, viewGroup, false), false, this);
             case TYPE_UNKNOWN_RECEIVED:
-                return new UnknownViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_received, viewGroup, false), false);
+                return new UnknownViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_received, viewGroup, false), false, this);
             default:
                 return null;
         }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BaseViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull MessageViewHolder viewHolder, int i) {
         Message message = messages.get(i);
         boolean needShowTime = showTimeStrategy.needShowTime(message);
-        viewHolder.tvTime.setVisibility(needShowTime ? View.VISIBLE : View.GONE);
+        viewHolder.getView(R.id.tv_time).setVisibility(needShowTime ? View.VISIBLE : View.GONE);
         viewHolder.showMessage(message);
     }
 
