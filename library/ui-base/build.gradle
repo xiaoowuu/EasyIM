@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -20,5 +21,16 @@ android {
 
 dependencies {
     implementation rootProject.ext.support_v4
-    implementation project(":library:im-base")
+    implementation rootProject.ext.easyim["im-base"]
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: "http://192.168.0.249:8081/nexus/content/repositories/android") {
+            authentication(userName: "admin", password: "admin123")
+        }
+        pom.version = rootProject.ext.versionName
+        pom.artifactId = "easyim-ui-base"
+        pom.groupId = "com.yishengyue.library"
+    }
 }

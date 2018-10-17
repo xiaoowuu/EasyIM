@@ -1,5 +1,10 @@
 include ':app',
-        ':library:im-base',
-        ':library:im-netease',
-        ':library:ui-base',
-        ':library:ui-ysy'
+        ':im-base',
+        ':im-netease',
+        ':ui-base',
+        ':ui-ysy'
+
+project(':im-base').projectDir = new File(rootDir, 'library/im-base')
+project(':im-netease').projectDir = new File(rootDir, 'library/im-netease')
+project(':ui-base').projectDir = new File(rootDir, 'library/ui-base')
+project(':ui-ysy').projectDir = new File(rootDir, 'library/ui-ysy')

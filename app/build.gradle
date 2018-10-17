@@ -22,6 +22,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.appcompat_v7
-    implementation project(':library:im-netease')
-    implementation project(':library:ui-ysy')
+    implementation rootProject.ext.easyim["im-netease"]
+    implementation rootProject.ext.easyim["ui-ysy"]
 }

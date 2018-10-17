@@ -9,7 +9,7 @@ buildscript {
         maven { url "https://maven.aliyun.com/repository/jcenter" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath "com.android.tools.build:gradle:3.0.1"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -29,21 +29,29 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
 ext {
     compileSdkVersion = 28
     minSdkVersion = 14
     targetSdkVersion = 28
     versionCode = 1
-    versionName = "1.0"
+    versionName = "1.0.0"
 
-    supportVersion = '28.0.0'
-    appcompat_v7 = 'com.android.support:appcompat-v7:28.0.0'
-    support_v4 = 'com.android.support:support-v4:28.0.0'
-    recyclerview_v7 = 'com.android.support:recyclerview-v7:28.0.0'
-    circle_image_view = 'de.hdodenhof:circleimageview:2.2.0'
-    easy_swipe_menu_layout = 'com.github.anzaizai:EasySwipeMenuLayout:1.1.2'
-    and_permission =  'com.yanzhenjie:permission:2.0.0-rc12'
-    glide = 'com.github.bumptech.glide:glide:4.5.0'
-    luban = 'top.zibin:Luban:1.1.8'
-    matisse = 'com.zhihu.android:matisse:0.5.1'
+    supportVersion = "28.0.0"
+    appcompat_v7 = "com.android.support:appcompat-v7:28.0.0"
+    support_v4 = "com.android.support:support-v4:28.0.0"
+    recyclerview_v7 = "com.android.support:recyclerview-v7:28.0.0"
+    circle_image_view = "de.hdodenhof:circleimageview:2.2.0"
+    easy_swipe_menu_layout = "com.github.anzaizai:EasySwipeMenuLayout:1.1.2"
+    and_permission = "com.yanzhenjie:permission:2.0.0-rc12"
+    glide = "com.github.bumptech.glide:glide:4.5.0"
+    luban = "top.zibin:Luban:1.1.8"
+    matisse = "com.zhihu.android:matisse:0.5.1"
+
+    easyim = [
+            "im-base"   : "com.yishengyue.library:easyim-im-base:${versionName}",
+            "im-netease": "com.yishengyue.library:easyim-im-netease:${versionName}",
+            "ui-base"   : "com.yishengyue.library:easyim-ui-base:${versionName}",
+            "ui-ysy"    : "com.yishengyue.library:easyim-ui-ysy:${versionName}"
+    ]
 }
