@@ -5,7 +5,7 @@
 
 # 使用方法
 - 添加依赖
-```groovy
+```
 ext {
         versionName = "1.0.1"
         easyim = [
@@ -16,27 +16,27 @@ ext {
         ]
     }
 ```
-```groovy
+```
 //引用具体的IM SDK实现，其会自动引用im-base基础库
 implementation rootProject.ext.easyim["im-netease"]
 //引用具体的UI实现，其会自动引用ui-base基础库
 implementation rootProject.ext.easyim["ui-ysy"]
 ```
 - 初始化
-```java
+```
 IM.init(new NIM(this));
 UI.init(new YSYUI());
 UI.getInstance().setActionHandler(new ActionHandler());
 ```
 - 最近会话
-```java
+```
 getSupportFragmentManager()
     .beginTransaction()
     .replace(R.id.fragment_container, UI.getInstance().getConversationFragment())
     .commit();
 ```
 - 聊天
-```java
+```
 getSupportFragmentManager()
     .beginTransaction()
     .replace(R.id.fragment_container, UI.getInstance().getChatFragment(account, String.valueOf(type)))
