@@ -34,12 +34,12 @@ import top.zibin.luban.OnRenameListener;
 import win.smartown.easyim.im.base.Conversation;
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.Message;
-import win.smartown.easyim.ui.base.BaseChatFragment;
+import win.smartown.easyim.ui.base.ChatFragment;
+import win.smartown.easyim.ui.ysy.R;
+import win.smartown.easyim.ui.ysy.adapter.MessageAdapter;
 import win.smartown.easyim.ui.ysy.strategy.ShowTimeStrategy;
 import win.smartown.easyim.ui.ysy.util.Glide4Engine;
 import win.smartown.easyim.ui.ysy.util.KeyboardUtils;
-import win.smartown.easyim.ui.ysy.adapter.MessageAdapter;
-import win.smartown.easyim.ui.ysy.R;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -49,7 +49,7 @@ import static android.app.Activity.RESULT_OK;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：聊天界面
  */
-public class ChatFragment extends BaseChatFragment implements View.OnClickListener {
+public class YSYChatFragment extends ChatFragment implements View.OnClickListener {
 
     /**
      * 拍照
@@ -80,11 +80,11 @@ public class ChatFragment extends BaseChatFragment implements View.OnClickListen
      *                群聊{@link Conversation#TYPE_GROUP}
      * @return 聊天界面
      */
-    public static ChatFragment newInstance(String account, int type) {
+    public static YSYChatFragment newInstance(String account, int type) {
         Bundle args = new Bundle();
-        args.putString(BaseChatFragment.ACCOUNT, account);
-        args.putInt(BaseChatFragment.TYPE, type);
-        ChatFragment fragment = new ChatFragment();
+        args.putString(ChatFragment.ACCOUNT, account);
+        args.putInt(ChatFragment.TYPE, type);
+        YSYChatFragment fragment = new YSYChatFragment();
         fragment.setArguments(args);
         return fragment;
     }

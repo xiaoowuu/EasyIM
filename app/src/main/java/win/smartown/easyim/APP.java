@@ -4,8 +4,8 @@ import android.app.Application;
 
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.netease.NIM;
-import win.smartown.easyim.ui.base.BaseUI;
-import win.smartown.easyim.ui.ysy.UI;
+import win.smartown.easyim.ui.base.UI;
+import win.smartown.easyim.ui.ysy.YSYUI;
 import win.smartown.easyim.util.ActionHandler;
 import win.smartown.easyim.util.ToastUtil;
 
@@ -21,8 +21,8 @@ public class APP extends Application {
         super.onCreate();
         ToastUtil.init(this);
         IM.init(new NIM(this));
-        BaseUI.init(new UI());
-        BaseUI.getInstance().setActionHandler(new ActionHandler());
+        UI.init(new YSYUI());
+        UI.getInstance().setActionHandler(new ActionHandler());
     }
 
 }

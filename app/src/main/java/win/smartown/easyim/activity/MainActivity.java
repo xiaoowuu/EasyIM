@@ -7,7 +7,7 @@ import android.view.MenuItem;
 
 import win.smartown.easyim.R;
 import win.smartown.easyim.im.base.Conversation;
-import win.smartown.easyim.ui.base.BaseUI;
+import win.smartown.easyim.ui.base.UI;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, BaseUI.getInstance().getConversationFragment())
+                .replace(R.id.fragment_container, UI.getInstance().getConversationFragment())
                 .commit();
     }
 

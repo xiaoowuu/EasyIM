@@ -6,15 +6,15 @@ package win.smartown.easyim.ui.base;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：UI基类
  */
-public abstract class BaseUI {
+public abstract class UI {
 
-    private static BaseUI sUI;
+    private static UI sUI;
 
-    public static void init(BaseUI ui) {
+    public static void init(UI ui) {
         sUI = ui;
     }
 
-    public static BaseUI getInstance() {
+    public static UI getInstance() {
         return sUI;
     }
 
@@ -26,7 +26,7 @@ public abstract class BaseUI {
      * @param params 参数
      * @return 会话列表Fragment
      */
-    public abstract BaseConversationFragment getConversationFragment(String... params);
+    public abstract ConversationFragment getConversationFragment(String... params);
 
     /**
      * 获取聊天fragment
@@ -34,7 +34,7 @@ public abstract class BaseUI {
      * @param params 参数
      * @return 聊天fragment
      */
-    public abstract BaseChatFragment getChatFragment(String... params);
+    public abstract ChatFragment getChatFragment(String... params);
 
     public void setActionHandler(ActionHandler actionHandler) {
         this.actionHandler = actionHandler;

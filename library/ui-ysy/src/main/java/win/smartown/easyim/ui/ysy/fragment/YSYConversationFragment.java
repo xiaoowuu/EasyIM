@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import win.smartown.easyim.im.base.Conversation;
-import win.smartown.easyim.ui.base.BaseConversationFragment;
+import win.smartown.easyim.ui.base.ConversationFragment;
 import win.smartown.easyim.ui.ysy.R;
 import win.smartown.easyim.ui.ysy.adapter.ConversationAdapter;
 
@@ -20,7 +20,7 @@ import win.smartown.easyim.ui.ysy.adapter.ConversationAdapter;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class ConversationFragment extends BaseConversationFragment {
+public class YSYConversationFragment extends ConversationFragment {
 
     private RecyclerView rvConversation;
     private TextView tvNone;

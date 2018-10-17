@@ -14,7 +14,7 @@ import win.smartown.easyim.im.base.OnMessageChangedListener;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public abstract class BaseChatFragment extends BaseFragment implements OnMessageChangedListener {
+public abstract class ChatFragment extends BaseFragment implements OnMessageChangedListener {
 
     public final static String ACCOUNT = "account";
     public final static String TYPE = "type";

@@ -8,8 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import win.smartown.easyim.R;
 import win.smartown.easyim.im.base.Conversation;
-import win.smartown.easyim.ui.base.BaseChatFragment;
-import win.smartown.easyim.ui.base.BaseUI;
+import win.smartown.easyim.ui.base.ChatFragment;
+import win.smartown.easyim.ui.base.UI;
 
 /**
  * @author 雷小武
@@ -28,20 +28,20 @@ public class ChatActivity extends AppCompatActivity {
      */
     public static void startChat(Context context, String account, int type) {
         Intent intent = new Intent(context, ChatActivity.class);
-        intent.putExtra(BaseChatFragment.ACCOUNT, account);
-        intent.putExtra(BaseChatFragment.TYPE, type);
+        intent.putExtra(ChatFragment.ACCOUNT, account);
+        intent.putExtra(ChatFragment.TYPE, type);
         context.startActivity(intent);
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String account = getIntent().getStringExtra(BaseChatFragment.ACCOUNT);
-        int type = getIntent().getIntExtra(BaseChatFragment.TYPE, Conversation.TYPE_OTHER);
+        String account = getIntent().getStringExtra(ChatFragment.ACCOUNT);
+        int type = getIntent().getIntExtra(ChatFragment.TYPE, Conversation.TYPE_OTHER);
         setContentView(R.layout.activity_main);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, BaseUI.getInstance().getChatFragment(account, String.valueOf(type)))
+                .replace(R.id.fragment_container, UI.getInstance().getChatFragment(account, String.valueOf(type)))
                 .commit();
     }
 }

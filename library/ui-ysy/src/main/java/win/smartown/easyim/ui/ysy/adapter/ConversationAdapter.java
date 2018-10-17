@@ -13,7 +13,7 @@ import win.smartown.easyim.im.base.Conversation;
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.User;
 import win.smartown.easyim.ui.base.ActionHandler;
-import win.smartown.easyim.ui.base.BaseUI;
+import win.smartown.easyim.ui.base.UI;
 import win.smartown.easyim.ui.ysy.R;
 import win.smartown.easyim.ui.ysy.util.ImageLoader;
 import win.smartown.easyim.ui.ysy.util.TimeUtil;
@@ -63,7 +63,7 @@ public class ConversationAdapter extends BaseAdapter<BaseAdapter.BaseViewHolder>
 
     @Override
     public void onItemChildClick(View view, int position) {
-        ActionHandler actionHandler = BaseUI.getInstance().getActionHandler();
+        ActionHandler actionHandler = UI.getInstance().getActionHandler();
         if (actionHandler != null) {
             Conversation conversation = conversations.get(position);
             int id = view.getId();
