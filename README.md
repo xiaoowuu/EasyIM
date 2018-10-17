@@ -5,6 +5,7 @@
 
 # 使用方法
 - 添加依赖
+
 ```
 ext {
         versionName = "1.0.1"
@@ -16,6 +17,7 @@ ext {
         ]
     }
 ```
+
 ```
 //引用具体的IM SDK实现，其会自动引用im-base基础库
 implementation rootProject.ext.easyim["im-netease"]
@@ -23,12 +25,14 @@ implementation rootProject.ext.easyim["im-netease"]
 implementation rootProject.ext.easyim["ui-ysy"]
 ```
 - 初始化
+
 ```
 IM.init(new NIM(this));
 UI.init(new YSYUI());
 UI.getInstance().setActionHandler(new ActionHandler());
 ```
 - 最近会话
+
 ```
 getSupportFragmentManager()
     .beginTransaction()
@@ -36,6 +40,7 @@ getSupportFragmentManager()
     .commit();
 ```
 - 聊天
+
 ```
 getSupportFragmentManager()
     .beginTransaction()
