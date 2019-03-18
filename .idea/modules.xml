@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/im-base/im-base.iml" filepath="$PROJECT_DIR$/library/im-base/im-base.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/im-netease/im-netease.iml" filepath="$PROJECT_DIR$/library/im-netease/im-netease.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/push-huawei/push-huawei.iml" filepath="$PROJECT_DIR$/library/push-huawei/push-huawei.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/push-mi/push-mi.iml" filepath="$PROJECT_DIR$/library/push-mi/push-mi.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/ui-base/ui-base.iml" filepath="$PROJECT_DIR$/library/ui-base/ui-base.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/ui-ysy/ui-ysy.iml" filepath="$PROJECT_DIR$/library/ui-ysy/ui-ysy.iml" />
     </modules>

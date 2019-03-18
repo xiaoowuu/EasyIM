@@ -2,9 +2,13 @@ include ':app',
         ':im-base',
         ':im-netease',
         ':ui-base',
-        ':ui-ysy'
+        ':ui-ysy',
+        ':push-mi',
+        ':push-huawei'
 
 project(':im-base').projectDir = new File(rootDir, 'library/im-base')
 project(':im-netease').projectDir = new File(rootDir, 'library/im-netease')
 project(':ui-base').projectDir = new File(rootDir, 'library/ui-base')
 project(':ui-ysy').projectDir = new File(rootDir, 'library/ui-ysy')
+project(':push-mi').projectDir = new File(rootDir, 'library/push-mi')
+project(':push-huawei').projectDir = new File(rootDir, 'library/push-huawei')

@@ -11,8 +11,23 @@ android {
         applicationId "win.smartown.easyim"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        sign {
+            storeFile file("ysy.jks")
+            storePassword "123456"
+            keyAlias "yishengyue"
+            keyPassword "123456"
+        }
+    }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.sign
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
+            signingConfig signingConfigs.sign
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -26,4 +41,5 @@ dependencies {
     implementation project(":im-netease")
 //    implementation rootProject.ext.easyim["ui-ysy"]
     implementation project(":ui-ysy")
+    implementation project(":push-mi")
 }

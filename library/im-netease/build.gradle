@@ -28,7 +28,7 @@ dependencies {
     api project(":im-base")
     //网易云信
     // 基础功能 (必需)
-    implementation 'com.netease.nimlib:basesdk:6.1.1'
+    api 'com.netease.nimlib:basesdk:6.1.1'
     // 音视频和互动白板服务需要
 //    implementation 'com.netease.nimlib:nrtc:6.1.1'
     // 音视频需要
@@ -40,7 +40,7 @@ dependencies {
     // 全文检索服务需要
 //    implementation 'com.netease.nimlib:lucene:6.1.1'
     // 小米、华为、魅族、fcm 推送
-    implementation 'com.netease.nimlib:push:6.1.1'
+    api 'com.netease.nimlib:push:6.1.1'
 }
 
 uploadArchives {
