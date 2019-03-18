@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="xmAppId" type="string" />
+    <item name="xmAppKey" type="string" />
+    <item name="xmCertificateName" type="string" />
+    <item name="hwCertificateName" type="string" />
+    <item name="mzAppId" type="string" />
+    <item name="mzAppKey" type="string" />
+    <item name="mzCertificateName" type="string" />
+</resources>

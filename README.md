@@ -24,6 +24,13 @@ implementation rootProject.ext.easyim["im-netease"]
 //引用具体的UI实现，其会自动引用ui-base基础库
 implementation rootProject.ext.easyim["ui-ysy"]
 ```
+- 配置AndroidManifest.xml
+
+```xml
+<meta-data
+    android:name="com.netease.nim.appKey"
+    android:value="7e189c54b1d789ba7bf174d4e074e585" />
+```
 - 初始化
 
 ```java

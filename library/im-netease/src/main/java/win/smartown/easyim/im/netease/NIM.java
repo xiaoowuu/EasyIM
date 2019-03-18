@@ -10,6 +10,7 @@ import com.netease.nimlib.sdk.RequestCallbackWrapper;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
 import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.netease.nimlib.sdk.mixpush.MixPushConfig;
 import com.netease.nimlib.sdk.msg.MessageBuilder;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
@@ -52,11 +53,23 @@ public class NIM extends IM {
         super(context);
         SDKOptions options = new SDKOptions();
         options.checkManifestConfig = true;
+        //推送通道配置
+        MixPushConfig pushConfig = new MixPushConfig();
+        pushConfig.xmAppId = context.getResources().getString(R.string.xmAppId);
+        pushConfig.xmAppKey = context.getResources().getString(R.string.xmAppKey);
+        pushConfig.xmCertificateName = context.getResources().getString(R.string.xmCertificateName);
+        pushConfig.hwCertificateName = context.getResources().getString(R.string.hwCertificateName);
+        pushConfig.mzAppId = context.getResources().getString(R.string.mzAppId);
+        pushConfig.mzAppKey = context.getResources().getString(R.string.mzAppKey);
+        pushConfig.mzCertificateName = context.getResources().getString(R.string.mzCertificateName);
+        options.mixPushConfig = pushConfig;
         NIMClient.init(this.context, null, options);
+        //通知栏配置
         StatusBarNotificationConfig config = new StatusBarNotificationConfig();
         config.notificationEntrance = null;
         NIMClient.updateStatusBarNotificationConfig(config);
         NIMClient.toggleNotification(true);
+
         initCallback();
     }
 
