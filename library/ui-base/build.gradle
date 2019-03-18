@@ -21,7 +21,8 @@ android {
 
 dependencies {
     implementation rootProject.ext.support_v4
-    implementation rootProject.ext.easyim["im-base"]
+//    implementation rootProject.ext.easyim["im-base"]
+    implementation project(":im-base")
 }
 
 uploadArchives {

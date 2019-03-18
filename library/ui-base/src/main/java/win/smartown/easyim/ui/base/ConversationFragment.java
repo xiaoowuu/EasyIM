@@ -25,7 +25,14 @@ public abstract class ConversationFragment extends BaseFragment implements OnCon
     @Override
     public void onResume() {
         super.onResume();
+        IM.getInstance().onConversationFragmentResume();
         IM.getInstance().refreshConversations();
+    }
+
+    @Override
+    public void onPause() {
+        IM.getInstance().onConversationFragmentPause();
+        super.onPause();
     }
 
     @Override

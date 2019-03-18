@@ -43,6 +43,18 @@ public abstract class ChatFragment extends BaseFragment implements OnMessageChan
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        IM.getInstance().onChatFragmentResume(account, type);
+    }
+
+    @Override
+    public void onPause() {
+        IM.getInstance().onChatFragmentPause();
+        super.onPause();
+    }
+
+    @Override
     public void onDestroy() {
         IM.getInstance().removeOnMessageChangedListener(account);
         super.onDestroy();

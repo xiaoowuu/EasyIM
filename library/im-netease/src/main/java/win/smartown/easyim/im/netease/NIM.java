@@ -8,8 +8,11 @@ import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.RequestCallbackWrapper;
 import com.netease.nimlib.sdk.SDKOptions;
+import com.netease.nimlib.sdk.StatusBarNotificationConfig;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.msg.MessageBuilder;
+import com.netease.nimlib.sdk.msg.MsgService;
+import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.QueryDirectionEnum;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
@@ -50,6 +53,10 @@ public class NIM extends IM {
         SDKOptions options = new SDKOptions();
         options.checkManifestConfig = true;
         NIMClient.init(this.context, null, options);
+        StatusBarNotificationConfig config = new StatusBarNotificationConfig();
+        config.notificationEntrance = null;
+        NIMClient.updateStatusBarNotificationConfig(config);
+        NIMClient.toggleNotification(true);
         initCallback();
     }
 
@@ -176,6 +183,26 @@ public class NIM extends IM {
     public void sendImageMessage(String account, int type, File file) {
         final IMMessage message = MessageBuilder.createImageMessage(account, Utils.getSesstionType(type), file);
         sendMessage(message);
+    }
+
+    @Override
+    public void onConversationFragmentResume() {
+        NIMSDK.getMsgService().setChattingAccount(MsgService.MSG_CHATTING_ACCOUNT_ALL, SessionTypeEnum.None);
+    }
+
+    @Override
+    public void onConversationFragmentPause() {
+        NIMSDK.getMsgService().setChattingAccount(MsgService.MSG_CHATTING_ACCOUNT_NONE, SessionTypeEnum.None);
+    }
+
+    @Override
+    public void onChatFragmentResume(String account, int type) {
+        NIMSDK.getMsgService().setChattingAccount(account, Utils.getSesstionType(type));
+    }
+
+    @Override
+    public void onChatFragmentPause() {
+        NIMSDK.getMsgService().setChattingAccount(MsgService.MSG_CHATTING_ACCOUNT_NONE, SessionTypeEnum.None);
     }
 
     public void sendMessage(final IMMessage message) {

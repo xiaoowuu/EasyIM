@@ -66,4 +66,12 @@ public abstract class IM {
 
     public abstract void sendImageMessage(String account, int type, File file);
 
+    public abstract void onConversationFragmentResume();
+
+    public abstract void onConversationFragmentPause();
+
+    public abstract void onChatFragmentResume(String account, int type);
+
+    public abstract void onChatFragmentPause();
+
 }
