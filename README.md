@@ -38,6 +38,22 @@ IM.init(new NIM(this));
 UI.init(new YSYUI());
 UI.getInstance().setActionHandler(new ActionHandler());
 ```
+- 登录
+
+```java
+IM.getInstance().login(new LoginListener() {
+
+            @Override
+            public void onLoginSuccess(Object result) {
+                //login success
+            }
+
+            @Override
+            public void onLoginFailed(Throwable throwable) {
+                //login failed
+            }
+        }, account, password);
+```
 - 最近会话
 
 ```java
