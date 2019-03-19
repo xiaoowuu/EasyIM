@@ -63,11 +63,12 @@ public class NIM extends IM {
         pushConfig.mzAppKey = context.getResources().getString(R.string.mzAppKey);
         pushConfig.mzCertificateName = context.getResources().getString(R.string.mzCertificateName);
         options.mixPushConfig = pushConfig;
-        NIMClient.init(this.context, null, options);
         //通知栏配置
         StatusBarNotificationConfig config = new StatusBarNotificationConfig();
         config.notificationEntrance = null;
-        NIMClient.updateStatusBarNotificationConfig(config);
+        options.statusBarNotificationConfig = config;
+
+        NIMClient.init(this.context, null, options);
         NIMClient.toggleNotification(true);
 
         initCallback();

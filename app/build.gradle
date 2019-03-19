@@ -42,4 +42,5 @@ dependencies {
 //    implementation rootProject.ext.easyim["ui-ysy"]
     implementation project(":ui-ysy")
     implementation project(":push-mi")
+    implementation project(":push-huawei")
 }

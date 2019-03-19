@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="win.smartown.easyim">
 
     <!-- SDK 权限申明, 第三方 APP 接入时，请将 win.smartown.easyim 替换为自己的包名 -->
@@ -17,7 +18,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".activity.FlashActivity"
             android:screenOrientation="portrait">
@@ -46,6 +48,7 @@
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="1107180208115268#easyim" />
+        <!--小米推送配置-->
         <receiver
             android:name="com.netease.nimlib.mixpush.mi.MiPushReceiver"
             android:exported="true">
@@ -54,6 +57,26 @@
                 <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" />
                 <action android:name="com.xiaomi.mipush.ERROR" />
             </intent-filter>
+        </receiver>
+        <!--华为推送配置-->
+        <receiver
+            android:name="com.netease.nimlib.mixpush.hw.HWPushReceiver"
+            android:permission="${applicationId}.permission.PROCESS_PUSH_MSG">
+            <intent-filter android:priority="0x7fffffff">
+                <!-- 必须,用于接收token -->
+                <action android:name="com.huawei.android.push.intent.REGISTRATION" />
+                <!-- 必须, 用于接收透传消息 -->
+                <action android:name="com.huawei.android.push.intent.RECEIVE" />
+                <!-- 必须, 用于接收通知栏消息点击事件 此事件不需要开发者处理，只需注册就可以-->
+                <action android:name="com.huawei.intent.action.PUSH_DELAY_NOTIFY" />
+                <!-- 用于点击通知栏或通知栏上的按钮后触发onEvent回调 -->
+                <action android:name="com.huawei.android.push.intent.CLICK" />
+                <!-- 查看push通道是否连接, 不查看则不需要 -->
+                <action android:name="com.huawei.intent.action.PUSH_STATE" />
+            </intent-filter>
+            <meta-data
+                android:name="CS_cloud_ablitity"
+                android:value="successRateAnalytics" />
         </receiver>
     </application>
 

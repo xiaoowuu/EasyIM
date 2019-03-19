@@ -3,4 +3,6 @@
     <string name="xmAppId">2882303761517964796</string>
     <string name="xmAppKey">5151796456796</string>
     <string name="xmCertificateName">xiaomi</string>
+    <string name="hwCertificateName">huawei</string>
+    <string name="hwPushAppId">100672923</string>
 </resources>
