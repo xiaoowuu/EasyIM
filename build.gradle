@@ -36,7 +36,7 @@ ext {
     minSdkVersion = 14
     targetSdkVersion = 28
     versionCode = 1
-    versionName = "1.0.1"
+    versionName = "1.0.2"
 
     supportVersion = "28.0.0"
     appcompat_v7 = "com.android.support:appcompat-v7:28.0.0"
@@ -53,6 +53,8 @@ ext {
             "im-base"   : "com.yishengyue.library:easyim-im-base:${versionName}",
             "im-netease": "com.yishengyue.library:easyim-im-netease:${versionName}",
             "ui-base"   : "com.yishengyue.library:easyim-ui-base:${versionName}",
-            "ui-ysy"    : "com.yishengyue.library:easyim-ui-ysy:${versionName}"
+            "ui-ysy"    : "com.yishengyue.library:easyim-ui-ysy:${versionName}",
+            "push-mi"    : "com.yishengyue.library:easyim-push-mi:${versionName}",
+            "push-huawei"    : "com.yishengyue.library:easyim-push-huawei:${versionName}"
     ]
 }

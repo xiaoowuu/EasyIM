@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -20,4 +21,15 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: "http://192.168.0.249:8081/nexus/content/repositories/android") {
+            authentication(userName: "admin", password: "admin123")
+        }
+        pom.version = rootProject.ext.versionName
+        pom.artifactId = "easyim-push-mi"
+        pom.groupId = "com.yishengyue.library"
+    }
 }
