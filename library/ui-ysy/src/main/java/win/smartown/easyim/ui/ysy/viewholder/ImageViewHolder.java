@@ -36,6 +36,7 @@ public class ImageViewHolder extends MessageViewHolder {
     @Override
     public void showMessage(Message message) {
         super.showMessage(message);
+        addOnChildClickListener(R.id.iv_image);
         ImageView ivImage = getImageView(R.id.iv_image);
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) ivImage.getLayoutParams();
         int imageWidth = ivImage.getResources().getDimensionPixelSize(R.dimen.dp198);

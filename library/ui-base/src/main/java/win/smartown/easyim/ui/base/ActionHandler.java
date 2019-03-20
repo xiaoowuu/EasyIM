@@ -2,6 +2,8 @@ package win.smartown.easyim.ui.base;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+
 import win.smartown.easyim.im.base.Conversation;
 
 /**
@@ -13,5 +15,7 @@ import win.smartown.easyim.im.base.Conversation;
 public interface ActionHandler {
 
     void startChat(Context context, Conversation conversation);
+
+    void previewImage(ArrayList<String> images, int index);
 
 }

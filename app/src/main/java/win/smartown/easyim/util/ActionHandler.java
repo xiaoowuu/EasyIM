@@ -1,6 +1,9 @@
 package win.smartown.easyim.util;
 
 import android.content.Context;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 import win.smartown.easyim.activity.ChatActivity;
 import win.smartown.easyim.im.base.Conversation;
@@ -15,5 +18,10 @@ public class ActionHandler implements win.smartown.easyim.ui.base.ActionHandler 
     @Override
     public void startChat(Context context, Conversation conversation) {
         ChatActivity.startChat(context, conversation.getId(), conversation.getType());
+    }
+
+    @Override
+    public void previewImage(ArrayList<String> images, int index) {
+        Log.i("ActionHandler", index + "");
     }
 }

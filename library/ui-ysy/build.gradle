@@ -33,8 +33,8 @@ dependencies {
     }
     implementation rootProject.ext.easyim["im-base"]
 //    implementation project(":im-base")
-    api rootProject.ext.easyim["ui-base"]
-//    api project(":ui-base")
+//    api rootProject.ext.easyim["ui-base"]
+    api project(":ui-base")
 }
 
 uploadArchives {
