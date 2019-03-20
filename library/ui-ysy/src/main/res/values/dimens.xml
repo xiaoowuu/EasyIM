@@ -28,4 +28,5 @@
     <dimen name="dp14">14dp</dimen>
     <dimen name="dp6">6dp</dimen>
     <dimen name="dp25">25dp</dimen>
+    <dimen name="sp8">8sp</dimen>
 </resources>

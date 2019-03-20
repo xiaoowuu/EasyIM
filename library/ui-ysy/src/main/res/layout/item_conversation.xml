@@ -25,6 +25,22 @@
             app:riv_corner_radius="@dimen/dp25"
             tools:src="@drawable/ico_default_head" />
 
+        <TextView
+            android:id="@+id/tv_unread"
+            android:layout_width="@dimen/dp16"
+            android:layout_height="@dimen/dp16"
+            android:layout_alignTop="@+id/iv_portrait"
+            android:layout_alignEnd="@+id/iv_portrait"
+            android:layout_alignRight="@+id/iv_portrait"
+            android:background="@drawable/shape_corner_maker"
+            android:gravity="center"
+            android:lines="1"
+            android:textColor="@color/_ffffff"
+            android:textSize="@dimen/sp8"
+            android:visibility="gone"
+            tools:text="99+"
+            tools:visibility="visible" />
+
         <View
             android:id="@+id/center"
             android:layout_width="0dp"

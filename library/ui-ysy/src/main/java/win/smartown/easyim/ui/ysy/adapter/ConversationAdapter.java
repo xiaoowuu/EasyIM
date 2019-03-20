@@ -52,6 +52,9 @@ public class ConversationAdapter extends BaseAdapter<BaseAdapter.BaseViewHolder>
         viewHolder.getTextView(R.id.tv_nick).setText(TextUtils.isEmpty(user.getNick()) ? conversation.getId() : user.getNick());
         viewHolder.getTextView(R.id.tv_content).setText(conversation.getLastMessageContent());
         viewHolder.getTextView(R.id.tv_time).setText(TimeUtil.getTimeShowString(conversation.getLastMessageTime()));
+        int unreadCount = conversation.getUnreadCount();
+        viewHolder.getTextView(R.id.tv_unread).setVisibility(unreadCount > 0 ? View.VISIBLE : View.GONE);
+        viewHolder.getTextView(R.id.tv_unread).setText(unreadCount > 99 ? "99+" : String.valueOf(unreadCount));
         viewHolder.addOnChildClickListener(R.id.rl_content);
         viewHolder.addOnChildClickListener(R.id.tv_delete);
     }
