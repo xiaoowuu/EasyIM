@@ -19,8 +19,8 @@
             android:layout_width="@dimen/dp50"
             android:layout_height="@dimen/dp50"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp10"
             android:layout_marginStart="@dimen/dp10"
+            android:layout_marginLeft="@dimen/dp10"
             tools:src="@drawable/ico_default_head" />
 
         <View
@@ -36,10 +36,12 @@
             android:layout_above="@id/center"
             android:layout_marginLeft="@dimen/dp10"
             android:layout_marginRight="@dimen/dp10"
-            android:layout_toEndOf="@+id/iv_portrait"
-            android:layout_toLeftOf="@+id/tv_time"
-            android:layout_toRightOf="@+id/iv_portrait"
             android:layout_toStartOf="@+id/tv_time"
+            android:layout_toLeftOf="@+id/tv_time"
+            android:layout_toEndOf="@+id/iv_portrait"
+            android:layout_toRightOf="@+id/iv_portrait"
+            android:ellipsize="end"
+            android:lines="1"
             android:textColor="@color/_333333"
             android:textSize="@dimen/sp16"
             tools:text="昵称" />
@@ -48,9 +50,9 @@
             android:id="@+id/tv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_nick"
-            android:layout_alignStart="@+id/tv_nick"
             android:layout_below="@id/center"
+            android:layout_alignStart="@+id/tv_nick"
+            android:layout_alignLeft="@+id/tv_nick"
             android:layout_marginEnd="@dimen/dp8"
             android:layout_marginRight="@dimen/dp8"
             android:ellipsize="end"
@@ -63,9 +65,9 @@
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tv_nick"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/tv_nick"
             android:layout_marginEnd="@dimen/dp8"
             android:layout_marginRight="@dimen/dp8"
             android:ellipsize="end"
@@ -76,11 +78,11 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/px2"
+            android:layout_height="@dimen/px1"
+            android:layout_alignStart="@+id/tv_nick"
             android:layout_alignLeft="@+id/tv_nick"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/tv_nick"
-            android:background="@color/_d9d9d9" />
+            android:background="@color/_e1e1e1" />
     </RelativeLayout>
 
     <TextView
