@@ -40,6 +40,10 @@ public abstract class IM {
 
     public abstract void logout(LogoutListener listener, String... params);
 
+    public abstract int getStatus();
+
+    public abstract boolean isLogin();
+
     public abstract void refreshConversations();
 
     public void addOnConversationChangedListener(OnConversationChangedListener listener) {

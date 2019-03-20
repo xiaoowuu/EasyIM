@@ -9,6 +9,7 @@ import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.RequestCallbackWrapper;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
+import com.netease.nimlib.sdk.StatusCode;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.mixpush.MixPushConfig;
 import com.netease.nimlib.sdk.msg.MessageBuilder;
@@ -168,6 +169,16 @@ public class NIM extends IM {
     @Override
     public void logout(LogoutListener listener, String... params) {
         NIMSDK.getAuthService().logout();
+    }
+
+    @Override
+    public int getStatus() {
+        return NIMClient.getStatus().getValue();
+    }
+
+    @Override
+    public boolean isLogin() {
+        return getStatus() == StatusCode.LOGINED.getValue();
     }
 
     @Override
