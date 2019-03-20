@@ -30,6 +30,7 @@
         android:layout_width="@dimen/dp40"
         android:layout_height="@dimen/dp40"
         android:layout_below="@+id/tv_time"
+        android:scaleType="centerCrop"
         app:riv_corner_radius="@dimen/dp20"
         tools:src="@drawable/ico_default_head" />
 
