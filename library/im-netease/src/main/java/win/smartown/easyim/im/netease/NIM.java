@@ -182,6 +182,11 @@ public class NIM extends IM {
     }
 
     @Override
+    public int getUnreadCount() {
+        return NIMSDK.getMsgService().getTotalUnreadCount();
+    }
+
+    @Override
     public void refreshConversations() {
         NIMSDK.getMsgService().queryRecentContacts().setCallback(recentContactCallback);
     }

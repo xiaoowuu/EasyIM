@@ -46,6 +46,8 @@ public abstract class IM {
 
     public abstract void refreshConversations();
 
+    public abstract int getUnreadCount();
+
     public void addOnConversationChangedListener(OnConversationChangedListener listener) {
         onConversationChangedListeners.add(listener);
     }
