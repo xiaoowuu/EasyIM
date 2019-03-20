@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="8dp"
     android:paddingLeft="16dp"
+    android:paddingTop="8dp"
     android:paddingRight="16dp"
-    android:paddingTop="8dp">
+    android:paddingBottom="8dp">
 
     <TextView
         android:id="@+id/tv_time"
@@ -24,25 +25,26 @@
         android:textStyle="bold"
         tools:text="2018-10-16 14:57:46" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/iv_portrait"
         android:layout_width="@dimen/dp40"
         android:layout_height="@dimen/dp40"
+        android:layout_below="@+id/tv_time"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tv_time"
-        android:src="@drawable/ico_default_head" />
+        android:src="@drawable/ico_default_head"
+        app:riv_corner_radius="@dimen/dp20" />
 
     <View
         android:id="@+id/triangle"
         android:layout_width="@dimen/dp6"
         android:layout_height="@dimen/dp12"
         android:layout_alignTop="@+id/iv_portrait"
+        android:layout_marginTop="@dimen/dp14"
         android:layout_marginEnd="@dimen/dp8"
         android:layout_marginRight="@dimen/dp8"
-        android:layout_marginTop="@dimen/dp14"
-        android:layout_toLeftOf="@+id/iv_portrait"
         android:layout_toStartOf="@+id/iv_portrait"
+        android:layout_toLeftOf="@+id/iv_portrait"
         android:background="@drawable/triangle_right" />
 
     <RelativeLayout
@@ -50,8 +52,8 @@
         android:layout_width="@dimen/dp200"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/iv_portrait"
-        android:layout_toLeftOf="@+id/triangle"
         android:layout_toStartOf="@+id/triangle"
+        android:layout_toLeftOf="@+id/triangle"
         android:gravity="right|end"
         tools:background="@drawable/shape_send_message_body"
         tools:minHeight="@dimen/dp40" />

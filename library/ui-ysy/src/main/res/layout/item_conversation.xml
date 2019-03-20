@@ -14,13 +14,15 @@
         android:layout_height="match_parent"
         android:background="?selectableItemBackground">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/iv_portrait"
             android:layout_width="@dimen/dp50"
             android:layout_height="@dimen/dp50"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/dp10"
             android:layout_marginLeft="@dimen/dp10"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="@dimen/dp25"
             tools:src="@drawable/ico_default_head" />
 
         <View

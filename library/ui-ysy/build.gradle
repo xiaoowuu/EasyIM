@@ -23,7 +23,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation rootProject.ext.appcompat_v7
     implementation rootProject.ext.recyclerview_v7
-    implementation rootProject.ext.circle_image_view
+    implementation rootProject.ext.round_image_view
     implementation rootProject.ext.easy_swipe_menu_layout
     implementation rootProject.ext.and_permission
     implementation rootProject.ext.luban

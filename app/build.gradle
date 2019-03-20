@@ -39,8 +39,8 @@ dependencies {
     implementation rootProject.ext.appcompat_v7
     implementation rootProject.ext.easyim["im-netease"]
 //    implementation project(":im-netease")
-    implementation rootProject.ext.easyim["ui-ysy"]
-//    implementation project(":ui-ysy")
+//    implementation rootProject.ext.easyim["ui-ysy"]
+    implementation project(":ui-ysy")
     implementation rootProject.ext.easyim["push-mi"]
 //    implementation project(":push-mi")
     implementation rootProject.ext.easyim["push-huawei"]

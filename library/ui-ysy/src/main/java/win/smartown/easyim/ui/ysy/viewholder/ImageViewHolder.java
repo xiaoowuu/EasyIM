@@ -1,12 +1,10 @@
 package win.smartown.easyim.ui.ysy.viewholder;
 
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 
 import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.ui.ysy.R;
@@ -39,19 +37,15 @@ public class ImageViewHolder extends MessageViewHolder {
     public void showMessage(Message message) {
         super.showMessage(message);
         ImageView ivImage = getImageView(R.id.iv_image);
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ivImage.getLayoutParams();
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) ivImage.getLayoutParams();
         int imageWidth = ivImage.getResources().getDimensionPixelSize(R.dimen.dp198);
         float scale = (float) imageWidth / message.getImageWidth();
         int imageHeight = (int) (scale * message.getImageHeight());
-        params.width = imageWidth + ivImage.getPaddingLeft() + ivImage.getPaddingRight();
-        params.height = imageHeight + ivImage.getPaddingTop() + ivImage.getPaddingBottom();
+        params.width = imageWidth;
+        params.height = imageHeight;
         ivImage.setLayoutParams(params);
 
-        int dp3 = ivImage.getResources().getDimensionPixelSize(R.dimen.dp3);
-        Glide.with(itemView)
-                .load(message.getImageUrl())
-                .apply(new RequestOptions().transform(new RoundedCorners(dp3)))
-                .into(ivImage);
+        Glide.with(itemView).load(message.getImageUrl()).into(ivImage);
     }
 
 }

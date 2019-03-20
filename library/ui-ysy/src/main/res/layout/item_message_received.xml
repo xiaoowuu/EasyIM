@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/dp8"
     android:paddingLeft="@dimen/dp16"
+    android:paddingTop="@dimen/dp8"
     android:paddingRight="@dimen/dp16"
-    android:paddingTop="@dimen/dp8">
+    android:paddingBottom="@dimen/dp8">
 
     <TextView
         android:id="@+id/tv_time"
@@ -24,11 +25,12 @@
         android:textStyle="bold"
         tools:text="100" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/iv_portrait"
         android:layout_width="@dimen/dp40"
         android:layout_height="@dimen/dp40"
         android:layout_below="@+id/tv_time"
+        app:riv_corner_radius="@dimen/dp20"
         tools:src="@drawable/ico_default_head" />
 
     <View
@@ -36,8 +38,8 @@
         android:layout_width="@dimen/dp6"
         android:layout_height="@dimen/dp12"
         android:layout_alignTop="@+id/iv_portrait"
-        android:layout_marginLeft="@dimen/dp8"
         android:layout_marginStart="@dimen/dp8"
+        android:layout_marginLeft="@dimen/dp8"
         android:layout_marginTop="@dimen/dp14"
         android:layout_toEndOf="@+id/iv_portrait"
         android:layout_toRightOf="@+id/iv_portrait"
