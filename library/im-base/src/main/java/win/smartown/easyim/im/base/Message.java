@@ -18,6 +18,15 @@ public abstract class Message<Data> {
         this.data = data;
     }
 
+    public Data getData() {
+        return data;
+    }
+
+    /**
+     * @return 消息发送人账号
+     */
+    public abstract String getConversationId();
+
     /**
      * 此消息是否是我发送的
      *

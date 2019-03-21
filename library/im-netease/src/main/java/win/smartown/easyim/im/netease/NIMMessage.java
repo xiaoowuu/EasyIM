@@ -23,6 +23,11 @@ public class NIMMessage extends Message<IMMessage> {
         super(imMessage);
     }
 
+    @Override
+    public String getConversationId() {
+        return data.getSessionId();
+    }
+
     /**
      * @return 是否是我发送的
      */

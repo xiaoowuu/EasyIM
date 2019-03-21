@@ -192,6 +192,19 @@ public class NIM extends IM {
     }
 
     @Override
+    public void removeConversation(Conversation conversation) {
+        NIMSDK.getMsgService().deleteRecentContact2(conversation.getId(), Utils.getSesstionType(conversation.getType()));
+        refreshConversations();
+    }
+
+    @Override
+    public void removeMessage(Message message) {
+        if (message instanceof NIMMessage) {
+            NIMSDK.getMsgService().deleteChattingHistory(((NIMMessage) message).getData());
+        }
+    }
+
+    @Override
     public User getUser(String account) {
         NimUserInfo info = NIMSDK.getUserService().getUserInfo(account);
         return new NIMUser(info);

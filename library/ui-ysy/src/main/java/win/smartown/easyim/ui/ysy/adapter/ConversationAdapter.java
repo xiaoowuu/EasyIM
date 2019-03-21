@@ -73,7 +73,7 @@ public class ConversationAdapter extends BaseAdapter<BaseAdapter.BaseViewHolder>
             if (id == R.id.rl_content) {
                 actionHandler.startChat(view.getContext(), conversation);
             } else if (id == R.id.tv_delete) {
-                // TODO: 2018/10/16 删除会话
+                IM.getInstance().removeConversation(conversation);
             }
         }
     }

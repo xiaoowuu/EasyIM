@@ -46,6 +46,10 @@ public abstract class IM {
 
     public abstract void refreshConversations();
 
+    public abstract void removeConversation(Conversation conversation);
+
+    public abstract void removeMessage(Message message);
+
     public abstract int getUnreadCount();
 
     public void addOnConversationChangedListener(OnConversationChangedListener listener) {
