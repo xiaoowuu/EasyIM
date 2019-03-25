@@ -5,4 +5,8 @@
     <string name="unknown_message">未知消息类型</string>
     <string name="camera">拍\t照</string>
     <string name="photo">照\t片</string>
+    <string name="no_message">暂无消息</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="sure_to_delete_conversation">删除后将清空历史消息记录，确定删除吗？</string>
 </resources>

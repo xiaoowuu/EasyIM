@@ -12,8 +12,6 @@ import java.util.List;
 import win.smartown.easyim.im.base.Conversation;
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.User;
-import win.smartown.easyim.ui.base.ActionHandler;
-import win.smartown.easyim.ui.base.UI;
 import win.smartown.easyim.ui.ysy.R;
 import win.smartown.easyim.ui.ysy.util.ImageLoader;
 import win.smartown.easyim.ui.ysy.util.TimeUtil;
@@ -24,18 +22,21 @@ import win.smartown.easyim.ui.ysy.util.TimeUtil;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class ConversationAdapter extends BaseAdapter<BaseAdapter.BaseViewHolder> implements BaseAdapter.OnItemChildClickListener {
+public class ConversationAdapter extends BaseAdapter<BaseAdapter.BaseViewHolder> {
 
     private List<Conversation> conversations;
 
     public ConversationAdapter() {
         conversations = new ArrayList<>();
-        setOnItemChildClickListener(this);
     }
 
     public void setData(List<Conversation> conversations) {
         this.conversations = conversations;
         notifyDataSetChanged();
+    }
+
+    public List<Conversation> getData() {
+        return conversations;
     }
 
     @NonNull
@@ -64,17 +65,4 @@ public class ConversationAdapter extends BaseAdapter<BaseAdapter.BaseViewHolder>
         return conversations.size();
     }
 
-    @Override
-    public void onItemChildClick(View view, int position) {
-        ActionHandler actionHandler = UI.getInstance().getActionHandler();
-        if (actionHandler != null) {
-            Conversation conversation = conversations.get(position);
-            int id = view.getId();
-            if (id == R.id.rl_content) {
-                actionHandler.startChat(view.getContext(), conversation);
-            } else if (id == R.id.tv_delete) {
-                IM.getInstance().removeConversation(conversation);
-            }
-        }
-    }
 }
