@@ -16,6 +16,8 @@ import win.smartown.easyim.ui.ysy.R;
 import win.smartown.easyim.ui.ysy.strategy.BaseShowTimeStrategy;
 import win.smartown.easyim.ui.ysy.viewholder.ImageViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.MessageViewHolder;
+import win.smartown.easyim.ui.ysy.viewholder.ProductInfoViewHolder;
+import win.smartown.easyim.ui.ysy.viewholder.ProductViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.TextViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.UnknownViewHolder;
 
@@ -33,6 +35,9 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> implements Ba
     private static final int TYPE_UNKNOWN_SEND = 4;
     private static final int TYPE_IMAGE_RECEIVED = 5;
     private static final int TYPE_IMAGE_SEND = 6;
+    private static final int TYPE_PRODUCT_RECEIVED = 7;
+    private static final int TYPE_PRODUCT_SEND = 8;
+    private static final int TYPE_PRODUCT_INFO = 9;
 
     private List<Message> messages;
     private BaseShowTimeStrategy showTimeStrategy;
@@ -52,6 +57,10 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> implements Ba
                     return TYPE_TEXT_SEND;
                 case Message.TYPE_IMAGE:
                     return TYPE_IMAGE_SEND;
+                case Message.TYPE_PRODUCT_MESSAGE:
+                    return TYPE_PRODUCT_SEND;
+                case Message.TYPE_PRODUCT_INFO:
+                    return TYPE_PRODUCT_INFO;
                 default:
                     return TYPE_UNKNOWN_SEND;
             }
@@ -61,6 +70,10 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> implements Ba
                     return TYPE_TEXT_RECEIVED;
                 case Message.TYPE_IMAGE:
                     return TYPE_IMAGE_RECEIVED;
+                case Message.TYPE_PRODUCT_MESSAGE:
+                    return TYPE_PRODUCT_RECEIVED;
+                case Message.TYPE_PRODUCT_INFO:
+                    return TYPE_PRODUCT_INFO;
                 default:
                     return TYPE_UNKNOWN_RECEIVED;
             }
@@ -83,6 +96,12 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> implements Ba
                 return new ImageViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_received, viewGroup, false), false, this);
             case TYPE_UNKNOWN_RECEIVED:
                 return new UnknownViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_received, viewGroup, false), false, this);
+            case TYPE_PRODUCT_INFO:
+                return new ProductInfoViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_product_info, viewGroup, false), this);
+            case TYPE_PRODUCT_SEND:
+                return new ProductViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_product_send, viewGroup, false), true, this);
+            case TYPE_PRODUCT_RECEIVED:
+                return new ProductViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_product_received, viewGroup, false), false, this);
             default:
                 return null;
         }
@@ -145,6 +164,8 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> implements Ba
                     }
                 }
                 actionHandler.previewImage(images, index);
+            } else if (id == R.id.tv_send_product) {
+                // TODO: 2019/3/25 发送商品
             }
         }
     }

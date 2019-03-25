@@ -8,6 +8,8 @@ import com.netease.nimlib.sdk.msg.constant.MsgDirectionEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 
 import win.smartown.easyim.im.base.Message;
+import win.smartown.easyim.im.base.ProductInfo;
+import win.smartown.easyim.im.netease.custom.ProductAttachment;
 
 /**
  * @author 雷小武
@@ -18,6 +20,7 @@ import win.smartown.easyim.im.base.Message;
 public class NIMMessage extends Message<IMMessage> {
 
     private ImageAttachment imageAttachment;
+    private ProductAttachment productAttachment;
 
     public NIMMessage(IMMessage imMessage) {
         super(imMessage);
@@ -51,6 +54,16 @@ public class NIMMessage extends Message<IMMessage> {
                 return Message.TYPE_TEXT;
             case image:
                 return Message.TYPE_IMAGE;
+            case custom:
+                MsgAttachment attachment = data.getAttachment();
+                if (attachment instanceof ProductAttachment) {
+                    switch (((ProductAttachment) attachment).getType()) {
+                        case ProductAttachment.PRODUCT_MESSAGE:
+                            return Message.TYPE_PRODUCT_MESSAGE;
+                        case ProductAttachment.PRODUCT_INFO:
+                            return Message.TYPE_PRODUCT_INFO;
+                    }
+                }
             default:
                 return 0;
         }
@@ -64,6 +77,16 @@ public class NIMMessage extends Message<IMMessage> {
             }
         }
         return imageAttachment;
+    }
+
+    public ProductAttachment getProductAttachment() {
+        if (productAttachment == null) {
+            MsgAttachment attachment = data.getAttachment();
+            if (attachment instanceof ProductAttachment) {
+                productAttachment = (ProductAttachment) attachment;
+            }
+        }
+        return productAttachment;
     }
 
     /**
@@ -114,6 +137,11 @@ public class NIMMessage extends Message<IMMessage> {
     @Override
     public String getFromAccount() {
         return data.getFromAccount();
+    }
+
+    @Override
+    public ProductInfo getProductInfo() {
+        return getProductAttachment().getProductInfo();
     }
 
     /**

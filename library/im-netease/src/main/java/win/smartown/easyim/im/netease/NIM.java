@@ -31,7 +31,10 @@ import win.smartown.easyim.im.base.LogoutListener;
 import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.im.base.OnConversationChangedListener;
 import win.smartown.easyim.im.base.OnMessageChangedListener;
+import win.smartown.easyim.im.base.ProductInfo;
 import win.smartown.easyim.im.base.User;
+import win.smartown.easyim.im.netease.custom.ProductAttachment;
+import win.smartown.easyim.im.netease.custom.ProductAttachmentParser;
 
 
 /**
@@ -71,6 +74,7 @@ public class NIM extends IM {
 
         NIMClient.init(this.context, null, options);
         NIMClient.toggleNotification(true);
+        NIMSDK.getMsgService().registerCustomAttachmentParser(new ProductAttachmentParser());
 
         initCallback();
     }
@@ -226,6 +230,11 @@ public class NIM extends IM {
     public void sendImageMessage(String account, int type, File file) {
         final IMMessage message = MessageBuilder.createImageMessage(account, Utils.getSesstionType(type), file);
         sendMessage(message);
+    }
+
+    @Override
+    public Message createProductMessage(String account, int type, boolean message, ProductInfo productInfo) {
+        return new NIMMessage(MessageBuilder.createCustomMessage(account, Utils.getSesstionType(type), String.format("[%s]", productInfo.getProductName()), new ProductAttachment(message ? ProductAttachment.PRODUCT_MESSAGE : ProductAttachment.PRODUCT_INFO, productInfo)));
     }
 
     @Override

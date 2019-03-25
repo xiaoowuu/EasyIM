@@ -30,4 +30,9 @@
     <dimen name="dp25">25dp</dimen>
     <dimen name="sp8">8sp</dimen>
     <dimen name="dp44">44dp</dimen>
+    <dimen name="dp15">15dp</dimen>
+    <dimen name="dp64">64dp</dimen>
+    <dimen name="dp2">2sp</dimen>
+    <dimen name="dp5">5dp</dimen>
+    <dimen name="dp140">140dp</dimen>
 </resources>

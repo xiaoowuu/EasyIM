@@ -7,6 +7,7 @@ import android.view.View;
 
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.OnMessageChangedListener;
+import win.smartown.easyim.im.base.ProductInfo;
 
 /**
  * @author 雷小武
@@ -18,14 +19,19 @@ public abstract class ChatFragment extends BaseFragment implements OnMessageChan
 
     public final static String ACCOUNT = "account";
     public final static String TYPE = "type";
+    public final static String PRODUCT = "product";
     protected String account;
     protected int type;
+    protected ProductInfo productInfo;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
-        if (bundle != null && bundle.containsKey(ACCOUNT)) {
+        if (bundle != null) {
+            if (bundle.containsKey(PRODUCT)) {
+                productInfo = (ProductInfo) bundle.getSerializable(PRODUCT);
+            }
             if (bundle.containsKey(ACCOUNT)) {
                 account = bundle.getString(ACCOUNT);
             }

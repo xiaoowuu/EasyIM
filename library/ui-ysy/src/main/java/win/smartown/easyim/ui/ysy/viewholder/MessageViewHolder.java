@@ -23,6 +23,10 @@ public abstract class MessageViewHolder extends BaseAdapter.BaseViewHolder {
 
     protected boolean send;
 
+    public MessageViewHolder(View itemView, BaseAdapter adapter) {
+        super(itemView, adapter);
+    }
+
     public MessageViewHolder(View itemView, boolean send, BaseAdapter adapter) {
         super(itemView, adapter);
         this.send = send;

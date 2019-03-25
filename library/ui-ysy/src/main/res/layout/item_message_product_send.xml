@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="16dp"
+    android:paddingTop="8dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dp4"
+        android:height="@dimen/dp20"
+        android:background="@drawable/shape_message_time_background"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp8"
+        android:paddingRight="@dimen/dp8"
+        android:textColor="@color/_ffffff"
+        android:textSize="@dimen/sp12"
+        android:textStyle="bold"
+        tools:text="2018-10-16 14:57:46" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/iv_portrait"
+        android:layout_width="@dimen/dp40"
+        android:layout_height="@dimen/dp40"
+        android:layout_below="@+id/tv_time"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ico_default_head"
+        app:riv_corner_radius="@dimen/dp20" />
+
+    <include
+        layout="@layout/item_message_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_time"
+        android:layout_marginEnd="@dimen/dp8"
+        android:layout_marginRight="@dimen/dp8"
+        android:layout_toStartOf="@+id/iv_portrait"
+        android:layout_toLeftOf="@+id/iv_portrait" />
+
+</RelativeLayout>

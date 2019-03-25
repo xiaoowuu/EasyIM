@@ -11,6 +11,8 @@ public abstract class Message<Data> {
 
     public static final int TYPE_TEXT = 1;
     public static final int TYPE_IMAGE = 2;
+    public static final int TYPE_PRODUCT_MESSAGE = 3;
+    public static final int TYPE_PRODUCT_INFO = 4;
 
     protected Data data;
 
@@ -75,6 +77,11 @@ public abstract class Message<Data> {
      * @return 消息发送人账号
      */
     public abstract String getFromAccount();
+
+    /**
+     * @return 商品信息
+     */
+    public abstract ProductInfo getProductInfo();
 
     /**
      * @return 消息时间

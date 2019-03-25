@@ -48,13 +48,14 @@ ext {
     glide = "com.github.bumptech.glide:glide:4.9.0"
     luban = "top.zibin:Luban:1.1.8"
     matisse = "com.zhihu.android:matisse:0.5.1"
+    fastjson = "com.alibaba:fastjson:1.2.47"
 
     easyim = [
-            "im-base"   : "com.yishengyue.library:easyim-im-base:${versionName}",
-            "im-netease": "com.yishengyue.library:easyim-im-netease:${versionName}",
-            "ui-base"   : "com.yishengyue.library:easyim-ui-base:${versionName}",
-            "ui-ysy"    : "com.yishengyue.library:easyim-ui-ysy:${versionName}",
+            "im-base"    : "com.yishengyue.library:easyim-im-base:${versionName}",
+            "im-netease" : "com.yishengyue.library:easyim-im-netease:${versionName}",
+            "ui-base"    : "com.yishengyue.library:easyim-ui-base:${versionName}",
+            "ui-ysy"     : "com.yishengyue.library:easyim-ui-ysy:${versionName}",
             "push-mi"    : "com.yishengyue.library:easyim-push-mi:${versionName}",
-            "push-huawei"    : "com.yishengyue.library:easyim-push-huawei:${versionName}"
+            "push-huawei": "com.yishengyue.library:easyim-push-huawei:${versionName}"
     ]
 }

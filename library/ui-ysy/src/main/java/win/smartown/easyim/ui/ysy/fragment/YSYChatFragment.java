@@ -34,6 +34,7 @@ import top.zibin.luban.OnRenameListener;
 import win.smartown.easyim.im.base.Conversation;
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.Message;
+import win.smartown.easyim.im.base.ProductInfo;
 import win.smartown.easyim.ui.base.ChatFragment;
 import win.smartown.easyim.ui.ysy.R;
 import win.smartown.easyim.ui.ysy.adapter.MessageAdapter;
@@ -72,16 +73,20 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
     /**
      * 创建一个聊天
      *
-     * @param account 聊天对象账号
-     * @param type    聊天类型:
-     *                <br>
-     *                单聊{@link Conversation#TYPE_SINGLE}
-     *                <br>
-     *                群聊{@link Conversation#TYPE_GROUP}
+     * @param productInfo 商品信息
+     * @param account     聊天对象账号
+     * @param type        聊天类型:
+     *                    <br>
+     *                    单聊{@link Conversation#TYPE_SINGLE}
+     *                    <br>
+     *                    群聊{@link Conversation#TYPE_GROUP}
      * @return 聊天界面
      */
-    public static YSYChatFragment newInstance(String account, int type) {
+    public static YSYChatFragment newInstance(ProductInfo productInfo, String account, int type) {
         Bundle args = new Bundle();
+        if (productInfo != null) {
+            args.putSerializable(ChatFragment.PRODUCT, productInfo);
+        }
         args.putString(ChatFragment.ACCOUNT, account);
         args.putInt(ChatFragment.TYPE, type);
         YSYChatFragment fragment = new YSYChatFragment();
@@ -155,6 +160,10 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
     @Override
     public void onReceivedMessage(List<Message> messages) {
         messageAdapter.addMessages(messages);
+        if (productInfo != null) {
+            messageAdapter.addMessage(IM.getInstance().createProductMessage(account, type, false, productInfo));
+            productInfo = null;
+        }
         scrollToBottomDelay(200);
     }
 

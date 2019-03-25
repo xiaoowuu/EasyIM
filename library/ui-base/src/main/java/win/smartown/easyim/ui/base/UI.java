@@ -1,5 +1,7 @@
 package win.smartown.easyim.ui.base;
 
+import win.smartown.easyim.im.base.ProductInfo;
+
 /**
  * @author 雷小武
  * 创建时间：2018/9/29 11:32
@@ -31,15 +33,24 @@ public abstract class UI {
     /**
      * 获取聊天fragment
      *
-     * @param params 参数
+     * @param productInfo 商品信息
+     * @param params      参数
      * @return 聊天fragment
      */
-    public abstract ChatFragment getChatFragment(String... params);
+    public abstract ChatFragment getChatFragment(ProductInfo productInfo, String... params);
 
+    /**
+     * 设置事件处理器，将部分逻辑暴露给APP层处理
+     *
+     * @param actionHandler 事件处理器
+     */
     public void setActionHandler(ActionHandler actionHandler) {
         this.actionHandler = actionHandler;
     }
 
+    /**
+     * @return 事件处理器
+     */
     public ActionHandler getActionHandler() {
         return actionHandler;
     }

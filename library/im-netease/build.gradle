@@ -24,8 +24,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.appcompat_v7
     implementation "com.android.support:support-fragment:28.0.0"
-    api rootProject.ext.easyim["im-base"]
-//    api project(":im-base")
+//    api rootProject.ext.easyim["im-base"]
+    api project(":im-base")
     //网易云信
     // 基础功能 (必需)
     api 'com.netease.nimlib:basesdk:6.1.1'
@@ -41,6 +41,7 @@ dependencies {
 //    implementation 'com.netease.nimlib:lucene:6.1.1'
     // 小米、华为、魅族、fcm 推送
     api 'com.netease.nimlib:push:6.1.1'
+    implementation rootProject.ext.fastjson
 }
 
 uploadArchives {

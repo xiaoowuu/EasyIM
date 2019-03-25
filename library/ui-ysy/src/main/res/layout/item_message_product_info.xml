@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="16dp"
+    android:paddingTop="8dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dp4"
+        android:height="@dimen/dp20"
+        android:background="@drawable/shape_message_time_background"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp8"
+        android:paddingRight="@dimen/dp8"
+        android:textColor="@color/_ffffff"
+        android:textSize="@dimen/sp12"
+        android:textStyle="bold"
+        tools:text="2018-10-16 14:57:46" />
+
+    <RelativeLayout
+        android:id="@+id/relay_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_time"
+        android:background="@color/_ffffff"
+        android:padding="@dimen/dp15">
+
+        <ImageView
+            android:id="@+id/iv_product"
+            android:layout_width="@dimen/dp64"
+            android:layout_height="@dimen/dp64"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp15"
+            android:layout_toRightOf="@+id/iv_product"
+            android:ellipsize="end"
+            android:lineSpacingExtra="@dimen/dp2"
+            android:lines="2"
+            android:textColor="#1A1A1A"
+            android:textSize="@dimen/sp14"
+            tools:text="alt阿恩蓝拓羽绒服男冬装新款韩版修身中长款加厚青年外套潮" />
+
+        <TextView
+            android:id="@+id/tv_product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/iv_product"
+            android:layout_marginLeft="@dimen/dp15"
+            android:layout_toRightOf="@+id/iv_product"
+            android:textColor="@color/_ff4239"
+            android:textSize="@dimen/sp12"
+            tools:text="¥ 388.00" />
+
+        <TextView
+            android:id="@+id/tv_send_product"
+            android:layout_width="@dimen/dp140"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_product"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp15"
+            android:background="@drawable/nim_message_product_selector"
+            android:gravity="center"
+            android:paddingTop="@dimen/dp5"
+            android:paddingBottom="@dimen/dp5"
+            android:text="@string/send_product"
+            android:textColor="@color/nim_message_product_send_text_selector"
+            android:textSize="@dimen/sp14" />
+    </RelativeLayout>
+
+</RelativeLayout>

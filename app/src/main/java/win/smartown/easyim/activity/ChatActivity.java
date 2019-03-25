@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import win.smartown.easyim.R;
 import win.smartown.easyim.im.base.Conversation;
+import win.smartown.easyim.im.base.ProductInfo;
 import win.smartown.easyim.ui.base.ChatFragment;
 import win.smartown.easyim.ui.base.UI;
 
@@ -39,9 +40,16 @@ public class ChatActivity extends AppCompatActivity {
         String account = getIntent().getStringExtra(ChatFragment.ACCOUNT);
         int type = getIntent().getIntExtra(ChatFragment.TYPE, Conversation.TYPE_OTHER);
         setContentView(R.layout.activity_main);
+        ProductInfo productInfo = new ProductInfo();
+        productInfo.setO2O(false);
+        productInfo.setProductId("");
+        productInfo.setProductImagePath("https://pics5.baidu.com/feed/b21bb051f8198618f594eff9c906bf7789d4e6e8.jpeg?token=ee3c78410dd39fbb1c8ffa4d9ebf60d7&s=07335B87C65637DC5E78E58703007081");
+        productInfo.setProductName("诺基亚五摄手机PureView意外亮相京东 多少钱值得买？");
+        productInfo.setProductPrice("100.00");
+        productInfo.setProductTitle("诺基亚五摄手机PureView意外亮相京东");
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, UI.getInstance().getChatFragment(account, String.valueOf(type)))
+                .replace(R.id.fragment_container, UI.getInstance().getChatFragment(productInfo, account, String.valueOf(type)))
                 .commit();
     }
 }
