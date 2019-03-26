@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import win.smartown.easyim.activity.ChatActivity;
 import win.smartown.easyim.im.base.Conversation;
+import win.smartown.easyim.im.base.ProductInfo;
 
 /**
  * @author 雷小武
@@ -23,5 +24,10 @@ public class ActionHandler implements win.smartown.easyim.ui.base.ActionHandler 
     @Override
     public void previewImage(ArrayList<String> images, int index) {
         Log.i("ActionHandler", index + "");
+    }
+
+    @Override
+    public void showProductDetail(ProductInfo productInfo) {
+        Log.i("ActionHandler", "showProductDetail");
     }
 }

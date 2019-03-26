@@ -1,7 +1,7 @@
 package win.smartown.easyim.im.netease.custom;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.annotation.JSONField;
 import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
 
 import win.smartown.easyim.im.base.ProductInfo;
@@ -25,7 +25,11 @@ public class ProductAttachment implements MsgAttachment {
     public static final int PRODUCT_INFO = 2;
 
     protected int type;
+    @JSONField(name = "data")
     private ProductInfo productInfo;
+
+    public ProductAttachment() {
+    }
 
     public ProductAttachment(int type, ProductInfo productInfo) {
         this.type = type;
@@ -50,9 +54,6 @@ public class ProductAttachment implements MsgAttachment {
 
     @Override
     public String toJson(boolean send) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("type", type);
-        jsonObject.put("data", JSON.toJSONString(productInfo));
-        return jsonObject.toJSONString();
+        return JSON.toJSONString(this);
     }
 }

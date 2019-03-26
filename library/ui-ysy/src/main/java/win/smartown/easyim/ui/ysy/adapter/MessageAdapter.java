@@ -1,7 +1,6 @@
 package win.smartown.easyim.ui.ysy.adapter;
 
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import win.smartown.easyim.im.base.Message;
-import win.smartown.easyim.ui.base.ActionHandler;
-import win.smartown.easyim.ui.base.UI;
 import win.smartown.easyim.ui.ysy.R;
 import win.smartown.easyim.ui.ysy.strategy.BaseShowTimeStrategy;
 import win.smartown.easyim.ui.ysy.viewholder.ImageViewHolder;
@@ -27,7 +24,7 @@ import win.smartown.easyim.ui.ysy.viewholder.UnknownViewHolder;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class MessageAdapter extends BaseAdapter<MessageViewHolder> implements BaseAdapter.OnItemChildClickListener {
+public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
 
     private static final int TYPE_TEXT_RECEIVED = 1;
     private static final int TYPE_TEXT_SEND = 2;
@@ -45,7 +42,6 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> implements Ba
     public MessageAdapter(BaseShowTimeStrategy showTimeStrategy) {
         this.messages = new ArrayList<>();
         this.showTimeStrategy = showTimeStrategy;
-        setOnItemChildClickListener(this);
     }
 
     @Override
@@ -140,33 +136,7 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> implements Ba
         }
     }
 
-    @Override
-    public void onItemChildClick(View view, int position) {
-        ActionHandler actionHandler = UI.getInstance().getActionHandler();
-        if (actionHandler != null) {
-            int id = view.getId();
-            if (id == R.id.iv_image) {
-                String clickImage = messages.get(position).getImageUrl();
-                ArrayList<String> images = new ArrayList<>();
-                int index = 0;
-                boolean foundIndex = false;
-                for (Message message : messages) {
-                    if (message.getType() == Message.TYPE_IMAGE) {
-                        String image = message.getImageUrl();
-                        images.add(image);
-                        if (!foundIndex) {
-                            if (TextUtils.equals(image, clickImage)) {
-                                foundIndex = true;
-                            } else {
-                                index++;
-                            }
-                        }
-                    }
-                }
-                actionHandler.previewImage(images, index);
-            } else if (id == R.id.tv_send_product) {
-                // TODO: 2019/3/25 发送商品
-            }
-        }
+    public List<Message> getData() {
+        return messages;
     }
 }

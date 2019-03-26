@@ -5,6 +5,7 @@ import android.content.Context;
 import java.util.ArrayList;
 
 import win.smartown.easyim.im.base.Conversation;
+import win.smartown.easyim.im.base.ProductInfo;
 
 /**
  * @author 雷小武
@@ -18,4 +19,5 @@ public interface ActionHandler {
 
     void previewImage(ArrayList<String> images, int index);
 
+    void showProductDetail(ProductInfo productInfo);
 }

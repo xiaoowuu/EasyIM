@@ -76,7 +76,9 @@ public abstract class IM {
 
     public abstract void sendImageMessage(String account, int type, File file);
 
-    public abstract Message createProductMessage(String account, int type,boolean message, ProductInfo productInfo);
+    public abstract void sendProductMessage(String account, int type, ProductInfo productInfo);
+
+    public abstract Message createProductMessage(String account, int type, boolean message, ProductInfo productInfo);
 
     public abstract void onConversationFragmentResume();
 

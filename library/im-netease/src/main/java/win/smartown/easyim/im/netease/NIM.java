@@ -19,6 +19,7 @@ import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.QueryDirectionEnum;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
 import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
+import com.netease.nimlib.sdk.util.NIMUtil;
 
 import java.io.File;
 import java.util.Collections;
@@ -74,7 +75,9 @@ public class NIM extends IM {
 
         NIMClient.init(this.context, null, options);
         NIMClient.toggleNotification(true);
-        NIMSDK.getMsgService().registerCustomAttachmentParser(new ProductAttachmentParser());
+        if (NIMUtil.isMainProcess(context)) {
+            NIMSDK.getMsgService().registerCustomAttachmentParser(new ProductAttachmentParser());
+        }
 
         initCallback();
     }
@@ -222,13 +225,19 @@ public class NIM extends IM {
 
     @Override
     public void sendTextMessage(String account, int type, String text) {
-        final IMMessage message = MessageBuilder.createTextMessage(account, Utils.getSesstionType(type), text);
+        IMMessage message = MessageBuilder.createTextMessage(account, Utils.getSesstionType(type), text);
         sendMessage(message);
     }
 
     @Override
     public void sendImageMessage(String account, int type, File file) {
-        final IMMessage message = MessageBuilder.createImageMessage(account, Utils.getSesstionType(type), file);
+        IMMessage message = MessageBuilder.createImageMessage(account, Utils.getSesstionType(type), file);
+        sendMessage(message);
+    }
+
+    @Override
+    public void sendProductMessage(String account, int type, ProductInfo productInfo) {
+        IMMessage message = MessageBuilder.createCustomMessage(account, Utils.getSesstionType(type), String.format("[%s]", productInfo.getProductName()), new ProductAttachment(ProductAttachment.PRODUCT_MESSAGE, productInfo));
         sendMessage(message);
     }
 

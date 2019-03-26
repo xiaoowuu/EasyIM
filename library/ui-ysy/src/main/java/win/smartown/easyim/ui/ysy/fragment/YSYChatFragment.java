@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import top.zibin.luban.Luban;
@@ -35,8 +37,11 @@ import win.smartown.easyim.im.base.Conversation;
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.im.base.ProductInfo;
+import win.smartown.easyim.ui.base.ActionHandler;
 import win.smartown.easyim.ui.base.ChatFragment;
+import win.smartown.easyim.ui.base.UI;
 import win.smartown.easyim.ui.ysy.R;
+import win.smartown.easyim.ui.ysy.adapter.BaseAdapter;
 import win.smartown.easyim.ui.ysy.adapter.MessageAdapter;
 import win.smartown.easyim.ui.ysy.strategy.ShowTimeStrategy;
 import win.smartown.easyim.ui.ysy.util.Glide4Engine;
@@ -50,7 +55,7 @@ import static android.app.Activity.RESULT_OK;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：聊天界面
  */
-public class YSYChatFragment extends ChatFragment implements View.OnClickListener {
+public class YSYChatFragment extends ChatFragment implements View.OnClickListener, BaseAdapter.OnItemChildClickListener {
 
     /**
      * 拍照
@@ -142,6 +147,7 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
         linearLayoutManager = new LinearLayoutManager(getActivity());
         rvMessage.setLayoutManager(linearLayoutManager);
         messageAdapter = new MessageAdapter(new ShowTimeStrategy());
+        messageAdapter.setOnItemChildClickListener(this);
         rvMessage.setAdapter(messageAdapter);
         etMessage.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -392,4 +398,43 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
                 .launch();
     }
 
+    @Override
+    public void onItemChildClick(View view, int position) {
+        int id = view.getId();
+        if (id == R.id.tv_send_product) {
+            //发送商品
+            Message message = messageAdapter.getData().get(position);
+            messageAdapter.getData().remove(message);
+            messageAdapter.notifyItemRemoved(position);
+            IM.getInstance().sendProductMessage(account, type, message.getProductInfo());
+        } else {
+            ActionHandler actionHandler = UI.getInstance().getActionHandler();
+            if (actionHandler != null) {
+                if (id == R.id.iv_image) {
+                    //查看大图
+                    String clickImage = messageAdapter.getData().get(position).getImageUrl();
+                    ArrayList<String> images = new ArrayList<>();
+                    int index = 0;
+                    boolean foundIndex = false;
+                    for (Message message : messageAdapter.getData()) {
+                        if (message.getType() == Message.TYPE_IMAGE) {
+                            String image = message.getImageUrl();
+                            images.add(image);
+                            if (!foundIndex) {
+                                if (TextUtils.equals(image, clickImage)) {
+                                    foundIndex = true;
+                                } else {
+                                    index++;
+                                }
+                            }
+                        }
+                    }
+                    actionHandler.previewImage(images, index);
+                } else if (id == R.id.rl_product) {
+                    //查看商品详情
+                    actionHandler.showProductDetail(messageAdapter.getData().get(position).getProductInfo());
+                }
+            }
+        }
+    }
 }
