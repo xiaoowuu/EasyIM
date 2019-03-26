@@ -1,8 +1,10 @@
 package win.smartown.easyim.im.netease;
 
+import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
 
 import win.smartown.easyim.im.base.Conversation;
+import win.smartown.easyim.im.netease.custom.ProductAttachment;
 
 /**
  * @author 雷小武
@@ -68,6 +70,10 @@ public class NIMConversation extends Conversation<RecentContact> {
      */
     @Override
     public String getLastMessageContent() {
+        MsgAttachment attachment = data.getAttachment();
+        if (attachment instanceof ProductAttachment) {
+            return String.format("[%s]", ((ProductAttachment) attachment).getProductInfo().getProductName());
+        }
         return data.getContent();
     }
 

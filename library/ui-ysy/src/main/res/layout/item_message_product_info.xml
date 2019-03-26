@@ -25,7 +25,7 @@
         tools:text="2018-10-16 14:57:46" />
 
     <RelativeLayout
-        android:id="@+id/relay_parent"
+        android:id="@+id/rl_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_time"

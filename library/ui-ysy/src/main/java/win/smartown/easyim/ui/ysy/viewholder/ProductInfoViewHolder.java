@@ -32,6 +32,7 @@ public class ProductInfoViewHolder extends MessageViewHolder {
         getTextView(R.id.tv_time).setText(TimeUtil.getTimeShowString(message.getTime(), true));
         ProductInfo productInfo = message.getProductInfo();
         if (productInfo != null) {
+            addOnChildClickListener(R.id.rl_product);
             Glide.with(itemView).load(productInfo.getProductImagePath()).into(getImageView(R.id.iv_product));
             getTextView(R.id.tv_product_name).setText(productInfo.getProductName());
             getTextView(R.id.tv_product_price).setText(String.format("¥%s", productInfo.getProductPrice()));
