@@ -31,10 +31,13 @@ dependencies {
     implementation(rootProject.ext.glide) {
         exclude group: "com.android.support"
     }
-    implementation rootProject.ext.easyim["im-base"]
-//    implementation project(":im-base")
-    api rootProject.ext.easyim["ui-base"]
-//    api project(":ui-base")
+    if (rootProject.ext.dev) {
+        implementation project(":im-base")
+        api project(":ui-base")
+    } else {
+        implementation rootProject.ext.easyim["im-base"]
+        api rootProject.ext.easyim["ui-base"]
+    }
 }
 
 uploadArchives {

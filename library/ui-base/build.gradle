@@ -21,8 +21,11 @@ android {
 
 dependencies {
     implementation rootProject.ext.support_v4
-    implementation rootProject.ext.easyim["im-base"]
-//    implementation project(":im-base")
+    if (rootProject.ext.dev) {
+        implementation project(":im-base")
+    } else {
+        implementation rootProject.ext.easyim["im-base"]
+    }
 }
 
 uploadArchives {
