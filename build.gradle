@@ -37,7 +37,7 @@ ext {
     minSdkVersion = 14
     targetSdkVersion = 28
     versionCode = 1
-    versionName = "1.1.2"
+    versionName = "1.1.3"
 
     supportVersion = "28.0.0"
     appcompat_v7 = "com.android.support:appcompat-v7:28.0.0"
@@ -48,7 +48,7 @@ ext {
     and_permission = "com.yanzhenjie:permission:2.0.0-rc12"
     glide = "com.github.bumptech.glide:glide:4.9.0"
     luban = "top.zibin:Luban:1.1.8"
-    matisse = "com.zhihu.android:matisse:0.5.1"
+    matisse = "com.zhihu.android:matisse:0.5.2-beta3"
     fastjson = "com.alibaba:fastjson:1.2.47"
 
     easyim = [
