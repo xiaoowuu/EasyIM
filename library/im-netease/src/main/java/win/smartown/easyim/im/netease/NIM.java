@@ -175,6 +175,7 @@ public class NIM extends IM {
 
     @Override
     public void logout(LogoutListener listener, String... params) {
+        super.logout(listener, params);
         NIMSDK.getAuthService().logout();
     }
 

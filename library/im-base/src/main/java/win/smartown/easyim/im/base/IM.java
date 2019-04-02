@@ -50,7 +50,10 @@ public abstract class IM {
      * @param listener 注销回调
      * @param params   注销参数
      */
-    public abstract void logout(LogoutListener listener, String... params);
+    public void logout(LogoutListener listener, String... params) {
+        onConversationChangedListeners.clear();
+        onMessageChangedListeners.clear();
+    }
 
     /**
      * 获取用户状态
@@ -105,7 +108,7 @@ public abstract class IM {
      * @param listener 会话数据变化监听器
      */
     public void removeOnConversationChangedListener(OnConversationChangedListener listener) {
-        onConversationChangedListeners.add(listener);
+        onConversationChangedListeners.remove(listener);
     }
 
     /**
