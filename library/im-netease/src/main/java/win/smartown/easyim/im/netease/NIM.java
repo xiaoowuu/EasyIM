@@ -125,6 +125,8 @@ public class NIM extends IM {
 
     @Override
     public void login(final LoginListener listener, String... params) {
+        NIMSDK.getMsgServiceObserve().observeRecentContact(recentContactObserver, false);
+        NIMSDK.getMsgServiceObserve().observeReceiveMessage(receiveMessageObserver, false);
         LoginInfo loginInfo = null;
         int paramsLength = params.length;
         if (paramsLength == 2) {
@@ -176,6 +178,8 @@ public class NIM extends IM {
     @Override
     public void logout(LogoutListener listener, String... params) {
         super.logout(listener, params);
+        NIMSDK.getMsgServiceObserve().observeRecentContact(recentContactObserver, false);
+        NIMSDK.getMsgServiceObserve().observeReceiveMessage(receiveMessageObserver, false);
         NIMSDK.getAuthService().logout();
     }
 
@@ -294,6 +298,10 @@ public class NIM extends IM {
             if (listener != null) {
                 List<Message> messages = Utils.getMessages(imMessages);
                 listener.onReceivedMessage(messages);
+            }
+        } else {
+            for (OnMessageChangedListener listener : onMessageChangedListeners.values()) {
+                listener.onReceivedMessage(Collections.<Message>emptyList());
             }
         }
     }
