@@ -24,6 +24,18 @@ implementation rootProject.ext.easyim["im-netease"]
 //引用具体的UI实现，其会自动引用ui-base基础库
 implementation rootProject.ext.easyim["ui-ysy"]
 ```
+- 推送通道参数配置
+```xml
+<!--strings.xml-->
+<resources>
+    <string name="xmAppId">2882303761517577614</string>
+    <string name="xmAppKey">5161757729614</string>
+    <string name="xmCertificateName">ysyxiaomipush</string>
+    <string name="hwCertificateName">ysyhuaweipush</string>
+    <string name="hwPushAppId">100017911</string>
+</resources>
+```
+
 - 配置AndroidManifest.xml
 
 ```xml
