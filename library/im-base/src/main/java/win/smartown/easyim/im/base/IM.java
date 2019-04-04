@@ -5,6 +5,7 @@ import android.content.Context;
 import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -71,6 +72,11 @@ public abstract class IM {
      * 刷新会话
      */
     public abstract void refreshConversations();
+
+    /**
+     * 刷新会话
+     */
+    public abstract List<Conversation> getConversations();
 
     /**
      * 删除会话

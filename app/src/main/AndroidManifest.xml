@@ -50,7 +50,7 @@
             android:value="1107180208115268#easyim" />
         <!--小米推送配置-->
         <receiver
-            android:name="com.netease.nimlib.mixpush.mi.MiPushReceiver"
+            android:name="win.smartown.easyim.push.mi.MiPushReceiver"
             android:exported="true">
             <intent-filter android:priority="0x7fffffff">
                 <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
@@ -60,8 +60,7 @@
         </receiver>
         <!--华为推送配置-->
         <receiver
-            android:name="com.netease.nimlib.mixpush.hw.HWPushReceiver"
-            android:permission="${applicationId}.permission.PROCESS_PUSH_MSG">
+            android:name="com.huawei.android.hms.agent.HWPushReceiver">
             <intent-filter android:priority="0x7fffffff">
                 <!-- 必须,用于接收token -->
                 <action android:name="com.huawei.android.push.intent.REGISTRATION" />

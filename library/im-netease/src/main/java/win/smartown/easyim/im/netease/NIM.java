@@ -204,6 +204,13 @@ public class NIM extends IM {
     }
 
     @Override
+    public List<Conversation> getConversations() {
+        List<RecentContact> recentContacts = NIMSDK.getMsgService().queryRecentContactsBlock();
+        recentContactCallback.onSuccess(recentContacts);
+        return Utils.getConversations(recentContacts);
+    }
+
+    @Override
     public void removeConversation(Conversation conversation) {
         NIMSDK.getMsgService().deleteRecentContact2(conversation.getId(), Utils.getSesstionType(conversation.getType()));
         refreshConversations();
