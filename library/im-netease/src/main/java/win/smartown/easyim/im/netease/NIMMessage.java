@@ -150,6 +150,11 @@ public class NIMMessage extends Message<IMMessage> {
     }
 
     @Override
+    public String getFromNick() {
+        return data.getFromNick();
+    }
+
+    @Override
     public ProductInfo getProductInfo() {
         return getProductAttachment().getProductInfo();
     }

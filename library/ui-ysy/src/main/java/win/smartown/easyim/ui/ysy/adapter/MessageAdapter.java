@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +14,9 @@ import win.smartown.easyim.ui.ysy.R;
 import win.smartown.easyim.ui.ysy.strategy.BaseShowTimeStrategy;
 import win.smartown.easyim.ui.ysy.viewholder.ImageViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.MessageViewHolder;
+import win.smartown.easyim.ui.ysy.viewholder.NotificationViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.ProductInfoViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.ProductViewHolder;
-import win.smartown.easyim.ui.ysy.viewholder.NotificationViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.TextViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.UnknownViewHolder;
 
@@ -40,10 +41,16 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
 
     private List<Message> messages;
     private BaseShowTimeStrategy showTimeStrategy;
+    private boolean showNick;
 
     public MessageAdapter(BaseShowTimeStrategy showTimeStrategy) {
+        this(showTimeStrategy, false);
+    }
+
+    public MessageAdapter(BaseShowTimeStrategy showTimeStrategy, boolean showNick) {
         this.messages = new ArrayList<>();
         this.showTimeStrategy = showTimeStrategy;
+        this.showNick = showNick;
     }
 
     @Override
@@ -82,6 +89,10 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
         }
     }
 
+    private int getReceivedMessageLayout() {
+        return showNick ? R.layout.item_message_received_nick : R.layout.item_message_received;
+    }
+
     @NonNull
     @Override
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -93,11 +104,11 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
             case TYPE_UNKNOWN_SEND:
                 return new UnknownViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_send, viewGroup, false), true, this);
             case TYPE_TEXT_RECEIVED:
-                return new TextViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_received, viewGroup, false), false, this);
+                return new TextViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(getReceivedMessageLayout(), viewGroup, false), false, this);
             case TYPE_IMAGE_RECEIVED:
-                return new ImageViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_received, viewGroup, false), false, this);
+                return new ImageViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(getReceivedMessageLayout(), viewGroup, false), false, this);
             case TYPE_UNKNOWN_RECEIVED:
-                return new UnknownViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_received, viewGroup, false), false, this);
+                return new UnknownViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(getReceivedMessageLayout(), viewGroup, false), false, this);
             case TYPE_PRODUCT_INFO:
                 return new ProductInfoViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_product_info, viewGroup, false), this);
             case TYPE_PRODUCT_SEND:
@@ -116,6 +127,10 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
         Message message = messages.get(i);
         boolean needShowTime = showTimeStrategy.needShowTime(message);
         viewHolder.getView(R.id.tv_time).setVisibility(needShowTime ? View.VISIBLE : View.GONE);
+        View view = viewHolder.getView(R.id.tv_nick);
+        if (view instanceof TextView) {
+            ((TextView) view).setText(message.getFromAccount());
+        }
         viewHolder.showMessage(message);
     }
 

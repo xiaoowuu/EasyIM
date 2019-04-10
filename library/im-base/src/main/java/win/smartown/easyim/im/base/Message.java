@@ -87,6 +87,11 @@ public abstract class Message<Data> {
     public abstract String getFromAccount();
 
     /**
+     * @return 消息发送人昵称
+     */
+    public abstract String getFromNick();
+
+    /**
      * @return 商品信息
      */
     public abstract ProductInfo getProductInfo();
