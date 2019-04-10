@@ -126,7 +126,12 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
     public void onBindViewHolder(@NonNull MessageViewHolder viewHolder, int i) {
         Message message = messages.get(i);
         boolean needShowTime = showTimeStrategy.needShowTime(message);
-        viewHolder.getView(R.id.tv_time).setVisibility(needShowTime ? View.VISIBLE : View.GONE);
+
+        View tvTime = viewHolder.getView(R.id.tv_time);
+        if (tvTime != null) {
+            tvTime.setVisibility(needShowTime ? View.VISIBLE : View.GONE);
+        }
+
         View view = viewHolder.getView(R.id.tv_nick);
         if (view instanceof TextView) {
             ((TextView) view).setText(message.getFromAccount());
