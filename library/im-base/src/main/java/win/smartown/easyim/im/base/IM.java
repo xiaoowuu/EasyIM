@@ -137,6 +137,13 @@ public abstract class IM {
     public abstract User getUser(String account);
 
     /**
+     * 获取加入的群列表
+     *
+     * @return 群列表
+     */
+    public abstract List<Group> getJoinedGroup();
+
+    /**
      * 通过账号获取群信息
      *
      * @param id 群id

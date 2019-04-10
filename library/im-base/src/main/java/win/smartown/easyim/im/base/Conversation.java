@@ -24,6 +24,8 @@ public abstract class Conversation<Data> {
 
     protected Data data;
 
+    protected Group group;
+
     public Conversation(Data data) {
         this.data = data;
     }
@@ -73,4 +75,7 @@ public abstract class Conversation<Data> {
      */
     public abstract int getUnreadCount();
 
+    public Group getGroup() {
+        return group;
+    }
 }

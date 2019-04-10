@@ -59,7 +59,7 @@ public class ConversationAdapter extends BaseAdapter<BaseAdapter.BaseViewHolder>
                 nick = TextUtils.isEmpty(user.getNick()) ? conversation.getId() : user.getNick();
                 break;
             case Conversation.TYPE_GROUP:
-                Group group = IM.getInstance().getGroup(conversation.getId());
+                Group group = conversation.getGroup();
                 if (!TextUtils.isEmpty(group.getIcon())) {
                     avatar = Collections.singletonList(group.getIcon());
                 } else {

@@ -23,6 +23,7 @@ import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
 import com.netease.nimlib.sdk.util.NIMUtil;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -237,6 +238,16 @@ public class NIM extends IM {
     public User getUser(String account) {
         NimUserInfo info = NIMSDK.getUserService().getUserInfo(account);
         return new NIMUser(info);
+    }
+
+    @Override
+    public List<Group> getJoinedGroup() {
+        List<Group> groups = new ArrayList<>();
+        List<Team> list = NIMSDK.getTeamService().queryTeamListBlock();
+        for (Team team : list) {
+            groups.add(new NIMGroup(team));
+        }
+        return groups;
     }
 
     @Override
