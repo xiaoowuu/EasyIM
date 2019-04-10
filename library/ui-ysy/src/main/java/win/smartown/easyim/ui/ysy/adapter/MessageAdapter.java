@@ -15,6 +15,7 @@ import win.smartown.easyim.ui.ysy.viewholder.ImageViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.MessageViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.ProductInfoViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.ProductViewHolder;
+import win.smartown.easyim.ui.ysy.viewholder.NotificationViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.TextViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.UnknownViewHolder;
 
@@ -35,6 +36,7 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
     private static final int TYPE_PRODUCT_RECEIVED = 7;
     private static final int TYPE_PRODUCT_SEND = 8;
     private static final int TYPE_PRODUCT_INFO = 9;
+    private static final int TYPE_NOTIFICATION = 10;
 
     private List<Message> messages;
     private BaseShowTimeStrategy showTimeStrategy;
@@ -57,6 +59,8 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
                     return TYPE_PRODUCT_SEND;
                 case Message.TYPE_PRODUCT_INFO:
                     return TYPE_PRODUCT_INFO;
+                case Message.TYPE_NOTIFICATION:
+                    return TYPE_NOTIFICATION;
                 default:
                     return TYPE_UNKNOWN_SEND;
             }
@@ -70,6 +74,8 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
                     return TYPE_PRODUCT_RECEIVED;
                 case Message.TYPE_PRODUCT_INFO:
                     return TYPE_PRODUCT_INFO;
+                case Message.TYPE_NOTIFICATION:
+                    return TYPE_NOTIFICATION;
                 default:
                     return TYPE_UNKNOWN_RECEIVED;
             }
@@ -98,6 +104,8 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
                 return new ProductViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_product_send, viewGroup, false), true, this);
             case TYPE_PRODUCT_RECEIVED:
                 return new ProductViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_product_received, viewGroup, false), false, this);
+            case TYPE_NOTIFICATION:
+                return new NotificationViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_notification, viewGroup, false), this);
             default:
                 return null;
         }

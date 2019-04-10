@@ -18,6 +18,7 @@ import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.QueryDirectionEnum;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
+import com.netease.nimlib.sdk.team.model.Team;
 import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
 import com.netease.nimlib.sdk.util.NIMUtil;
 
@@ -26,6 +27,7 @@ import java.util.Collections;
 import java.util.List;
 
 import win.smartown.easyim.im.base.Conversation;
+import win.smartown.easyim.im.base.Group;
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.LoginListener;
 import win.smartown.easyim.im.base.LogoutListener;
@@ -52,7 +54,7 @@ public class NIM extends IM {
     private Observer<List<IMMessage>> receiveMessageObserver;
     private RequestCallbackWrapper<List<IMMessage>> messageCallback;
 
-    private NimUserInfo userInfo;
+    private NIMUser user;
 
     public NIM(Context context) {
         super(context);
@@ -138,14 +140,17 @@ public class NIM extends IM {
             NIMSDK.getAuthService().login(loginInfo).setCallback(new RequestCallback<LoginInfo>() {
                 @Override
                 public void onSuccess(LoginInfo param) {
-                    userInfo = NIMSDK.getUserService().getUserInfo(param.getAccount());
+                    NimUserInfo userInfo = NIMSDK.getUserService().getUserInfo(param.getAccount());
+                    if (userInfo != null) {
+                        user = new NIMUser(userInfo);
+                    }
                     NIMSDK.getUserService().fetchUserInfo(Collections.singletonList(param.getAccount())).setCallback(new RequestCallback<List<NimUserInfo>>() {
                         @Override
                         public void onSuccess(List<NimUserInfo> param) {
                             NIMSDK.getMsgServiceObserve().observeRecentContact(recentContactObserver, true);
                             NIMSDK.getMsgServiceObserve().observeReceiveMessage(receiveMessageObserver, true);
                             if (param != null && param.size() > 0) {
-                                userInfo = param.get(0);
+                                user = new NIMUser(param.get(0));
                             }
                         }
 
@@ -194,6 +199,11 @@ public class NIM extends IM {
     }
 
     @Override
+    public User getLoginUser() {
+        return user;
+    }
+
+    @Override
     public int getUnreadCount() {
         return NIMSDK.getMsgService().getTotalUnreadCount();
     }
@@ -227,6 +237,12 @@ public class NIM extends IM {
     public User getUser(String account) {
         NimUserInfo info = NIMSDK.getUserService().getUserInfo(account);
         return new NIMUser(info);
+    }
+
+    @Override
+    public Group getGroup(String id) {
+        Team team = NIMSDK.getTeamService().queryTeamBlock(id);
+        return new NIMGroup(team);
     }
 
     @Override
@@ -276,6 +292,14 @@ public class NIM extends IM {
     @Override
     public void onChatFragmentPause() {
         NIMSDK.getMsgService().setChattingAccount(MsgService.MSG_CHATTING_ACCOUNT_NONE, SessionTypeEnum.None);
+    }
+
+    @Override
+    public String getAccount() {
+        if (user != null) {
+            return user.getAccount();
+        }
+        return "";
     }
 
     public void sendMessage(final IMMessage message) {

@@ -48,12 +48,22 @@ public class NIMMessage extends Message<IMMessage> {
     }
 
     @Override
+    public String getNotificationContent() {
+        if (getType() == Message.TYPE_NOTIFICATION) {
+            TeamNotificationHelper.getTeamNotificationText(data);
+        }
+        return "";
+    }
+
+    @Override
     public int getType() {
         switch (data.getMsgType()) {
             case text:
                 return Message.TYPE_TEXT;
             case image:
                 return Message.TYPE_IMAGE;
+            case notification:
+                return Message.TYPE_NOTIFICATION;
             case custom:
                 MsgAttachment attachment = data.getAttachment();
                 if (attachment instanceof ProductAttachment) {

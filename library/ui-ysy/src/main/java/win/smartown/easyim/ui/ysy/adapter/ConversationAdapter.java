@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import win.smartown.easyim.im.base.Conversation;
+import win.smartown.easyim.im.base.Group;
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.User;
 import win.smartown.easyim.ui.ysy.R;
@@ -48,9 +49,22 @@ public class ConversationAdapter extends BaseAdapter<BaseAdapter.BaseViewHolder>
     @Override
     public void onBindViewHolder(@NonNull BaseAdapter.BaseViewHolder viewHolder, int i) {
         Conversation conversation = conversations.get(i);
-        User user = IM.getInstance().getUser(conversation.getId());
-        ImageLoader.loadHeadImage(user.getAvatar(), viewHolder.getImageView(R.id.iv_portrait));
-        viewHolder.getTextView(R.id.tv_nick).setText(TextUtils.isEmpty(user.getNick()) ? conversation.getId() : user.getNick());
+        String avatar = "";
+        String nick = conversation.getId();
+        switch (conversation.getType()) {
+            case Conversation.TYPE_SINGLE:
+                User user = IM.getInstance().getUser(conversation.getId());
+                avatar = user.getAvatar();
+                nick = TextUtils.isEmpty(user.getNick()) ? conversation.getId() : user.getNick();
+                break;
+            case Conversation.TYPE_GROUP:
+                Group group = IM.getInstance().getGroup(conversation.getId());
+                avatar = group.getIcon();
+                nick = TextUtils.isEmpty(group.getName()) ? conversation.getId() : group.getName();
+                break;
+        }
+        ImageLoader.loadHeadImage(avatar, viewHolder.getImageView(R.id.iv_portrait));
+        viewHolder.getTextView(R.id.tv_nick).setText(nick);
         viewHolder.getTextView(R.id.tv_content).setText(conversation.getLastMessageContent());
         viewHolder.getTextView(R.id.tv_time).setText(TimeUtil.getTimeShowString(conversation.getLastMessageTime()));
         int unreadCount = conversation.getUnreadCount();

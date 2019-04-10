@@ -1,6 +1,7 @@
 package win.smartown.easyim.im.base;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 
 import java.io.File;
 import java.util.HashMap;
@@ -30,6 +31,10 @@ public abstract class IM {
     protected Context context;
     protected Set<OnConversationChangedListener> onConversationChangedListeners;
     protected Map<String, OnMessageChangedListener> onMessageChangedListeners;
+
+    public Context getContext() {
+        return context;
+    }
 
     public IM(Context context) {
         this.context = context.getApplicationContext();
@@ -67,6 +72,12 @@ public abstract class IM {
      * @return 当前用户是否登录
      */
     public abstract boolean isLogin();
+
+    /**
+     * @return 当前登录用户
+     */
+    @Nullable
+    public abstract User getLoginUser();
 
     /**
      * 刷新会话
@@ -124,6 +135,14 @@ public abstract class IM {
      * @return 用户数据
      */
     public abstract User getUser(String account);
+
+    /**
+     * 通过账号获取群信息
+     *
+     * @param id 群id
+     * @return 群信息
+     */
+    public abstract Group getGroup(String id);
 
     /**
      * 刷新消息
@@ -198,4 +217,5 @@ public abstract class IM {
 
     public abstract void onChatFragmentPause();
 
+    public abstract String getAccount();
 }

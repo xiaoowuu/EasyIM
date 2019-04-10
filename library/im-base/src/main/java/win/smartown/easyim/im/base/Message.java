@@ -13,6 +13,7 @@ public abstract class Message<Data> {
     public static final int TYPE_IMAGE = 2;
     public static final int TYPE_PRODUCT_MESSAGE = 3;
     public static final int TYPE_PRODUCT_INFO = 4;
+    public static final int TYPE_NOTIFICATION = 5;
 
     protected Data data;
 
@@ -42,6 +43,13 @@ public abstract class Message<Data> {
      * @return 消息内容
      */
     public abstract String getContent();
+
+    /**
+     * 获取通知消息内容
+     *
+     * @return 通知消息内容
+     */
+    public abstract String getNotificationContent();
 
     /**
      * 获取消息类型
