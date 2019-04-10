@@ -146,7 +146,7 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
         });
         linearLayoutManager = new LinearLayoutManager(getActivity());
         rvMessage.setLayoutManager(linearLayoutManager);
-        messageAdapter = new MessageAdapter(new ShowTimeStrategy(), true);
+        messageAdapter = new MessageAdapter(new ShowTimeStrategy(), type == Conversation.TYPE_GROUP);
         messageAdapter.setOnItemChildClickListener(this);
         rvMessage.setAdapter(messageAdapter);
         etMessage.setOnTouchListener(new View.OnTouchListener() {
