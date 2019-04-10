@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:background="?selectableItemBackground">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <win.smartown.easyim.ui.ysy.view.HeadImageView
             android:id="@+id/iv_portrait"
             android:layout_width="@dimen/dp50"
             android:layout_height="@dimen/dp50"

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import win.smartown.easyim.im.base.Conversation;
@@ -14,8 +15,8 @@ import win.smartown.easyim.im.base.Group;
 import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.base.User;
 import win.smartown.easyim.ui.ysy.R;
-import win.smartown.easyim.ui.ysy.util.ImageLoader;
 import win.smartown.easyim.ui.ysy.util.TimeUtil;
+import win.smartown.easyim.ui.ysy.view.HeadImageView;
 
 /**
  * @author 雷小武
@@ -23,7 +24,7 @@ import win.smartown.easyim.ui.ysy.util.TimeUtil;
  * 版权：成都智慧一生约科技有限公司
  * 类描述：
  */
-public class ConversationAdapter extends BaseAdapter<BaseAdapter.BaseViewHolder> {
+public class ConversationAdapter extends BaseAdapter<BaseAdapter.BaseViewHolder> implements Group.GetGroupMembersCallback {
 
     private List<Conversation> conversations;
 
@@ -49,21 +50,30 @@ public class ConversationAdapter extends BaseAdapter<BaseAdapter.BaseViewHolder>
     @Override
     public void onBindViewHolder(@NonNull BaseAdapter.BaseViewHolder viewHolder, int i) {
         Conversation conversation = conversations.get(i);
-        String avatar = "";
+        List<String> avatar = new ArrayList<>();
         String nick = conversation.getId();
         switch (conversation.getType()) {
             case Conversation.TYPE_SINGLE:
                 User user = IM.getInstance().getUser(conversation.getId());
-                avatar = user.getAvatar();
+                avatar = Collections.singletonList(user.getAvatar());
                 nick = TextUtils.isEmpty(user.getNick()) ? conversation.getId() : user.getNick();
                 break;
             case Conversation.TYPE_GROUP:
                 Group group = IM.getInstance().getGroup(conversation.getId());
-                avatar = group.getIcon();
+                if (!TextUtils.isEmpty(group.getIcon())) {
+                    avatar = Collections.singletonList(group.getIcon());
+                } else {
+                    if (group.getAvatars() != null) {
+                        avatar = group.getAvatars();
+                    } else {
+                        group.getGroupMembers(this);
+                    }
+                }
                 nick = TextUtils.isEmpty(group.getName()) ? conversation.getId() : group.getName();
                 break;
         }
-        ImageLoader.loadHeadImage(avatar, viewHolder.getImageView(R.id.iv_portrait));
+        HeadImageView headImageView = (HeadImageView) viewHolder.getView(R.id.iv_portrait);
+        headImageView.setImages(avatar);
         viewHolder.getTextView(R.id.tv_nick).setText(nick);
         viewHolder.getTextView(R.id.tv_content).setText(conversation.getLastMessageContent());
         viewHolder.getTextView(R.id.tv_time).setText(TimeUtil.getTimeShowString(conversation.getLastMessageTime()));
@@ -79,4 +89,8 @@ public class ConversationAdapter extends BaseAdapter<BaseAdapter.BaseViewHolder>
         return conversations.size();
     }
 
+    @Override
+    public void godGroupMembers() {
+        notifyDataSetChanged();
+    }
 }

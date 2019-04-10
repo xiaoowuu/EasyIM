@@ -1,5 +1,7 @@
 package win.smartown.easyim.im.base;
 
+import java.util.List;
+
 /**
  * 类描述：
  *
@@ -9,6 +11,8 @@ package win.smartown.easyim.im.base;
 public abstract class Group<Data> {
 
     protected Data data;
+    protected List<GroupMember> groupMembers;
+    protected List<String> avatars;
 
     public Group(Data data) {
         this.data = data;
@@ -35,4 +39,23 @@ public abstract class Group<Data> {
      * @return
      */
     public abstract String getIcon();
+
+    /**
+     * 获取群成员
+     *
+     * @return 群成员
+     */
+    public abstract void getGroupMembers(GetGroupMembersCallback callback);
+
+    public List<GroupMember> getGroupMembers() {
+        return groupMembers;
+    }
+
+    public List<String> getAvatars() {
+        return avatars;
+    }
+
+    public interface GetGroupMembersCallback {
+        void godGroupMembers();
+    }
 }

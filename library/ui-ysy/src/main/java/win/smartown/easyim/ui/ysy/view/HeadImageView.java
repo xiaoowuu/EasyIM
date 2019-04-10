@@ -1,24 +1,17 @@
 package win.smartown.easyim.ui.ysy.view;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.View;
+import android.view.Gravity;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.CustomTarget;
-import com.bumptech.glide.request.transition.Transition;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import win.smartown.easyim.ui.ysy.R;
 
@@ -28,108 +21,83 @@ import win.smartown.easyim.ui.ysy.R;
  * @author xiaoowuu@gmail.com
  * 创建时间：2019/4/10 10:43
  */
-public class HeadImageView extends View {
+public class HeadImageView extends LinearLayout {
 
-    private List<String> images = new ArrayList<>();
-    private int maxCount = 4;
-    private int shape = 1;
-    private Map<String, Bitmap> bitmap = new HashMap<>();
-    private Bitmap defaultBitmap;
+    private List<String> images;
 
     public HeadImageView(Context context) {
         super(context);
+        init();
     }
 
     public HeadImageView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public HeadImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int size = Math.min(getMeasuredWidth(), getMeasuredHeight());
-        setMeasuredDimension(size, size);
+    private void init() {
+        setOrientation(VERTICAL);
     }
 
     public void setImages(List<String> images) {
         this.images = images;
-        loadImages();
-        invalidate();
-    }
-
-    private void loadImages() {
-        for (final String url : images) {
-            Glide.with(this).asBitmap().load(url).override(100).into(new CustomTarget<Bitmap>() {
-                @Override
-                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                    bitmap.put(url, resource);
-                    invalidate();
-                }
-
-                @Override
-                public void onLoadCleared(@Nullable Drawable placeholder) {
-
-                }
-            });
-        }
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        if (images.isEmpty()) {
-
-        } else if (images.size() == 1) {
-
-        } else if (images.size() == 2) {
-
-        } else if (images.size() == 3) {
-
-        } else {
-
-        }
-    }
-
-    private Bitmap mergeBitmap2() {
-        Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.RGB_565);
-        Canvas canvas = new Canvas(bitmap);
-        for (int i = 0; i < 2; i++) {
-//            canvas.drawBitmap(getBitmap(images.get(i)),);
-        }
-        return bitmap;
-    }
-
-    private Bitmap mergeBitmap3() {
-        Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.RGB_565);
-        Canvas canvas = new Canvas(bitmap);
-        for (int i = 0; i < 2; i++) {
-//            canvas.drawBitmap(getBitmap(images.get(i)),);
-        }
-        return bitmap;
-    }
-
-    private Bitmap mergeBitmap4() {
-        Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.RGB_565);
-        Canvas canvas = new Canvas(bitmap);
-        for (int i = 0; i < 2; i++) {
-//            canvas.drawBitmap(getBitmap(images.get(i)),);
-        }
-        return bitmap;
-    }
-
-    private Bitmap getBitmap(String url) {
-        if (!TextUtils.isEmpty(url)) {
-            if (bitmap.containsKey(url)) {
-                return bitmap.get(url);
+        removeAllViews();
+        if (images == null || images.isEmpty()) {
+            LinearLayout linearLayout = newLinearLayout();
+            linearLayout.addView(newImageView(null));
+            addView(linearLayout);
+        } else if (images.size() <= 2) {
+            LinearLayout linearLayout = newLinearLayout();
+            for (String image : images) {
+                linearLayout.addView(newImageView(image));
             }
+            addView(linearLayout);
+        } else if (images.size() == 3) {
+            LinearLayout linearLayout1 = newLinearLayout();
+            linearLayout1.addView(newImageView(images.get(0)));
+            linearLayout1.addView(newImageView(images.get(1)));
+            LinearLayout linearLayout2 = newLinearLayout();
+            linearLayout2.addView(newImageView(images.get(2)));
+            addView(linearLayout1);
+            addView(linearLayout2);
+        } else {
+            LinearLayout linearLayout1 = newLinearLayout();
+            linearLayout1.addView(newImageView(images.get(0)));
+            linearLayout1.addView(newImageView(images.get(1)));
+            LinearLayout linearLayout2 = newLinearLayout();
+            linearLayout2.addView(newImageView(images.get(2)));
+            linearLayout2.addView(newImageView(images.get(3)));
+            addView(linearLayout1);
+            addView(linearLayout2);
         }
-        if (defaultBitmap == null) {
-            defaultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ico_default_head);
+    }
+
+    private LinearLayout newLinearLayout() {
+        LinearLayout linearLayout = new LinearLayout(getContext());
+        LinearLayout.LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
+        layoutParams.weight = 1;
+        linearLayout.setGravity(Gravity.CENTER);
+        linearLayout.setLayoutParams(layoutParams);
+        linearLayout.setOrientation(HORIZONTAL);
+        return linearLayout;
+    }
+
+    private ImageView newImageView(String image) {
+        ImageView imageView = new ImageView(getContext());
+        LinearLayout.LayoutParams layoutParams = new LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT);
+        layoutParams.weight = 1;
+        imageView.setLayoutParams(layoutParams);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        if (TextUtils.isEmpty(image)) {
+            imageView.setImageResource(R.drawable.ico_default_head);
+        } else {
+            Glide.with(this).load(image).into(imageView);
         }
-        return defaultBitmap;
+        return imageView;
     }
 }
