@@ -132,9 +132,11 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
             tvTime.setVisibility(needShowTime ? View.VISIBLE : View.GONE);
         }
 
-        View view = viewHolder.getView(R.id.tv_nick);
-        if (view instanceof TextView) {
-            ((TextView) view).setText(message.getFromAccount());
+        if (showNick) {
+            View view = viewHolder.getView(R.id.tv_nick);
+            if (view instanceof TextView) {
+                ((TextView) view).setText(message.getFromNick());
+            }
         }
         viewHolder.showMessage(message);
     }

@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import win.smartown.easyim.im.base.Conversation;
 import win.smartown.easyim.im.base.Group;
@@ -27,9 +29,11 @@ import win.smartown.easyim.ui.ysy.view.HeadImageView;
 public class ConversationAdapter extends BaseAdapter<BaseAdapter.BaseViewHolder> implements Group.GetGroupMembersCallback {
 
     private List<Conversation> conversations;
+    private Map<String, Group> groups;
 
     public ConversationAdapter() {
         conversations = new ArrayList<>();
+        groups = new HashMap<>();
     }
 
     public void setData(List<Conversation> conversations) {
@@ -59,7 +63,7 @@ public class ConversationAdapter extends BaseAdapter<BaseAdapter.BaseViewHolder>
                 nick = TextUtils.isEmpty(user.getNick()) ? conversation.getId() : user.getNick();
                 break;
             case Conversation.TYPE_GROUP:
-                Group group = conversation.getGroup();
+                Group group = getGroup(conversation.getId());
                 if (!TextUtils.isEmpty(group.getIcon())) {
                     avatar = Collections.singletonList(group.getIcon());
                 } else {
@@ -92,5 +96,14 @@ public class ConversationAdapter extends BaseAdapter<BaseAdapter.BaseViewHolder>
     @Override
     public void godGroupMembers() {
         notifyDataSetChanged();
+    }
+
+    private Group getGroup(String id) {
+        if (groups.containsKey(id)) {
+            return groups.get(id);
+        }
+        Group group = IM.getInstance().getGroup(id);
+        groups.put(id, group);
+        return group;
     }
 }

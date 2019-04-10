@@ -1,12 +1,9 @@
 package win.smartown.easyim.im.netease;
 
 import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
-import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
 
 import win.smartown.easyim.im.base.Conversation;
-import win.smartown.easyim.im.base.Group;
-import win.smartown.easyim.im.base.IM;
 import win.smartown.easyim.im.netease.custom.ProductAttachment;
 
 
@@ -105,11 +102,4 @@ public class NIMConversation extends Conversation<RecentContact> {
         return data.getUnreadCount();
     }
 
-    @Override
-    public Group getGroup() {
-        if (group == null && data.getSessionType() == SessionTypeEnum.Team) {
-            group = IM.getInstance().getGroup(data.getContactId());
-        }
-        return super.getGroup();
-    }
 }

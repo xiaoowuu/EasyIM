@@ -1,11 +1,11 @@
 package win.smartown.easyim.im.base;
 
 /**
+ * @param <Data> IM SDK会话记录
  * @author 雷小武
  * 创建时间：2018/9/29 11:42
  * 版权：成都智慧一生约科技有限公司
  * 类描述：会话记录对象
- * @param <Data> IM SDK会话记录
  */
 public abstract class Conversation<Data> {
 
@@ -23,8 +23,6 @@ public abstract class Conversation<Data> {
     public final static int TYPE_OTHER = 0;
 
     protected Data data;
-
-    protected Group group;
 
     public Conversation(Data data) {
         this.data = data;
@@ -75,7 +73,4 @@ public abstract class Conversation<Data> {
      */
     public abstract int getUnreadCount();
 
-    public Group getGroup() {
-        return group;
-    }
 }

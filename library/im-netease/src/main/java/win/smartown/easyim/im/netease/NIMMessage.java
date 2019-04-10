@@ -50,7 +50,7 @@ public class NIMMessage extends Message<IMMessage> {
     @Override
     public String getNotificationContent() {
         if (getType() == Message.TYPE_NOTIFICATION) {
-            TeamNotificationHelper.getTeamNotificationText(data);
+            return TeamNotificationHelper.getTeamNotificationText(data);
         }
         return "";
     }
