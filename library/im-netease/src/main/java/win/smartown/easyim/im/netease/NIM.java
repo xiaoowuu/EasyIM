@@ -223,7 +223,9 @@ public class NIM extends IM {
 
     @Override
     public void removeConversation(Conversation conversation) {
-        NIMSDK.getMsgService().deleteRecentContact2(conversation.getId(), Utils.getSesstionType(conversation.getType()));
+        SessionTypeEnum sessionType = Utils.getSesstionType(conversation.getType());
+        NIMSDK.getMsgService().clearChattingHistory(conversation.getId(), sessionType);
+        NIMSDK.getMsgService().deleteRecentContact2(conversation.getId(), sessionType);
         refreshConversations();
     }
 
