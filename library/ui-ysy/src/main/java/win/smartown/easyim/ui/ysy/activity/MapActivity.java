@@ -89,9 +89,6 @@ public class MapActivity extends Activity implements View.OnClickListener, Baidu
         map.setMyLocationEnabled(true);
         map.animateMapStatus(MapStatusUpdateFactory.zoomTo(18));
 
-        map.setMyLocationEnabled(true);
-        map.setOnMapClickListener(this);
-
         geoCoder = GeoCoder.newInstance();
         geoCoder.setOnGetGeoCodeResultListener(this);
         locationClient = new LocationClient(this);
@@ -118,6 +115,7 @@ public class MapActivity extends Activity implements View.OnClickListener, Baidu
             map.animateMapStatus(MapStatusUpdateFactory.newLatLng(latLng));
             return;
         }
+        map.setOnMapClickListener(this);
         checkLocationPermission();
     }
 

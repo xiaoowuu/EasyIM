@@ -15,6 +15,7 @@ public abstract class Message<Data> {
     public static final int TYPE_PRODUCT_INFO = 4;
     public static final int TYPE_NOTIFICATION = 5;
     public static final int TYPE_LOCATION = 6;
+    public static final int TYPE_VIDEO = 7;
 
     protected Data data;
 
@@ -81,6 +82,27 @@ public abstract class Message<Data> {
      * @return 图片高度
      */
     public abstract int getImageHeight();
+
+    /**
+     * 获取视频链接
+     *
+     * @return 视频链接
+     */
+    public abstract String getVideoUrl();
+
+    /**
+     * 获取视频宽度
+     *
+     * @return 视频宽度
+     */
+    public abstract int getVideoWidth();
+
+    /**
+     * 获取视频高度
+     *
+     * @return 视频高度
+     */
+    public abstract int getVideoHeight();
 
     /**
      * @return 消息发送人账号

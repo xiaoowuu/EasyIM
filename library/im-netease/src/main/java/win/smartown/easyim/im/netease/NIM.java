@@ -1,6 +1,7 @@
 package win.smartown.easyim.im.netease;
 
 import android.content.Context;
+import android.media.MediaMetadataRetriever;
 
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.NIMSDK;
@@ -274,6 +275,23 @@ public class NIM extends IM {
     public void sendImageMessage(String account, int type, File file) {
         IMMessage message = MessageBuilder.createImageMessage(account, Utils.getSesstionType(type), file);
         sendMessage(message);
+    }
+
+    @Override
+    public void sendVideoMessage(String account, int type, File file) {
+        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+        try {
+            mmr.setDataSource(file.getPath());
+            String duration = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);//时长(毫秒)
+            String width = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH);//宽
+            String height = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT);//高
+            IMMessage message = MessageBuilder.createVideoMessage(account, Utils.getSesstionType(type), file, Long.parseLong(duration), Integer.parseInt(width), Integer.parseInt(height), "");
+            sendMessage(message);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            mmr.release();
+        }
     }
 
     @Override

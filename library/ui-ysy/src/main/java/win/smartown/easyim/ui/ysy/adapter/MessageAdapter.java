@@ -20,6 +20,7 @@ import win.smartown.easyim.ui.ysy.viewholder.ProductInfoViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.ProductViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.TextViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.UnknownViewHolder;
+import win.smartown.easyim.ui.ysy.viewholder.VideoViewHolder;
 
 /**
  * @author 雷小武
@@ -41,6 +42,8 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
     private static final int TYPE_NOTIFICATION = 10;
     private static final int TYPE_LOCATION_RECEIVED = 11;
     private static final int TYPE_LOCATION_SEND = 12;
+    private static final int TYPE_VIDEO_SEND = 13;
+    private static final int TYPE_VIDEO_RECEIVED = 14;
 
     private List<Message> messages;
     private BaseShowTimeStrategy showTimeStrategy;
@@ -73,6 +76,8 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
                     return TYPE_NOTIFICATION;
                 case Message.TYPE_LOCATION:
                     return TYPE_LOCATION_SEND;
+                case Message.TYPE_VIDEO:
+                    return TYPE_VIDEO_SEND;
                 default:
                     return TYPE_UNKNOWN_SEND;
             }
@@ -90,6 +95,8 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
                     return TYPE_NOTIFICATION;
                 case Message.TYPE_LOCATION:
                     return TYPE_LOCATION_RECEIVED;
+                case Message.TYPE_VIDEO:
+                    return TYPE_VIDEO_RECEIVED;
                 default:
                     return TYPE_UNKNOWN_RECEIVED;
             }
@@ -128,6 +135,10 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
                 return new LocationViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_send, viewGroup, false), true, this);
             case TYPE_LOCATION_RECEIVED:
                 return new LocationViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(getReceivedMessageLayout(), viewGroup, false), false, this);
+            case TYPE_VIDEO_SEND:
+                return new VideoViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_send, viewGroup, false), true, this);
+            case TYPE_VIDEO_RECEIVED:
+                return new VideoViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(getReceivedMessageLayout(), viewGroup, false), false, this);
             default:
                 return null;
         }

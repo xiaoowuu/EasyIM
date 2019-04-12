@@ -25,6 +25,7 @@ import com.yanzhenjie.permission.FileProvider;
 import com.yanzhenjie.permission.Permission;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
+import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ import win.smartown.easyim.ui.base.ChatFragment;
 import win.smartown.easyim.ui.base.UI;
 import win.smartown.easyim.ui.ysy.R;
 import win.smartown.easyim.ui.ysy.activity.MapActivity;
+import win.smartown.easyim.ui.ysy.activity.WebViewActivity;
 import win.smartown.easyim.ui.ysy.adapter.BaseAdapter;
 import win.smartown.easyim.ui.ysy.adapter.MessageAdapter;
 import win.smartown.easyim.ui.ysy.entity.Location;
@@ -67,6 +69,10 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
      * 选择图片
      */
     private static final int REQUEST_PICK = 12;
+    /**
+     * 拍视频
+     */
+    private static final int REQUEST_VIDEO = 14;
     /**
      * 选择地址
      */
@@ -167,6 +173,7 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
         ivMore.setOnClickListener(this);
         view.findViewById(R.id.ll_camera).setOnClickListener(this);
         view.findViewById(R.id.ll_photo).setOnClickListener(this);
+        view.findViewById(R.id.ll_video).setOnClickListener(this);
         view.findViewById(R.id.ll_location).setOnClickListener(this);
     }
 
@@ -217,6 +224,8 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
             checkCameraPermission();
         } else if (id == R.id.ll_photo) {
             checkStoragePermission();
+        } else if (id == R.id.ll_video) {
+            checkVideoPermission();
         } else if (id == R.id.ll_location) {
             startActivityForResult(new Intent(getActivity(), MapActivity.class), REQUEST_LOCATION);
         }
@@ -274,6 +283,14 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
                     }
                 }
                 break;
+            //选择图片回调
+            case REQUEST_VIDEO:
+                if (resultCode == RESULT_OK) {
+                    if (tempImageFile != null && tempImageFile.exists()) {
+                        IM.getInstance().sendVideoMessage(account, type, tempImageFile);
+                    }
+                }
+                break;
             case REQUEST_LOCATION:
                 if (resultCode == MapActivity.RESULT_SEND_LOCATION) {
                     Location location = (Location) data.getSerializableExtra("location");
@@ -323,6 +340,43 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
     }
 
     /**
+     * 检查相机权限
+     */
+    private void checkVideoPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            AndPermission.with(this)
+                    .runtime()
+                    .permission(Permission.Group.CAMERA)
+                    .onDenied(new Action<List<String>>() {
+                        @Override
+                        public void onAction(List<String> data) {
+
+                        }
+                    })
+                    .onGranted(new Action<List<String>>() {
+                        @Override
+                        public void onAction(List<String> data) {
+                            takeVideo();
+                        }
+                    })
+                    .start();
+        } else {
+            takeVideo();
+        }
+    }
+
+    /**
+     * 调用系统相机拍照
+     */
+    private void takeVideo() {
+        tempImageFile = new File(getActivity().getExternalCacheDir(), String.valueOf(System.currentTimeMillis()));
+        Intent openCameraIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+        openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, getFileUri(tempImageFile));
+        startActivityForResult(openCameraIntent, REQUEST_VIDEO);
+        llAction.setVisibility(View.GONE);
+    }
+
+    /**
      * 检查文件系统权限
      */
     private void checkStoragePermission() {
@@ -353,7 +407,9 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
      */
     private void pickImage() {
         Matisse.from(this)
-                .choose(MimeType.ofImage())
+                .choose(MimeType.ofVideo())
+                .captureStrategy(new CaptureStrategy(true, getActivity().getPackageName()))
+                .capture(true)
                 .countable(true)
                 .maxSelectable(1)
                 .theme(R.style.Matisse_Zhihu)
@@ -422,6 +478,9 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
             messageAdapter.getData().remove(message);
             messageAdapter.notifyItemRemoved(position);
             IM.getInstance().sendProductMessage(account, type, message.getProductInfo());
+        } else if (id == R.id.iv_play) {
+            Message message = messageAdapter.getData().get(position);
+            WebViewActivity.playVideo(view.getContext(), message.getVideoUrl());
         } else if (id == R.id.ll_location) {
             Message message = messageAdapter.getData().get(position);
             MapActivity.showMap(view.getContext(), message.getLatitude(), message.getLongitude(), message.getAddress());

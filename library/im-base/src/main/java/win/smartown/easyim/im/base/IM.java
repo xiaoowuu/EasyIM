@@ -197,6 +197,15 @@ public abstract class IM {
     public abstract void sendImageMessage(String account, int type, File file);
 
     /**
+     * 发送图片消息
+     *
+     * @param account 会话账号
+     * @param type    会话类型
+     * @param file    图片文件
+     */
+    public abstract void sendVideoMessage(String account, int type, File file);
+
+    /**
      * 发送商品消息消息
      *
      * @param account     会话账号

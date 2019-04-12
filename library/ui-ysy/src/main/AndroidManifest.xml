@@ -27,11 +27,17 @@
     <!--程序在手机屏幕关闭后后台进程仍然运行-->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <application>
-        <service android:name="com.baidu.location.f"
+        <service
+            android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"/>
+            android:process=":remote" />
+
         <activity
             android:name=".activity.MapActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.WebViewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>

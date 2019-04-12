@@ -11,4 +11,5 @@
     <string name="sure_to_delete_conversation">删除后将清空历史消息记录，确定删除吗？</string>
     <string name="send_product">发送宝贝</string>
     <string name="location">位置</string>
+    <string name="video">视频</string>
 </resources>

@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.netease.nimlib.sdk.msg.attachment.ImageAttachment;
 import com.netease.nimlib.sdk.msg.attachment.LocationAttachment;
 import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
+import com.netease.nimlib.sdk.msg.attachment.VideoAttachment;
 import com.netease.nimlib.sdk.msg.constant.MsgDirectionEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 
@@ -23,6 +24,7 @@ public class NIMMessage extends Message<IMMessage> {
     private ImageAttachment imageAttachment;
     private ProductAttachment productAttachment;
     private LocationAttachment locationAttachment;
+    private VideoAttachment videoAttachment;
 
     public NIMMessage(IMMessage imMessage) {
         super(imMessage);
@@ -68,6 +70,8 @@ public class NIMMessage extends Message<IMMessage> {
                 return Message.TYPE_NOTIFICATION;
             case location:
                 return Message.TYPE_LOCATION;
+            case video:
+                return Message.TYPE_VIDEO;
             case custom:
                 MsgAttachment attachment = data.getAttachment();
                 if (attachment instanceof ProductAttachment) {
@@ -83,7 +87,7 @@ public class NIMMessage extends Message<IMMessage> {
         }
     }
 
-    public ImageAttachment getImageAttachment() {
+    private ImageAttachment getImageAttachment() {
         if (imageAttachment == null) {
             MsgAttachment attachment = data.getAttachment();
             if (attachment instanceof ImageAttachment) {
@@ -93,7 +97,7 @@ public class NIMMessage extends Message<IMMessage> {
         return imageAttachment;
     }
 
-    public ProductAttachment getProductAttachment() {
+    private ProductAttachment getProductAttachment() {
         if (productAttachment == null) {
             MsgAttachment attachment = data.getAttachment();
             if (attachment instanceof ProductAttachment) {
@@ -103,7 +107,7 @@ public class NIMMessage extends Message<IMMessage> {
         return productAttachment;
     }
 
-    public LocationAttachment getLocationAttachment() {
+    private LocationAttachment getLocationAttachment() {
         if (locationAttachment == null) {
             MsgAttachment attachment = data.getAttachment();
             if (attachment instanceof LocationAttachment) {
@@ -111,6 +115,16 @@ public class NIMMessage extends Message<IMMessage> {
             }
         }
         return locationAttachment;
+    }
+
+    private VideoAttachment getVideoAttachment() {
+        if (videoAttachment == null) {
+            MsgAttachment attachment = data.getAttachment();
+            if (attachment instanceof VideoAttachment) {
+                videoAttachment = (VideoAttachment) attachment;
+            }
+        }
+        return videoAttachment;
     }
 
     /**
@@ -153,6 +167,21 @@ public class NIMMessage extends Message<IMMessage> {
             return imageAttachment.getHeight();
         }
         return 1;
+    }
+
+    @Override
+    public String getVideoUrl() {
+        return !TextUtils.isEmpty(getVideoAttachment().getPath()) ? getVideoAttachment().getPath() : getVideoAttachment().getUrl();
+    }
+
+    @Override
+    public int getVideoWidth() {
+        return getVideoAttachment().getWidth();
+    }
+
+    @Override
+    public int getVideoHeight() {
+        return getVideoAttachment().getHeight();
     }
 
     /**
