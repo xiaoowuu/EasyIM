@@ -13,6 +13,7 @@ import win.smartown.easyim.im.base.Message;
 import win.smartown.easyim.ui.ysy.R;
 import win.smartown.easyim.ui.ysy.strategy.BaseShowTimeStrategy;
 import win.smartown.easyim.ui.ysy.viewholder.ImageViewHolder;
+import win.smartown.easyim.ui.ysy.viewholder.LocationViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.MessageViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.NotificationViewHolder;
 import win.smartown.easyim.ui.ysy.viewholder.ProductInfoViewHolder;
@@ -38,6 +39,8 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
     private static final int TYPE_PRODUCT_SEND = 8;
     private static final int TYPE_PRODUCT_INFO = 9;
     private static final int TYPE_NOTIFICATION = 10;
+    private static final int TYPE_LOCATION_RECEIVED = 11;
+    private static final int TYPE_LOCATION_SEND = 12;
 
     private List<Message> messages;
     private BaseShowTimeStrategy showTimeStrategy;
@@ -68,6 +71,8 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
                     return TYPE_PRODUCT_INFO;
                 case Message.TYPE_NOTIFICATION:
                     return TYPE_NOTIFICATION;
+                case Message.TYPE_LOCATION:
+                    return TYPE_LOCATION_SEND;
                 default:
                     return TYPE_UNKNOWN_SEND;
             }
@@ -83,6 +88,8 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
                     return TYPE_PRODUCT_INFO;
                 case Message.TYPE_NOTIFICATION:
                     return TYPE_NOTIFICATION;
+                case Message.TYPE_LOCATION:
+                    return TYPE_LOCATION_RECEIVED;
                 default:
                     return TYPE_UNKNOWN_RECEIVED;
             }
@@ -117,6 +124,10 @@ public class MessageAdapter extends BaseAdapter<MessageViewHolder> {
                 return new ProductViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_product_received, viewGroup, false), false, this);
             case TYPE_NOTIFICATION:
                 return new NotificationViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_notification, viewGroup, false), this);
+            case TYPE_LOCATION_SEND:
+                return new LocationViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_message_send, viewGroup, false), true, this);
+            case TYPE_LOCATION_RECEIVED:
+                return new LocationViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(getReceivedMessageLayout(), viewGroup, false), false, this);
             default:
                 return null;
         }

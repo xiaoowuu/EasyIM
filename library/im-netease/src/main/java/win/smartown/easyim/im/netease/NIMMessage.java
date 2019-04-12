@@ -3,6 +3,7 @@ package win.smartown.easyim.im.netease;
 import android.text.TextUtils;
 
 import com.netease.nimlib.sdk.msg.attachment.ImageAttachment;
+import com.netease.nimlib.sdk.msg.attachment.LocationAttachment;
 import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
 import com.netease.nimlib.sdk.msg.constant.MsgDirectionEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
@@ -21,6 +22,7 @@ public class NIMMessage extends Message<IMMessage> {
 
     private ImageAttachment imageAttachment;
     private ProductAttachment productAttachment;
+    private LocationAttachment locationAttachment;
 
     public NIMMessage(IMMessage imMessage) {
         super(imMessage);
@@ -64,6 +66,8 @@ public class NIMMessage extends Message<IMMessage> {
                 return Message.TYPE_IMAGE;
             case notification:
                 return Message.TYPE_NOTIFICATION;
+            case location:
+                return Message.TYPE_LOCATION;
             case custom:
                 MsgAttachment attachment = data.getAttachment();
                 if (attachment instanceof ProductAttachment) {
@@ -97,6 +101,16 @@ public class NIMMessage extends Message<IMMessage> {
             }
         }
         return productAttachment;
+    }
+
+    public LocationAttachment getLocationAttachment() {
+        if (locationAttachment == null) {
+            MsgAttachment attachment = data.getAttachment();
+            if (attachment instanceof LocationAttachment) {
+                locationAttachment = (LocationAttachment) attachment;
+            }
+        }
+        return locationAttachment;
     }
 
     /**
@@ -168,10 +182,26 @@ public class NIMMessage extends Message<IMMessage> {
     }
 
     @Override
+    public double getLatitude() {
+        return getLocationAttachment().getLatitude();
+    }
+
+    @Override
+    public double getLongitude() {
+        return getLocationAttachment().getLongitude();
+    }
+
+    @Override
+    public String getAddress() {
+        return getLocationAttachment().getAddress();
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj instanceof NIMMessage) {
             return TextUtils.equals(((NIMMessage) obj).data.getUuid(), data.getUuid());
         }
         return false;
     }
+
 }

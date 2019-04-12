@@ -1,6 +1,7 @@
 package win.smartown.easyim.ui.ysy.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -49,6 +50,14 @@ import win.smartown.easyim.ui.ysy.entity.Location;
  */
 public class MapActivity extends Activity implements View.OnClickListener, BaiduMap.OnMapClickListener, OnGetGeoCoderResultListener {
 
+    public static void showMap(Context context, double latitude, double longitude, String address) {
+        Intent intent = new Intent(context, MapActivity.class);
+        intent.putExtra("latitude", latitude);
+        intent.putExtra("longitude", longitude);
+        intent.putExtra("address", address);
+        context.startActivity(intent);
+    }
+
     public static final int RESULT_SEND_LOCATION = 0x101;
 
     private MapView mapView;
@@ -59,6 +68,7 @@ public class MapActivity extends Activity implements View.OnClickListener, Baidu
 
     private GeoCoder geoCoder;
     private Location location;
+    private boolean onlyShow;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,6 +88,8 @@ public class MapActivity extends Activity implements View.OnClickListener, Baidu
         map = mapView.getMap();
         map.setMyLocationEnabled(true);
         map.animateMapStatus(MapStatusUpdateFactory.zoomTo(18));
+
+        map.setMyLocationEnabled(true);
         map.setOnMapClickListener(this);
 
         geoCoder = GeoCoder.newInstance();
@@ -96,6 +108,16 @@ public class MapActivity extends Activity implements View.OnClickListener, Baidu
         //注册LocationListener监听器
         locateListener = new LocateListener(this);
         locationClient.registerLocationListener(locateListener);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("latitude")) {
+            onlyShow = true;
+            LatLng latLng = new LatLng(intent.getDoubleExtra("latitude", 0), intent.getDoubleExtra("longitude", 0));
+            addMarker(latLng);
+            showInfoWindow(new Location(latLng, intent.getStringExtra("address")));
+            map.animateMapStatus(MapStatusUpdateFactory.newLatLng(latLng));
+            return;
+        }
         checkLocationPermission();
     }
 
@@ -174,7 +196,11 @@ public class MapActivity extends Activity implements View.OnClickListener, Baidu
         View view = LayoutInflater.from(this).inflate(R.layout.layout_marker, null);
         TextView textView = view.findViewById(R.id.tv_address);
         textView.setText(location.getName());
-        view.findViewById(R.id.tv_send).setOnClickListener(this);
+        if (onlyShow) {
+            view.findViewById(R.id.tv_send).setVisibility(View.GONE);
+        } else {
+            view.findViewById(R.id.tv_send).setOnClickListener(this);
+        }
         infoWindow = new InfoWindow(view, location.getLatLng(), -100);
         map.showInfoWindow(infoWindow);
     }

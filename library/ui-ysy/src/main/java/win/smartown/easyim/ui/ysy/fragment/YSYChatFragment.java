@@ -422,6 +422,9 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
             messageAdapter.getData().remove(message);
             messageAdapter.notifyItemRemoved(position);
             IM.getInstance().sendProductMessage(account, type, message.getProductInfo());
+        } else if (id == R.id.ll_location) {
+            Message message = messageAdapter.getData().get(position);
+            MapActivity.showMap(view.getContext(), message.getLatitude(), message.getLongitude(), message.getAddress());
         } else {
             ActionHandler actionHandler = UI.getInstance().getActionHandler();
             if (actionHandler != null) {

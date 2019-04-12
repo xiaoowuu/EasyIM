@@ -14,6 +14,7 @@ public abstract class Message<Data> {
     public static final int TYPE_PRODUCT_MESSAGE = 3;
     public static final int TYPE_PRODUCT_INFO = 4;
     public static final int TYPE_NOTIFICATION = 5;
+    public static final int TYPE_LOCATION = 6;
 
     protected Data data;
 
@@ -100,5 +101,26 @@ public abstract class Message<Data> {
      * @return 消息时间
      */
     public abstract long getTime();
+
+    /**
+     * 获取纬度
+     *
+     * @return 纬度
+     */
+    public abstract double getLatitude();
+
+    /**
+     * 获取经度
+     *
+     * @return 经度
+     */
+    public abstract double getLongitude();
+
+    /**
+     * 获取地理位置描述信息
+     *
+     * @return 地理位置描述
+     */
+    public abstract String getAddress();
 
 }
