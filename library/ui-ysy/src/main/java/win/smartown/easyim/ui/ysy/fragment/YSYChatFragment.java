@@ -41,8 +41,10 @@ import win.smartown.easyim.ui.base.ActionHandler;
 import win.smartown.easyim.ui.base.ChatFragment;
 import win.smartown.easyim.ui.base.UI;
 import win.smartown.easyim.ui.ysy.R;
+import win.smartown.easyim.ui.ysy.activity.MapActivity;
 import win.smartown.easyim.ui.ysy.adapter.BaseAdapter;
 import win.smartown.easyim.ui.ysy.adapter.MessageAdapter;
+import win.smartown.easyim.ui.ysy.entity.Location;
 import win.smartown.easyim.ui.ysy.strategy.ShowTimeStrategy;
 import win.smartown.easyim.ui.ysy.util.Glide4Engine;
 import win.smartown.easyim.ui.ysy.util.KeyboardUtils;
@@ -65,6 +67,10 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
      * 选择图片
      */
     private static final int REQUEST_PICK = 12;
+    /**
+     * 选择地址
+     */
+    private static final int REQUEST_LOCATION = 13;
     private RecyclerView rvMessage;
     private LinearLayoutManager linearLayoutManager;
     private EditText etMessage;
@@ -161,6 +167,7 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
         ivMore.setOnClickListener(this);
         view.findViewById(R.id.ll_camera).setOnClickListener(this);
         view.findViewById(R.id.ll_photo).setOnClickListener(this);
+        view.findViewById(R.id.ll_location).setOnClickListener(this);
     }
 
     @Override
@@ -210,6 +217,8 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
             checkCameraPermission();
         } else if (id == R.id.ll_photo) {
             checkStoragePermission();
+        } else if (id == R.id.ll_location) {
+            startActivityForResult(new Intent(getActivity(), MapActivity.class), REQUEST_LOCATION);
         }
     }
 
@@ -263,6 +272,12 @@ public class YSYChatFragment extends ChatFragment implements View.OnClickListene
                     if (list != null && !list.isEmpty()) {
                         compressImage(new File(list.get(0)));
                     }
+                }
+                break;
+            case REQUEST_LOCATION:
+                if (resultCode == MapActivity.RESULT_SEND_LOCATION) {
+                    Location location = (Location) data.getSerializableExtra("location");
+                    IM.getInstance().sendLocationMessage(account, type, location.getLatitude(), location.getLongitude(), location.getName());
                 }
                 break;
             default:

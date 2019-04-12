@@ -77,6 +77,10 @@
                 android:name="CS_cloud_ablitity"
                 android:value="successRateAnalytics" />
         </receiver>
+        <!--百度地图-->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="oQCsD4yCG9moQFFCob1qrN7NZHsgI2W5" />
     </application>
 
 </manifest>

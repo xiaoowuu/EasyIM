@@ -216,6 +216,17 @@ public abstract class IM {
      */
     public abstract Message createProductMessage(String account, int type, boolean message, ProductInfo productInfo);
 
+    /**
+     * 发送位置消息
+     *
+     * @param account   会话账号
+     * @param type      会话类型
+     * @param latitude  经纬度
+     * @param longitude 经纬度
+     * @param address   地址
+     */
+    public abstract void sendLocationMessage(String account, int type, double latitude, double longitude, String address);
+
     public abstract void onConversationFragmentResume();
 
     public abstract void onConversationFragmentPause();

@@ -288,6 +288,12 @@ public class NIM extends IM {
     }
 
     @Override
+    public void sendLocationMessage(String account, int type, double latitude, double longitude, String address) {
+        IMMessage message = MessageBuilder.createLocationMessage(account, Utils.getSesstionType(type), latitude, longitude, address);
+        sendMessage(message);
+    }
+
+    @Override
     public void onConversationFragmentResume() {
         NIMSDK.getMsgService().setChattingAccount(MsgService.MSG_CHATTING_ACCOUNT_ALL, SessionTypeEnum.None);
     }
